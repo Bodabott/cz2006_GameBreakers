@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gamebreakers.activities.MainMenuActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/secondActivityName"
+            android:text="Second Activity"
+            android:textSize="40sp"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/goStallOrderActivity"
+            android:onClick="goStallOrder"
+            android:layout_centerInParent="true"
+            android:padding="80sp"
+            android:background="#00EEFF"
+            android:text="ORDER"
+            android:textSize="40sp"
+            android:textColor="#FF0000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/returnToMainActivity"
+            android:onClick="gobackMain"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="return to Main Activity"
+            android:padding="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</RelativeLayout>

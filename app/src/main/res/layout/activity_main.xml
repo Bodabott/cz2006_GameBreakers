@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gamebreakers.activities.Main">
+
+    <ImageView
+        android:id="@+id/mainActivityBackgroundImg"
+        android:src="@drawable/background"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/mainActivityText"
+        android:background="#1B3CA2"
+        android:text="Main Activity"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:textColor="#000000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/passwordName"
+        android:text="Password"
+        android:textAlignment="center"
+        android:background="#000"
+        android:textSize="40sp"
+        android:layout_below="@id/mainActivityText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/loginButton"
+        android:onClick="goMainMenu"
+        android:background="#00FF00"
+        android:text="LOGIN"
+        android:textSize="20sp"
+        android:textColor="#0000FF"
+        android:padding="20sp"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/passwordName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
