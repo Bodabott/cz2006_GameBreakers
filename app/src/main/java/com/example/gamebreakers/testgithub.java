@@ -8,6 +8,7 @@ public class testgithub {
     String insertnamehere= "Jiachin";
 <<<<<<< HEAD
     String insertmyname = "Jonathan Chew";
+    String hi = "1 hour to load chris"
 
 =======
     String insertnamehere2= "zixiang";
