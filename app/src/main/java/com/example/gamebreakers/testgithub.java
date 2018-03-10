@@ -6,6 +6,11 @@ package com.example.gamebreakers;
 
 public class testgithub {
     String insertnamehere= "Jiachin";
+<<<<<<< HEAD
     String insertmyname = "Jonathan Chew";
 
+=======
+    String insertnamehere2= "zixiang";
+    String hi = "Shanjing";
+>>>>>>> e416237f1f0c03b8bb90855d2b0d032d9fcc8938
 }
