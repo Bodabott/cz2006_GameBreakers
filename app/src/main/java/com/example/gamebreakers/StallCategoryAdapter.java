@@ -12,8 +12,6 @@ import android.widget.Toast;
 /**
  * Created by zNotAgain on 28/2/2018.
  */
- 
- //HELLO WORLD
 
 public class StallCategoryAdapter extends ArrayAdapter<String> {
 
