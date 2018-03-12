@@ -6,6 +6,7 @@ package com.example.gamebreakers.entities;
 
 public class Food {
     String foodName;
+    String[] Reviews;
 
     public Food(String foodName) {
         this.foodName = foodName;
