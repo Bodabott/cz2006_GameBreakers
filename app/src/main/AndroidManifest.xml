@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".login.Activity_Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,59 +16,49 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".user.Activity_UserMenu"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_Stall"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_Category"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_Food"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_Payment"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".owner.Activity_Owner"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".login.Activity_CreateUserAccount"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".login.Activity_CreateOwnerAccount"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".owner.Activity_Manage_Menu"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".owner.Activity_Current_Orders"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".owner.Activity_Transaction_History"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".owner.Activity_Owner_Settings"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".owner.Activity_Edit_Menu"
-            android:label="@string/app_name">
-        </activity>
-
+        <activity
+            android:name=".user.Activity_UserMenu"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".user.Activity_Stall"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".user.Activity_Category"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".user.Activity_Food"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".user.Activity_Payment"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".owner.Activity_Owner"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".login.Activity_CreateUserAccount"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".login.Activity_CreateOwnerAccount"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".owner.Activity_Manage_Menu"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".owner.Activity_Current_Orders"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".owner.Activity_Transaction_History"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".owner.Activity_Owner_Settings"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".owner.Activity_Edit_Menu"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".user_ui"
+            android:label="@string/title_activity_user_ui"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
