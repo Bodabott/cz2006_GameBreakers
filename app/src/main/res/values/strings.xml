@@ -1,4 +1,25 @@
 <resources>
     <string name="app_name">GameBreakers</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="Array_AccountType">
+        <item>Food User</item>
+        <item>Stall Owner</item>
+    </string-array>
+
+    <string-array name="Array_manageMenu">
+        <item>Edit</item>
+        <item>Remove</item>
+    </string-array>
+
+    <string-array name="Array_currentOrder">
+        <item>Finish</item>
+        <item>Cancel</item>
+    </string-array>
+
+    <string name="t_hist">Transaction\nHistory</string>
+    <string name="c_orders">Current\nOrders</string>
+    <string name="m_menu">Manage\nMenu</string>
+
+
 </resources>
