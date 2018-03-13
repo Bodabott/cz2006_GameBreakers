@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.znotagain.DatabaseHelper;
-import com.example.znotagain.R;
-import com.example.znotagain.login.Activity_Main;
+import com.example.gamebreakers.R;
+import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.login.Activity_Main;
+
 
 public class Activity_User_Payment extends AppCompatActivity {
 
