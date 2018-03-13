@@ -11,32 +11,33 @@ import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 
+
 /**
- * Created by zNotAgain on 5/3/2018.
+ * Created by zNotAgain on 6/3/2018.
  */
 
-public class Adapter_Manage_Menu extends ArrayAdapter<String> {
+public class Adapter_Owner_Current_Orders extends ArrayAdapter<String> {
 
-        Context mContext;
-        int mLayoutResId;
-        String mData[] = null;
+    Context mContext;
+    int mLayoutResId;
+    String mData[] = null;
 
-    public Adapter_Manage_Menu(Context context, int resource, String[] objects) {
-            super(context, resource, objects);
-            this.mContext = context;
-            this.mLayoutResId = resource;
-            this.mData = objects;
+    public Adapter_Owner_Current_Orders(Context context, int resource, String[] objects) {
+        super(context, resource, objects);
+        this.mContext = context;
+        this.mLayoutResId = resource;
+        this.mData = objects;
     }
 
     @Override
     public String getItem(int position) {
-            return super.getItem(position);
+        return super.getItem(position);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        PlaceHolder holder = null;
+        Adapter_Owner_Current_Orders.PlaceHolder holder = null;
 
         //if we currently don't have a row View to reuse...
         if(row == null){
@@ -44,28 +45,29 @@ public class Adapter_Manage_Menu extends ArrayAdapter<String> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             row = inflater.inflate(mLayoutResId,parent,false);
 
-            holder = new PlaceHolder();
+            holder = new Adapter_Owner_Current_Orders.PlaceHolder();
 
-            holder.textView =  row.findViewById(R.id.row_text);
+            holder.nameView = row.findViewById(R.id.row_text);
             holder.imageView = row.findViewById(R.id.row_image);
 
             row.setTag(holder);
-            }else{
+        }else{
             //Otherwise use an existing View
-            holder = (PlaceHolder) row.getTag();
+            holder = (Adapter_Owner_Current_Orders.PlaceHolder) row.getTag();
         }
 
         //Getting the data from the data array
         String string = mData[position];
 
         //Setup and reuse the same listener for each row
-        holder.textView.setOnClickListener(PopupListener);
+        holder.nameView.setOnClickListener(PopupListener);
         Integer rowPosition = position;
-        holder.textView.setTag(rowPosition);
+        holder.nameView.setTag(rowPosition);
 
         //setting the view to reflect the data we need to display
-        holder.textView.setText(string);
-        holder.imageView.setImageResource(R.drawable.fork_and_spoon);
+        holder.nameView.setText(string);
+        holder.imageView.setImageResource(R.drawable.ic_edit);
+
         //returning the row (because this is called getView after all
         return row;
 
@@ -74,14 +76,15 @@ public class Adapter_Manage_Menu extends ArrayAdapter<String> {
     View.OnClickListener PopupListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-                Integer viewPosition = (Integer) v.getTag();
-                String string = mData[viewPosition];
-                Toast.makeText(getContext(),string, Toast.LENGTH_SHORT).show();
+            Integer viewPosition = (Integer) v.getTag();
+            String string = mData[viewPosition];
+            Toast.makeText(getContext(),string, Toast.LENGTH_SHORT).show();
         }
     };
 
     private static class PlaceHolder {
+        TextView nameView;
         ImageView imageView;
-        TextView textView;
     }
 }
+

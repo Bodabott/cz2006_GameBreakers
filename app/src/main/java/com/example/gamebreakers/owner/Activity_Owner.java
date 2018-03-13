@@ -11,13 +11,14 @@ import android.widget.TextView;
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.login.Activity_Main;
 
+
 /**
  * Created by zNotAgain on 3/3/2018.
  */
 
 public class Activity_Owner extends Activity {
 
-    Button manageMenuButton,currentOrdersButton,transHistButton,settingsButton,logOutButton;
+    Button logOutButton;
     TextView stallNameTextView;
 
     @Override
@@ -26,10 +27,7 @@ public class Activity_Owner extends Activity {
         setContentView(R.layout.activity_owner);
 
         stallNameTextView = findViewById(R.id.stall_Name);
-        manageMenuButton = findViewById(R.id.manage_menu);
-        currentOrdersButton = findViewById(R.id.current_orders);
-        transHistButton = findViewById(R.id.transaction_history);
-        settingsButton = findViewById(R.id.settings);
+
         logOutButton = findViewById(R.id.logout);
 
         Intent intent = getIntent();
@@ -40,45 +38,58 @@ public class Activity_Owner extends Activity {
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent backIntent = new Intent(v.getContext(),Activity_Main.class);
-                startActivity(backIntent);
+                finish();
             }
         });
 
-        manageMenuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goIntent = new Intent(v.getContext(),Activity_Manage_Menu.class);
-                goIntent.putExtra(Activity_Main.STALL_NAME,temp);
-                startActivity(goIntent);
-            }
-        });
-
-        currentOrdersButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goIntent = new Intent(v.getContext(),Activity_Current_Orders.class);
-                goIntent.putExtra(Activity_Main.STALL_NAME,temp);
-                startActivity(goIntent);
-            }
-        });
-
-        transHistButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goIntent = new Intent(v.getContext(),Activity_Transaction_History.class);
-                goIntent.putExtra(Activity_Main.STALL_NAME,temp);
-                startActivity(goIntent);
-            }
-        });
-
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goIntent = new Intent(v.getContext(),Activity_Owner_Settings.class);
-                goIntent.putExtra(Activity_Main.STALL_NAME,temp);
-                startActivity(goIntent);
-            }
-        });
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 4)
+            if(resultCode == Activity.RESULT_OK)
+                finish();
+    }
+
+    public void manageMenu(View v){
+        Intent intent = getIntent();
+        final String temp = intent.getStringExtra(Activity_Main.STALL_NAME);
+        if(temp != null)
+            stallNameTextView.setText(temp);
+        Intent goIntent = new Intent(v.getContext(),Activity_Owner_Manage_Menu.class);
+        goIntent.putExtra(Activity_Main.STALL_NAME,temp);
+        startActivity(goIntent);
+    }
+
+    public void currentOrders(View v){
+        Intent intent = getIntent();
+        final String temp = intent.getStringExtra(Activity_Main.STALL_NAME);
+        if(temp != null)
+            stallNameTextView.setText(temp);
+        Intent goIntent = new Intent(v.getContext(),Activity_Owner_Orders.class);
+        goIntent.putExtra(Activity_Main.STALL_NAME,temp);
+        startActivity(goIntent);
+    }
+
+    public void transactionHistory(View v){
+        Intent intent = getIntent();
+        final String temp = intent.getStringExtra(Activity_Main.STALL_NAME);
+        if(temp != null)
+            stallNameTextView.setText(temp);
+        Intent goIntent = new Intent(v.getContext(),Activity_Owner_History.class);
+        goIntent.putExtra(Activity_Main.STALL_NAME,temp);
+        startActivity(goIntent);
+    }
+
+    public void owner_settings(View v){
+        Intent intent = getIntent();
+        final String temp = intent.getStringExtra(Activity_Main.STALL_NAME);
+        if(temp != null)
+            stallNameTextView.setText(temp);
+        Intent goIntent = new Intent(v.getContext(),Activity_Owner_Settings.class);
+        goIntent.putExtra(Activity_Main.STALL_NAME,temp);
+        startActivityForResult(goIntent,4);
+    }
+
 }

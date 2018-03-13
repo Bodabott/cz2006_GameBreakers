@@ -5,22 +5,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 
+
 /**
  * Created by zNotAgain on 6/3/2018.
  */
 
-public class Adapter_Current_Orders extends ArrayAdapter<String> {
+public class Adapter_Owner_Transaction_History extends ArrayAdapter<String> {
 
     Context mContext;
     int mLayoutResId;
     String mData[] = null;
 
-    public Adapter_Current_Orders(Context context, int resource, String[] objects) {
+    public Adapter_Owner_Transaction_History(Context context, int resource, String[] objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mLayoutResId = resource;
@@ -35,7 +37,7 @@ public class Adapter_Current_Orders extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        Adapter_Current_Orders.PlaceHolder holder = null;
+        Adapter_Owner_Transaction_History.PlaceHolder holder = null;
 
         //if we currently don't have a row View to reuse...
         if(row == null){
@@ -43,14 +45,15 @@ public class Adapter_Current_Orders extends ArrayAdapter<String> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             row = inflater.inflate(mLayoutResId,parent,false);
 
-            holder = new Adapter_Current_Orders.PlaceHolder();
+            holder = new Adapter_Owner_Transaction_History.PlaceHolder();
 
-            holder.nameView = (TextView) row.findViewById(R.id.row_currentOrders);
+            holder.nameView = row.findViewById(R.id.row_text);
+            holder.imageView = row.findViewById(R.id.row_image);
 
             row.setTag(holder);
         }else{
             //Otherwise use an existing View
-            holder = (Adapter_Current_Orders.PlaceHolder) row.getTag();
+            holder = (Adapter_Owner_Transaction_History.PlaceHolder) row.getTag();
         }
 
         //Getting the data from the data array
@@ -63,6 +66,7 @@ public class Adapter_Current_Orders extends ArrayAdapter<String> {
 
         //setting the view to reflect the data we need to display
         holder.nameView.setText(string);
+        holder.imageView.setImageResource(R.drawable.ic_delete);
 
         //returning the row (because this is called getView after all
         return row;
@@ -80,6 +84,6 @@ public class Adapter_Current_Orders extends ArrayAdapter<String> {
 
     private static class PlaceHolder {
         TextView nameView;
+        ImageView imageView;
     }
 }
-

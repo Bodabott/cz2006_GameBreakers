@@ -6,7 +6,7 @@
     android:padding="20sp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gamebreakers.login.Activity_CreateOwnerAccount">
+    tools:context="com.example.znotagain.login.Activity_CreateOwnerAccount">
 
     <ImageView
         android:id="@+id/logo"
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:onClick="registerOwner"
+        android:onClick="registerOwnerAccount"
         android:id="@+id/register_button"
         android:text="Register"
         android:background="#00FFFF"

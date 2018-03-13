@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/owner_settings_stallName"
+        android:id="@+id/user_settings"
         android:text="Settings"
         android:textSize="30sp"
         android:textColor="#00CCFF"
@@ -124,55 +124,15 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <Space
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0sp"
-            android:weightSum="3"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_weight="2"
-                android:layout_width="0sp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="2">
-                <TextView
-                    android:id="@+id/temp_stallName"
-                    android:layout_weight="1"
-                    android:text="@string/edit_stallname"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginTop="15sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0sp" />
-                <TextView
-                    android:id="@+id/settings_stallName"
-                    android:text="Stall Name"
-                    android:textSize="15sp"
-                    android:layout_marginLeft="10sp"
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0sp" />
-            </LinearLayout>
-
-            <Button
-                android:onClick="editStallName"
-                android:id="@+id/settings_stallNameButton"
-                android:text="EDIT"
-                android:layout_marginTop="20sp"
-                android:layout_weight="1"
-                android:layout_width="0sp"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+            android:layout_height="0sp"/>
 
         <Space
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0sp">
-        </Space>
+            android:layout_height="0sp"/>
 
         <Button
             android:onClick="deleteAccount"

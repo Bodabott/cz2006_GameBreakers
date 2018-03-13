@@ -6,7 +6,7 @@
     android:padding="20sp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.gamebreakers.login.Activity_CreateUserAccount">
+    tools:context="com.example.znotagain.login.Activity_CreateUserAccount">
 
     <ImageView
         android:id="@+id/logo"
@@ -53,7 +53,7 @@
         android:layout_height="wrap_content" />
     
     <Button
-        android:onClick="registerUser"
+        android:onClick="registerUserAccount"
         android:id="@+id/register_button"
         android:text="Register"
         android:background="#00FFFF"
@@ -68,7 +68,6 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:onClick="gobackMain"
         android:id="@+id/already_member"
         android:text="Already a member? Login"
         android:textColor="#FFFF00"
