@@ -29,14 +29,14 @@ public class Activity_User_Stall extends Activity {
     Button exitButton,nextButton;
     ListView mListView;
     Adapter_User_Stall mAdapterStall;
-    String[] strings;
+    String[] stallArray_String;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_stall);
         myDb = new DatabaseHelper(this);
-        strings = myDb.getArrayOfStall();
+        stallArray_String = myDb.getArrayOfStall();
 
         mStallTextView = findViewById(R.id.stall_status);
         mListView = findViewById(R.id.myStallListView);
@@ -65,7 +65,7 @@ public class Activity_User_Stall extends Activity {
             }
         });
 
-        mAdapterStall = new Adapter_User_Stall(getApplicationContext(),R.layout.row_stall,strings);
+        mAdapterStall = new Adapter_User_Stall(getApplicationContext(), R.layout.row_stall, stallArray_String);
 
         if(mListView != null){
             mListView.setAdapter(mAdapterStall);
@@ -85,8 +85,8 @@ public class Activity_User_Stall extends Activity {
     }
 
     public void listItemClickListener(AdapterView<?> parent, View view, int position, long id){
-        Log.v("PLACE",strings[position]);
-        String temp = "Stall: " + strings[position];
+        Log.v("PLACE",stallArray_String[position]);
+        String temp = "Stall: " + stallArray_String[position];
         mStallTextView.setText(temp);
     }
 

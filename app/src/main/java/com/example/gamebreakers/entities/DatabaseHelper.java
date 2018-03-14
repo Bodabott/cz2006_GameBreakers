@@ -268,7 +268,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(OWNER_MENU_COL_1,foodName);
         contentValues.put(OWNER_MENU_COL_2,stallName);
         long result = sqLiteDatabase.insert(OWNER_MENU_TABLE_NAME,null,contentValues);
-        return !(result == -1);
+        return (result != -1);
     }
     /////////////////////////////////////////// ORDER METHODS ///////////////////////////////////////////
     public String[] getUserArrayOfOrders(String username){

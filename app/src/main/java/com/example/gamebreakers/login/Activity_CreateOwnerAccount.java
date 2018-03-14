@@ -81,5 +81,4 @@ public class Activity_CreateOwnerAccount extends Activity {
     public boolean isOwnerRegisterAcceptable(String username,String stall_name, String password, String confirm_password){
         return !(username.isEmpty() || stall_name.isEmpty() || password.isEmpty() || confirm_password.isEmpty());
     }
-
 }
