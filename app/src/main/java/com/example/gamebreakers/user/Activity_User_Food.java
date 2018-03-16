@@ -59,7 +59,7 @@ public class Activity_User_Food extends Activity {
 
         strings = myDb.getStallMenu(stallMessage.substring(7));
 
-        mAdapterFood = new Adapter_User_Food(getApplicationContext(),R.layout.row_food,strings);
+        mAdapterFood = new Adapter_User_Food(getApplicationContext(),R.layout.row_stall,strings);
 
         if(mListView != null){
             mListView.setAdapter(mAdapterFood);

@@ -69,7 +69,6 @@ public class Adapter_User_Current_Orders extends ArrayAdapter<String> {
 
             //returning the row (because this is called getView after all
             return row;
-
         }
 
     View.OnClickListener PopupListener = new View.OnClickListener() {
