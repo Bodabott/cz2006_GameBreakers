@@ -4,13 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/fork_and_spoon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/fork_and_spoon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <activity android:name=".activities.Main">
+        <activity android:name=".login.Activity_Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,23 +18,59 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.MainMenuActivity"
+        <activity android:name=".login.Activity_CreateUserAccount"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".activities.StallOrderActivity"
+        <activity android:name=".login.Activity_CreateOwnerAccount"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".activities.FoodActivity"
+        <activity android:name=".user.Activity_User"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".activities.PaymentActivity"
+        <activity android:name=".user.Activity_User_Stall"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".activities.ReceiptActivity"
+        <activity android:name=".user.Activity_User_Food"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".user.Activity_User_Payment"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".user.Activity_User_Settings"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".owner.Activity_Owner"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".owner.Activity_Owner_Manage_Menu"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".owner.Activity_Owner_Orders"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".owner.Activity_Owner_History"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".owner.Activity_Owner_Settings"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".user.Activity_User_Orders"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity android:name=".user.Activity_User_History"
             android:label="@string/app_name">
         </activity>
 
