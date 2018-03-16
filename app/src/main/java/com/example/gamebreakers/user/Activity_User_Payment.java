@@ -36,15 +36,22 @@ public class Activity_User_Payment extends AppCompatActivity {
 
     }
 
-    public String foodNameConverter(String old_foodName, String stall_name){
+    public String foodNameConverter(String old_foodName, String stall_name, String user_name){
         // Initialise
         int ID = 0;
         int Max_ID = 1;
         String[] strings_orders = myDb.getArrayOfOrders(stall_name.substring(7));
-        String[] strings_history = myDb.getArrayOfHistory(stall_name.substring(7));
+        String[] strings_owner_history = myDb.getArrayOfHistory(stall_name.substring(7));
+        String[] strings_user_history = myDb.getUserArrayOfHistory(user_name);
 
-        // Initial Check
+        // Initial Check, increment ID to 1
         for(String element : strings_orders)
+            if(old_foodName.substring(6).matches(element))
+                ID++;
+        for(String element : strings_owner_history)
+            if(old_foodName.substring(6).matches(element))
+                ID++;
+        for(String element : strings_user_history)
             if(old_foodName.substring(6).matches(element))
                 ID++;
 
@@ -56,8 +63,16 @@ public class Activity_User_Payment extends AppCompatActivity {
                         if((ID = Integer.valueOf(element.substring(j+1)) + 1) > Max_ID)
                             Max_ID = ID;
 
-        // Check if there are duplicates in History List
-        for(String element : strings_history)
+        // Check if there are duplicates in Owner History List
+        for(String element : strings_owner_history)
+            for(int j=0;j<element.length();j++)
+                if(element.charAt(j) == '-')
+                    if(old_foodName.substring(6).matches(element.substring(0,j)))
+                        if((ID = Integer.valueOf(element.substring(j+1)) + 1) > Max_ID)
+                            Max_ID = ID;
+
+        // Check if there are duplicates in User History List
+        for(String element : strings_user_history)
             for(int j=0;j<element.length();j++)
                 if(element.charAt(j) == '-')
                     if(old_foodName.substring(6).matches(element.substring(0,j)))
@@ -78,7 +93,7 @@ public class Activity_User_Payment extends AppCompatActivity {
         final String foodMessage = intent.getStringExtra(Activity_User_Food.FOOD_NAME);
         final String usernameMessage = intent.getStringExtra(Activity_Main.USER_NAME);
 
-        String newFoodMessage = foodNameConverter(foodMessage,stallMessage);
+        String newFoodMessage = foodNameConverter(foodMessage,stallMessage,usernameMessage);
         if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage.substring(7))){
             Toast.makeText(getApplicationContext(),"PAYMENT SUCCESSFUL",Toast.LENGTH_LONG).show();
             setResult(Activity.RESULT_OK);
