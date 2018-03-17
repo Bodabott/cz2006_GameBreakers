@@ -67,7 +67,7 @@ public class Activity_Owner extends Activity {
         final String temp = intent.getStringExtra(Activity_Main.STALL_NAME);
         if(temp != null)
             stallNameTextView.setText(temp);
-        Intent goIntent = new Intent(v.getContext(),Activity_Owner_Orders.class);
+        Intent goIntent = new Intent(v.getContext(),Activity_Owner_Business_Mode.class);
         goIntent.putExtra(Activity_Main.STALL_NAME,temp);
         startActivity(goIntent);
     }

@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.gamebreakers.R;
@@ -24,18 +23,23 @@ import com.example.gamebreakers.login.Activity_Main;
  * Created by zNotAgain on 1/3/2018.
  */
 
-public class Activity_User extends AppCompatActivity {
+public class Activity_User extends AppCompatActivity implements Fragment_User_BrowseStall.OnStallNameSelectedListener{
 
-    Button logOutButton;
     DrawerLayout mDrawerLayout;
+    String stallName, food;
+
+    android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_MainMenu())
+                .commit();
+
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        logOutButton = findViewById(R.id.logout);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,12 +67,6 @@ public class Activity_User extends AppCompatActivity {
             }
         });
 
-        logOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
     }
 
     @Override
@@ -87,14 +85,6 @@ public class Activity_User extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void orderFood(View v){
-        Intent intent = getIntent();
-        final String username_message = intent.getStringExtra(Activity_Main.USER_NAME);
-        Intent goIntent = new Intent(v.getContext(),Activity_User_Stall.class);
-        goIntent.putExtra(Activity_Main.USER_NAME,username_message);
-        startActivity(goIntent);
     }
 
     public boolean navigationItemListener(MenuItem item){
@@ -124,5 +114,22 @@ public class Activity_User extends AppCompatActivity {
         // close drawer when item is tapped
         mDrawerLayout.closeDrawers();
         return true;
+    }
+
+    @Override
+    public void onStallNameSelected(String stallName) {
+        this.stallName =  stallName;
+
+    }
+    //=======================ON CLICK METHODS======================
+    public void orderFood(View v){
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_BrowseStall())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void logout(View v) {
+        finish();
     }
 }

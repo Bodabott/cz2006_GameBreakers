@@ -23,12 +23,12 @@ import com.example.gamebreakers.login.Activity_Main;
  * Created by zNotAgain on 5/3/2018.
  */
 
-public class Activity_Owner_Orders extends Activity {
+public class Activity_Owner_Business_Mode extends Activity {
 
     DatabaseHelper myDb;
     TextView mTextView;
     ListView mListView;
-    Adapter_Owner_Current_Orders mAdapterCurrentOrders;
+    Adapter_Owner_Business_Mode mAdapterCurrentOrders;
     Button backButton;
     String[] strings;
 
@@ -49,7 +49,7 @@ public class Activity_Owner_Orders extends Activity {
         }
 
         strings = myDb.getArrayOfOrders(stallNameMessage);
-        mAdapterCurrentOrders = new Adapter_Owner_Current_Orders(getApplicationContext(),R.layout.row_current_orders,strings);
+        mAdapterCurrentOrders = new Adapter_Owner_Business_Mode(getApplicationContext(),R.layout.row_current_orders,strings);
 
         if(mListView != null){
             mListView.setAdapter(mAdapterCurrentOrders);
@@ -59,7 +59,7 @@ public class Activity_Owner_Orders extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, final int position, long id) {
                 Log.v("PLACE",strings[position]);
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(Activity_Owner_Orders.this);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(Activity_Owner_Business_Mode.this);
                 mBuilder.setCancelable(true);
                 mBuilder.setTitle("Choose an Action: ").setItems(R.array.Array_currentOrder, new DialogInterface.OnClickListener() {
                     @Override
@@ -70,14 +70,14 @@ public class Activity_Owner_Orders extends Activity {
                             myDb.addUserHistoryArrayData(strings[position],myDb.getBuyerUsername(strings[position],stallNameMessage),stallNameMessage);
                             Integer deletedRows = myDb.deleteOrderArrayData(strings[position],stallNameMessage);
                             if(deletedRows > 0){
-                                Toast.makeText(Activity_Owner_Orders.this,"Order Completed",Toast.LENGTH_LONG).show();
+                                Toast.makeText(Activity_Owner_Business_Mode.this,"Order Completed",Toast.LENGTH_LONG).show();
                             }
                             else
-                                Toast.makeText(Activity_Owner_Orders.this,"Order not Completed",Toast.LENGTH_LONG).show();
+                                Toast.makeText(Activity_Owner_Business_Mode.this,"Order not Completed",Toast.LENGTH_LONG).show();
 
                             // Resets the ListView
                             strings = myDb.getArrayOfOrders(stallNameMessage);
-                            mAdapterCurrentOrders = new Adapter_Owner_Current_Orders(getApplicationContext(),R.layout.row_current_orders,strings);
+                            mAdapterCurrentOrders = new Adapter_Owner_Business_Mode(getApplicationContext(),R.layout.row_current_orders,strings);
 
                             if(mListView != null){
                                 mListView.setAdapter(mAdapterCurrentOrders);
@@ -86,12 +86,12 @@ public class Activity_Owner_Orders extends Activity {
                             // Cancel Order
                             Integer deletedRows = myDb.deleteOrderArrayData(strings[position],stallNameMessage);
                             if(deletedRows > 0)
-                                Toast.makeText(Activity_Owner_Orders.this,"Order Canceled",Toast.LENGTH_LONG).show();
+                                Toast.makeText(Activity_Owner_Business_Mode.this,"Order Canceled",Toast.LENGTH_LONG).show();
                             else
-                                Toast.makeText(Activity_Owner_Orders.this,"Order not Canceled",Toast.LENGTH_LONG).show();
+                                Toast.makeText(Activity_Owner_Business_Mode.this,"Order not Canceled",Toast.LENGTH_LONG).show();
                              // Resets the ListView
                             strings = myDb.getArrayOfOrders(stallNameMessage);
-                            mAdapterCurrentOrders = new Adapter_Owner_Current_Orders(getApplicationContext(),R.layout.row_current_orders,strings);
+                            mAdapterCurrentOrders = new Adapter_Owner_Business_Mode(getApplicationContext(),R.layout.row_current_orders,strings);
 
                             if(mListView != null){
                                 mListView.setAdapter(mAdapterCurrentOrders);

@@ -34,12 +34,12 @@ public class Activity_User_Stall extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_stall);
+        setContentView(R.layout.fragment_user_stall);
         myDb = new DatabaseHelper(this);
         stallArray_String = myDb.getArrayOfStall();
 
         mStallTextView = findViewById(R.id.stall_status);
-        mListView = findViewById(R.id.myStallListView);
+        //mListView = findViewById(R.id.myStallListView);
         exitButton = findViewById(R.id.exit);
         nextButton = findViewById(R.id.next);
 
