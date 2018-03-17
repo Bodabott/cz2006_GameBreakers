@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    android:id="@+id/browsefragment"
+    android:background="@drawable/translucentbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,18 +9,18 @@
         android:id="@+id/view_stalls_button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_above="@id/fav_stalls_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
         android:text="View All Stalls" />
 
     <Button
         android:id="@+id/fav_stalls_button"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/view_stalls_button"
         android:layout_alignStart="@+id/view_stalls_button"
-        android:layout_below="@+id/view_stalls_button"
+
         android:layout_marginTop="15dp"
         android:text="Favourite Stalls" />
 
@@ -32,7 +33,6 @@
         android:layout_below="@+id/fav_stalls_button"
         android:layout_marginTop="15dp"
         android:text="Nearest Stalls" />
-
 
 
 </RelativeLayout>

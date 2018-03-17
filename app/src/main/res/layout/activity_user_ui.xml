@@ -11,16 +11,72 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_user_ui" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow android:padding="10dp">
+
+                <Button
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:background="@drawable/menubutton"/>
+
+                <TextView
+                    android:layout_weight=".33"
+                    android:id="@+id/title"
+                    android:text="Food Breaker"
+                    android:paddingLeft="20dp"
+                    android:layout_height="30dp"/>
+
+                <Button
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:background="@drawable/menubutton"/>
+            </TableRow>
+        </TableLayout>
+
+        <!--The EditText below is used to draw the line you see below the header -->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_below="@id/header"
+            android:background="#000000"
+            android:layout_height="1dp" />
+
+        <RelativeLayout
+            android:id="@+id/searchtext"
+            android:layout_below="@id/header"
+            android:layout_width="match_parent"
+            android:paddingBottom="20dp"
+            android:layout_height="wrap_content">
+            <EditText
+
+                android:layout_width="300dp"
+                android:paddingTop="60dp"
+
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+
+                android:text="Search for food stores by name..."
+                />
+        </RelativeLayout>
+
+            <Button
+                android:onClick="clickBrowse"
+                android:layout_below="@id/searchtext"
+                android:background="@drawable/magnifying_glass"
+                android:layout_centerInParent="true"
+                android:layout_width="250dp"
+                android:layout_height="250dp" />
+
+    </RelativeLayout>
 
 
 

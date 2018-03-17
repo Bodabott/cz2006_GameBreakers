@@ -74,6 +74,10 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity android:name="user_ui"
+            android:label="GameBreakers">
+        </activity>
+
     </application>
 
 </manifest>
