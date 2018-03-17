@@ -7,21 +7,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.gamebreakers.R;
-import com.example.gamebreakers.user.Fragment_User_BrowseFood.OnFoodSelectedListener;
+import com.example.gamebreakers.user.Fragment_User_Transactions.OnTransactionSelectedListener;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link String} and makes a call to the
- * specified {@link OnFoodSelectedListener}.
+ * specified {@link OnTransactionSelectedListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class Adapter_FoodList extends RecyclerView.Adapter<Adapter_FoodList.ViewHolder> {
+public class Adapter_Transactions extends RecyclerView.Adapter<Adapter_Transactions.ViewHolder> {
 
     private final List<String> mValues;
-    private final OnFoodSelectedListener mListener;
+    private final OnTransactionSelectedListener mListener;
 
-    public Adapter_FoodList(List<String> items, OnFoodSelectedListener listener) {
+    public Adapter_Transactions(List<String> items, OnTransactionSelectedListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -29,7 +29,7 @@ public class Adapter_FoodList extends RecyclerView.Adapter<Adapter_FoodList.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.fragment_user_transactions, parent, false);
         return new ViewHolder(view);
     }
 
@@ -37,7 +37,7 @@ public class Adapter_FoodList extends RecyclerView.Adapter<Adapter_FoodList.View
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position));
-        holder.mContentView.setText("yum yum yum");
+        holder.mContentView.setText(mValues.get(position));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +45,7 @@ public class Adapter_FoodList extends RecyclerView.Adapter<Adapter_FoodList.View
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onFoodSelected(holder.mItem);
+                    mListener.onTransactionSelecteed(holder.mItem);
                 }
             }
         });
@@ -70,7 +70,7 @@ public class Adapter_FoodList extends RecyclerView.Adapter<Adapter_FoodList.View
         }
 
         @Override
-        public java.lang.String toString() {
+        public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";
         }
     }

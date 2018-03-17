@@ -1,6 +1,7 @@
 package com.example.gamebreakers.user;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -21,7 +23,6 @@ import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.login.Activity_Main;
 
-import static com.example.gamebreakers.login.Activity_Main.STALL_NAME;
 import static com.example.gamebreakers.login.Activity_Main.USER_NAME;
 
 
@@ -29,7 +30,9 @@ import static com.example.gamebreakers.login.Activity_Main.USER_NAME;
  * Created by zNotAgain on 1/3/2018.
  */
 
-public class Activity_User extends AppCompatActivity implements Fragment_User_BrowseStall.OnStallNameSelectedListener, Fragment_User_BrowseFood.OnListFragmentInteractionListener{
+public class Activity_User extends AppCompatActivity
+        implements Fragment_User_BrowseStall.OnStallNameSelectedListener, Fragment_User_BrowseFood.OnFoodSelectedListener
+        ,Fragment_User_CurrentOrders.OnOrderSelectedListener, Fragment_User_Transactions.OnTransactionSelectedListener {
 
     DrawerLayout mDrawerLayout;
     String username, stallName, food;
@@ -107,9 +110,10 @@ public class Activity_User extends AppCompatActivity implements Fragment_User_Br
         item.setChecked(true);
         if(item.toString().matches("Current Orders")){
             // Go to User Current Orders. Item is recorded right after payment.
-            Intent goIntent = new Intent(getApplicationContext(),Activity_User_Orders.class);
-            goIntent.putExtra(USER_NAME,username_message);
-            startActivityForResult(goIntent,1);
+            fragman.beginTransaction()
+                    .replace(R.id.content_main, new Fragment_User_CurrentOrders())
+                    .addToBackStack(null)
+                    .commit();
         }else if(item.toString().matches("History")){
             // Go to User Transaction History. Item is recorded only if Order is Successfully completed by Owner of that stall
             Intent goIntent = new Intent(getApplicationContext(),Activity_User_History.class);
@@ -179,7 +183,7 @@ public class Activity_User extends AppCompatActivity implements Fragment_User_Br
     }
     //====================List Adaptor Methods=====================
     @Override
-    public void onListFragmentInteraction(String food){
+    public void onFoodSelected(String food){
         this.food=food;
         TextView v = findViewById(R.id.selected_food);
         v.setText("Food: "+food);
@@ -190,6 +194,16 @@ public class Activity_User extends AppCompatActivity implements Fragment_User_Br
         this.stallName =  stallName;
         TextView v = findViewById(R.id.selected_stall);
         v.setText("Stall: "+stallName);
+    }
+
+    @Override
+    public void onOrderSelected(String item) {
+
+    }
+
+    @Override
+    public void onTransactionSelecteed(String item) {
+
     }
     //=======================ON CLICK METHODS======================
     public void browseStall(View v){
@@ -233,6 +247,52 @@ public class Activity_User extends AppCompatActivity implements Fragment_User_Br
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_MainMenu())
                 .commit();
+    }
+
+    public void checkOrders(View v){
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_CurrentOrders())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void checkTransactions(View v){
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_Transactions())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void clearAllTransactions(View v){
+        Intent intent = getIntent();
+        final String usernameMessage = intent.getStringExtra(Activity_Main.USER_NAME);
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        mBuilder.setCancelable(true);
+        mBuilder.setTitle("Clear All Data?");
+        mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Integer deletedRows = myDb.deleteAllUserHistoryData(usernameMessage);
+                if(deletedRows > 0)
+                    Toast.makeText(Activity_User.this,"All Data Deleted",Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(Activity_User.this,"Data not Deleted",Toast.LENGTH_LONG).show();
+
+                // Resets the Fragment
+                fragman.popBackStack();
+                fragman.beginTransaction()
+                        .replace(R.id.content_main, new Fragment_User_Transactions())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        mBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        mBuilder.show();
     }
 
     public void backtoMain(View v){

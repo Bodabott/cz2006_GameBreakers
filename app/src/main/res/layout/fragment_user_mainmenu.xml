@@ -24,12 +24,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
+            android:onClick="checkOrders"
+            android:id="@+id/current_orders"
+            android:text="Current Orders"
+            android:textSize="30sp"
+            android:background="#2CAA12"
+            android:padding="10sp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/order"/>
+
+        <Button
+            android:onClick="checkTransactions"
+            android:id="@+id/pastTransactions"
+            android:text="Past Transactions"
+            android:textSize="30sp"
+            android:background="#2CAA12"
+            android:padding="10sp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/current_orders"/>
+        <Button
             android:onClick="logout"
             android:id="@+id/logout"
             android:text="LOG OUT"
             android:background="#FF0000"
             android:layout_marginTop="10sp"
-            android:layout_below="@id/order"
+            android:layout_below="@id/pastTransactions"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

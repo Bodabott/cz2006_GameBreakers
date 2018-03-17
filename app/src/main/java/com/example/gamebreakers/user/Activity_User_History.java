@@ -35,7 +35,7 @@ public class Activity_User_History extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_hist);
+        setContentView(R.layout.fragment_user_transactions);
         myDb = new DatabaseHelper(this);
 
         mTextView = findViewById(R.id.tran_hist_stallName);
