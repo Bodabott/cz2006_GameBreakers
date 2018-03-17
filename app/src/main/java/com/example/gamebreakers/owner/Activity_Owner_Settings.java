@@ -31,7 +31,7 @@ public class Activity_Owner_Settings extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_owner_settings);
+        setContentView(R.layout.fragment_owner_settings);
         myDb = new DatabaseHelper(this);
 
         textView = findViewById(R.id.owner_settings_stallName);

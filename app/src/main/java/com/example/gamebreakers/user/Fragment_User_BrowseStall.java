@@ -3,7 +3,6 @@ package com.example.gamebreakers.user;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,15 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static com.example.gamebreakers.login.Activity_Main.STALL_NAME;
 
 /**
  * A fragment representing a list of Items.
@@ -71,8 +67,8 @@ public class Fragment_User_BrowseStall extends Fragment {
             selectedStall.setText("Stall: "+stallname);
         }
 
-        View list = view.findViewById(R.id.item_list);
         // Set the adapter
+        View list = view.findViewById(R.id.item_list);
         if (list instanceof RecyclerView) {
             Context context = list.getContext();
             RecyclerView recyclerView = (RecyclerView) list;
@@ -81,7 +77,7 @@ public class Fragment_User_BrowseStall extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new Adapter_StallList(stallName_List, mListener));
+            recyclerView.setAdapter(new Adapter_User_StallList(stallName_List, mListener));
         }
         return view;
     }

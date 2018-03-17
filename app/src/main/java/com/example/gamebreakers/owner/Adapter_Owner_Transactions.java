@@ -1,4 +1,4 @@
-package com.example.gamebreakers.user;
+package com.example.gamebreakers.owner;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,21 +7,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.gamebreakers.R;
-import com.example.gamebreakers.user.Fragment_User_BrowseFood.OnFoodSelectedListener;
+import com.example.gamebreakers.owner.Fragment_Owner_Transactions.OnTransactionSelectedListener;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link String} and makes a call to the
- * specified {@link OnFoodSelectedListener}.
+ * specified {@link OnTransactionSelectedListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class Adapter_FoodList extends RecyclerView.Adapter<Adapter_FoodList.ViewHolder> {
+public class Adapter_Owner_Transactions extends RecyclerView.Adapter<Adapter_Owner_Transactions.ViewHolder> {
 
     private final List<String> mValues;
-    private final OnFoodSelectedListener mListener;
+    private final OnTransactionSelectedListener mListener;
 
-    public Adapter_FoodList(List<String> items, OnFoodSelectedListener listener) {
+    public Adapter_Owner_Transactions(List<String> items, Fragment_Owner_Transactions.OnTransactionSelectedListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -37,7 +37,7 @@ public class Adapter_FoodList extends RecyclerView.Adapter<Adapter_FoodList.View
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position));
-        holder.mContentView.setText("yum yum yum");
+        holder.mContentView.setText(mValues.get(position));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +45,7 @@ public class Adapter_FoodList extends RecyclerView.Adapter<Adapter_FoodList.View
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onFoodSelected(holder.mItem);
+                    mListener.onTransactionSelected(holder.mItem);
                 }
             }
         });

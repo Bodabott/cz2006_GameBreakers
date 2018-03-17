@@ -61,9 +61,10 @@ public class Fragment_User_CurrentOrders extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_currentorders, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+        View list = view.findViewById(R.id.item_list);
+        if (list instanceof RecyclerView) {
+            Context context = list.getContext();
+            RecyclerView recyclerView = (RecyclerView) list;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {

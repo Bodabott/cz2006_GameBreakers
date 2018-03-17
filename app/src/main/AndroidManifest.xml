@@ -38,23 +38,11 @@
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".owner.Activity_Owner_Manage_Menu"
-            android:label="@string/app_name">
-        </activity>
-
         <activity android:name=".owner.Activity_Owner_Business_Mode"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".owner.Activity_Owner_History"
-            android:label="@string/app_name">
-        </activity>
-
         <activity android:name=".owner.Activity_Owner_Settings"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_User_History"
             android:label="@string/app_name">
         </activity>
 

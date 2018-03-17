@@ -16,12 +16,12 @@ import java.util.List;
  * specified {@link OnTransactionSelectedListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class Adapter_Transactions extends RecyclerView.Adapter<Adapter_Transactions.ViewHolder> {
+public class Adapter_User_Transactions extends RecyclerView.Adapter<Adapter_User_Transactions.ViewHolder> {
 
     private final List<String> mValues;
     private final OnTransactionSelectedListener mListener;
 
-    public Adapter_Transactions(List<String> items, OnTransactionSelectedListener listener) {
+    public Adapter_User_Transactions(List<String> items, OnTransactionSelectedListener listener) {
         mValues = items;
         mListener = listener;
     }

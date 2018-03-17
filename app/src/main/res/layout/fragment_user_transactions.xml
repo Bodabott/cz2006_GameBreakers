@@ -22,7 +22,6 @@
         android:textColor="#00CCFF"
         android:fontFamily="cursive"
         android:layout_marginLeft="15sp"
-        android:layout_above="@id/tran_hist_ListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

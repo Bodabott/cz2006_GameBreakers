@@ -116,9 +116,10 @@ public class Activity_User extends AppCompatActivity
                     .commit();
         }else if(item.toString().matches("History")){
             // Go to User Transaction History. Item is recorded only if Order is Successfully completed by Owner of that stall
-            Intent goIntent = new Intent(getApplicationContext(),Activity_User_History.class);
-            goIntent.putExtra(USER_NAME,username_message);
-            startActivityForResult(goIntent,2);
+            fragman.beginTransaction()
+                    .replace(R.id.content_main, new Fragment_User_Transactions())
+                    .addToBackStack(null)
+                    .commit();
         }else if(item.toString().matches("Settings")){
             Intent goIntent = new Intent(getApplicationContext(),Activity_User_Settings.class);
             goIntent.putExtra(USER_NAME,username_message);
@@ -205,31 +206,8 @@ public class Activity_User extends AppCompatActivity
     public void onTransactionSelecteed(String item) {
 
     }
-    //=======================ON CLICK METHODS======================
-    public void browseStall(View v){
-        fragman.beginTransaction()
-                .replace(R.id.content_main, new Fragment_User_BrowseStall())
-                .addToBackStack(null)
-                .commit();
-    }
 
-    public void browseFood(View v){
-        if (stallName==null) {
-            Toast.makeText(v.getContext(),"Please choose a stall",Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        fragman.beginTransaction()
-                .replace(R.id.content_main, new Fragment_User_BrowseFood())
-                .addToBackStack(null)
-                .commit();
-    }
-    public void goPayment(View v){
-        fragman.beginTransaction()
-                .replace(R.id.content_main, new Fragment_User_Payment())
-                .commit();
-    }
-
+    //================COMPLEX ON CLICK METHODS======================
     public void makePayment(View v){
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
@@ -246,20 +224,6 @@ public class Activity_User extends AppCompatActivity
 
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_MainMenu())
-                .commit();
-    }
-
-    public void checkOrders(View v){
-        fragman.beginTransaction()
-                .replace(R.id.content_main, new Fragment_User_CurrentOrders())
-                .addToBackStack(null)
-                .commit();
-    }
-
-    public void checkTransactions(View v){
-        fragman.beginTransaction()
-                .replace(R.id.content_main, new Fragment_User_Transactions())
-                .addToBackStack(null)
                 .commit();
     }
 
@@ -293,6 +257,45 @@ public class Activity_User extends AppCompatActivity
             }
         });
         mBuilder.show();
+    }
+
+    //================SIMPLE ON CLICK METHODS======================
+    public void browseStall(View v){
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_BrowseStall())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void browseFood(View v){
+        if (stallName==null) {
+            Toast.makeText(v.getContext(),"Please choose a stall",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_BrowseFood())
+                .addToBackStack(null)
+                .commit();
+    }
+    public void goPayment(View v){
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_Payment())
+                .commit();
+    }
+
+    public void checkOrders(View v){
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_CurrentOrders())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void checkTransactions(View v){
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_Transactions())
+                .addToBackStack(null)
+                .commit();
     }
 
     public void backtoMain(View v){

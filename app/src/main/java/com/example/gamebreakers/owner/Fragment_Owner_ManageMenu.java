@@ -1,4 +1,4 @@
-package com.example.gamebreakers.user;
+package com.example.gamebreakers.owner;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -20,25 +20,24 @@ import java.util.List;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnFoodSelectedListener}
+ * Activities containing this fragment MUST implement the {@link OnMenuItemSelectedListener}
  * interface.
  */
-public class Fragment_User_BrowseFood extends Fragment {
+public class Fragment_Owner_ManageMenu extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final java.lang.String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnFoodSelectedListener mListener;
+    private OnMenuItemSelectedListener mListener;
 
     DatabaseHelper myDb;
-    List<java.lang.String> food_List;
-
+    List<java.lang.String> menu;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public Fragment_User_BrowseFood() {
+    public Fragment_Owner_ManageMenu() {
     }
 
     @Override
@@ -48,35 +47,25 @@ public class Fragment_User_BrowseFood extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-        //get database
+
         myDb= new DatabaseHelper(getContext());
-        //get selected stall
-        Activity_User act = (Activity_User) getActivity();
-        String stallName= act.stallName;
-        //get list of food
-        java.lang.String[] foodArray = myDb.getStallMenu(stallName);
-        food_List = Arrays.asList(foodArray);
+        Activity_Owner act = (Activity_Owner) getActivity();
+
+        String[] menu_Array= myDb.getStallMenu(act.stallName);
+        menu = Arrays.asList(menu_Array);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_food, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_owner_manage_menu, container, false);
         //check selected values. If have, update textview
-        Activity_User act = (Activity_User) getActivity();
+        Activity_Owner act = (Activity_Owner) getActivity();
         String stallname= act.stallName;
-        String food=act.food;
-
         if (stallname!=null) {
-            TextView selectedStall = view.findViewById(R.id.selected_stall);
-            selectedStall.setText("Stall: "+stallname);
+            TextView selectedStall = view.findViewById(R.id.stall_name_holder);
+            selectedStall.setText(stallname);
         }
-        if (food!=null) {
-            TextView selectedStall = view.findViewById(R.id.selected_food);
-            selectedStall.setText("Food: "+food);
-        }
-
         // Set the adapter
         View list = view.findViewById(R.id.item_list);
         if (list instanceof RecyclerView) {
@@ -87,7 +76,7 @@ public class Fragment_User_BrowseFood extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new Adapter_User_FoodList(food_List, mListener));
+            recyclerView.setAdapter(new Adapter_Owner_ManageMenu(menu, mListener));
         }
         return view;
     }
@@ -96,11 +85,11 @@ public class Fragment_User_BrowseFood extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFoodSelectedListener) {
-            mListener = (OnFoodSelectedListener) context;
+        if (context instanceof OnMenuItemSelectedListener) {
+            mListener = (OnMenuItemSelectedListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnOrderSelectedListener");
+                    + " must implement OnMenuItemSelectedListener");
         }
     }
 
@@ -120,8 +109,8 @@ public class Fragment_User_BrowseFood extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFoodSelectedListener {
+    public interface OnMenuItemSelectedListener {
         // TODO: Update argument type and name
-        void onFoodSelected(String item);
+        void onMenuItemSelected(String item);
     }
 }

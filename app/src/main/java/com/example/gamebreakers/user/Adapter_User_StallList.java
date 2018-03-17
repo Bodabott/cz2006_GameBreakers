@@ -16,12 +16,12 @@ import java.util.List;
  * specified {@link OnStallNameSelectedListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class Adapter_StallList extends RecyclerView.Adapter<Adapter_StallList.ViewHolder> {
+public class Adapter_User_StallList extends RecyclerView.Adapter<Adapter_User_StallList.ViewHolder> {
 
     private final List<String> mValues;
     private final OnStallNameSelectedListener mListener;
 
-    public Adapter_StallList(List<String> items, OnStallNameSelectedListener listener) {
+    public Adapter_User_StallList(List<String> items, OnStallNameSelectedListener listener) {
         mValues = items;
         mListener = listener;
     }

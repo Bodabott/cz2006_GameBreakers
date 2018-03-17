@@ -18,6 +18,7 @@
 
     <Button
         android:id="@+id/back"
+        android:onClick="back"
         android:text="BACK"
         android:layout_marginRight="15sp"
         android:layout_alignParentTop="true"
