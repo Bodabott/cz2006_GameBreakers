@@ -14,7 +14,7 @@
 
 
         <Button
-            android:onClick="orderFood"
+            android:onClick="browseStall"
             android:id="@+id/order"
             android:text="ORDER ^_^"
             android:textSize="30sp"

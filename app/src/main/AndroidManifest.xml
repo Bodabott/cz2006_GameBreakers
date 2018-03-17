@@ -30,18 +30,6 @@
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".user.Activity_User_Stall"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_User_Food"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_User_Payment"
-            android:label="@string/app_name">
-        </activity>
-
         <activity android:name=".user.Activity_User_Settings"
             android:label="@string/app_name">
         </activity>
