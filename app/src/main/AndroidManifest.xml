@@ -30,18 +30,6 @@
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".user.Activity_User_Stall"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_User_Food"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_User_Payment"
-            android:label="@string/app_name">
-        </activity>
-
         <activity android:name=".user.Activity_User_Settings"
             android:label="@string/app_name">
         </activity>
@@ -50,15 +38,7 @@
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".owner.Activity_Owner_Manage_Menu"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".owner.Activity_Owner_Orders"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".owner.Activity_Owner_History"
+        <activity android:name=".owner.Activity_Owner_Business_Mode"
             android:label="@string/app_name">
         </activity>
 
@@ -66,6 +46,7 @@
             android:label="@string/app_name">
         </activity>
 
+<<<<<<< HEAD
         <activity android:name=".user.Activity_User_Orders"
             android:label="@string/app_name">
         </activity>
@@ -78,6 +59,8 @@
             android:label="GameBreakers">
         </activity>
 
+=======
+>>>>>>> f65740db67dc008eb3c0c66736ed2963699b392b
     </application>
 
 </manifest>

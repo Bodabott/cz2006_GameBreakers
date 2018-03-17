@@ -16,13 +16,13 @@ import com.example.gamebreakers.R;
  * Created by zNotAgain on 6/3/2018.
  */
 
-public class Adapter_Owner_Transaction_History extends ArrayAdapter<String> {
+public class Adapter_Owner_Business_Mode extends ArrayAdapter<String> {
 
     Context mContext;
     int mLayoutResId;
     String mData[] = null;
 
-    public Adapter_Owner_Transaction_History(Context context, int resource, String[] objects) {
+    public Adapter_Owner_Business_Mode(Context context, int resource, String[] objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mLayoutResId = resource;
@@ -37,7 +37,7 @@ public class Adapter_Owner_Transaction_History extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        Adapter_Owner_Transaction_History.PlaceHolder holder = null;
+        Adapter_Owner_Business_Mode.PlaceHolder holder = null;
 
         //if we currently don't have a row View to reuse...
         if(row == null){
@@ -45,7 +45,7 @@ public class Adapter_Owner_Transaction_History extends ArrayAdapter<String> {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             row = inflater.inflate(mLayoutResId,parent,false);
 
-            holder = new Adapter_Owner_Transaction_History.PlaceHolder();
+            holder = new Adapter_Owner_Business_Mode.PlaceHolder();
 
             holder.nameView = row.findViewById(R.id.row_text);
             holder.imageView = row.findViewById(R.id.row_image);
@@ -53,7 +53,7 @@ public class Adapter_Owner_Transaction_History extends ArrayAdapter<String> {
             row.setTag(holder);
         }else{
             //Otherwise use an existing View
-            holder = (Adapter_Owner_Transaction_History.PlaceHolder) row.getTag();
+            holder = (Adapter_Owner_Business_Mode.PlaceHolder) row.getTag();
         }
 
         //Getting the data from the data array
@@ -66,7 +66,7 @@ public class Adapter_Owner_Transaction_History extends ArrayAdapter<String> {
 
         //setting the view to reflect the data we need to display
         holder.nameView.setText(string);
-        holder.imageView.setImageResource(R.drawable.ic_delete);
+        holder.imageView.setImageResource(R.drawable.ic_edit);
 
         //returning the row (because this is called getView after all
         return row;
@@ -87,3 +87,4 @@ public class Adapter_Owner_Transaction_History extends ArrayAdapter<String> {
         ImageView imageView;
     }
 }
+
