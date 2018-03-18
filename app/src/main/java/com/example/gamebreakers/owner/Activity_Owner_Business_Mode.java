@@ -51,6 +51,8 @@ public class Activity_Owner_Business_Mode extends Activity {
         strings = myDb.getArrayOfOrders(stallNameMessage);
         mAdapterCurrentOrders = new Adapter_Owner_Business_Mode(getApplicationContext(),R.layout.row_current_orders,strings);
 
+        Toast.makeText(this,"hello "+strings.length,Toast.LENGTH_SHORT).show();
+
         if(mListView != null){
             mListView.setAdapter(mAdapterCurrentOrders);
         }

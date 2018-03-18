@@ -273,7 +273,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /////////////////////////////////////////// ORDER METHODS ///////////////////////////////////////////
     public String[] getUserArrayOfOrders(String username){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM " + ORDERS_TABLE_NAME + " WHERE " + ORDERS_COL_3 + " = '" + username + "'" + " ORDER BY " + ORDERS_COL_1 + " ASC;",null);
+        Cursor res = sqLiteDatabase.rawQuery(
+                "SELECT * FROM " + ORDERS_TABLE_NAME
+                        + " WHERE " + ORDERS_COL_3 + " = '" + username + "'"
+                        +  " ORDER BY " + ORDERS_COL_1 + " ASC;",null);
         String[] stringList = new String[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
@@ -286,7 +289,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public String[] getArrayOfOrders(String stallName){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM " + ORDERS_TABLE_NAME + " WHERE " + ORDERS_COL_4 + " = '" + stallName + "'" + " ORDER BY " + ORDERS_COL_1 + " ASC;",null);
+        Cursor res = sqLiteDatabase.rawQuery(
+                "SELECT * FROM " + ORDERS_TABLE_NAME
+                    + " WHERE " + ORDERS_COL_4 + " = '" + stallName + "'"
+                        + " ORDER BY " + ORDERS_COL_1 + " ASC;",null);
         String[] stringList = new String[res.getCount()];
         int i = 0;
         while(res.moveToNext()){

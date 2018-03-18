@@ -137,26 +137,26 @@ public class Activity_User extends AppCompatActivity
         // Initialise
         int ID = 0;
         int Max_ID = 1;
-        String[] strings_orders = myDb.getArrayOfOrders(stall_name.substring(7));
-        String[] strings_owner_history = myDb.getArrayOfHistory(stall_name.substring(7));
+        String[] strings_orders = myDb.getArrayOfOrders(stall_name);
+        String[] strings_owner_history = myDb.getArrayOfHistory(stall_name);
         String[] strings_user_history = myDb.getUserArrayOfHistory(user_name);
 
         // Initial Check, increment ID to 1
         for(String element : strings_orders)
-            if(old_foodName.substring(6).matches(element))
+            if(old_foodName.matches(element))
                 ID++;
         for(String element : strings_owner_history)
-            if(old_foodName.substring(6).matches(element))
+            if(old_foodName.matches(element))
                 ID++;
         for(String element : strings_user_history)
-            if(old_foodName.substring(6).matches(element))
+            if(old_foodName.matches(element))
                 ID++;
 
         // Check if there are duplicates in Order List
         for(String element : strings_orders)
             for(int j=0;j<element.length();j++)
                 if(element.charAt(j) == '-')
-                    if(old_foodName.substring(6).matches(element.substring(0,j)))
+                    if(old_foodName.matches(element.substring(0,j)))
                         if((ID = Integer.valueOf(element.substring(j+1)) + 1) > Max_ID)
                             Max_ID = ID;
 
@@ -164,7 +164,7 @@ public class Activity_User extends AppCompatActivity
         for(String element : strings_owner_history)
             for(int j=0;j<element.length();j++)
                 if(element.charAt(j) == '-')
-                    if(old_foodName.substring(6).matches(element.substring(0,j)))
+                    if(old_foodName.matches(element.substring(0,j)))
                         if((ID = Integer.valueOf(element.substring(j+1)) + 1) > Max_ID)
                             Max_ID = ID;
 
@@ -172,14 +172,14 @@ public class Activity_User extends AppCompatActivity
         for(String element : strings_user_history)
             for(int j=0;j<element.length();j++)
                 if(element.charAt(j) == '-')
-                    if(old_foodName.substring(6).matches(element.substring(0,j)))
+                    if(old_foodName.matches(element.substring(0,j)))
                         if((ID = Integer.valueOf(element.substring(j+1)) + 1) > Max_ID)
                             Max_ID = ID;
 
         if(ID != 0) { // If item already exists in Order/History List
-            return  old_foodName.substring(6) + "-" + String.valueOf(Max_ID);
+            return  old_foodName + "-" + String.valueOf(Max_ID);
         }else{
-            return old_foodName.substring(6);
+            return old_foodName;
         }
     }
     //====================List Adaptor Methods=====================
@@ -216,12 +216,12 @@ public class Activity_User extends AppCompatActivity
         final String usernameMessage = username;
 
         String newFoodMessage = foodNameConverter(foodMessage,stallMessage,usernameMessage);
-        if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage.substring(7))){
+        if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage)){
             Toast.makeText(getApplicationContext(),"PAYMENT SUCCESSFUL",Toast.LENGTH_LONG).show();
             setResult(Activity.RESULT_OK);
         }
         else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();
-
+        fragman.popBackStack();
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_MainMenu())
                 .commit();
