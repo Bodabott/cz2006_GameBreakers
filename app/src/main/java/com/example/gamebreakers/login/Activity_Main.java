@@ -1,6 +1,5 @@
 package com.example.gamebreakers.login;
 
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.gamebreakers.user_ui;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
@@ -64,10 +61,7 @@ public class Activity_Main extends AppCompatActivity {
             // make sure account exists in database
             if (user_res.getCount() == 1) { // if user account
                 Toast.makeText(Activity_Main.this, "Login Successful", Toast.LENGTH_LONG).show();
-
-                //Intent goIntent = new Intent(v.getContext(), Activity_User.class);
-
-                Intent goIntent = new Intent(v.getContext(), user_ui.class);
+                Intent goIntent = new Intent(v.getContext(), Activity_User.class);
 
                 goIntent.putExtra(USER_NAME, editUserName.getText().toString());
                 goIntent.putExtra(PASSWORD, editPassword.getText().toString());

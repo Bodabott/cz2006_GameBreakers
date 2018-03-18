@@ -46,21 +46,6 @@
             android:label="@string/app_name">
         </activity>
 
-<<<<<<< HEAD
-        <activity android:name=".user.Activity_User_Orders"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".user.Activity_User_History"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name="user_ui"
-            android:label="GameBreakers">
-        </activity>
-
-=======
->>>>>>> f65740db67dc008eb3c0c66736ed2963699b392b
     </application>
 
 </manifest>
