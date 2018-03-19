@@ -81,7 +81,6 @@ public class Activity_User extends AppCompatActivity
                 return navigationItemListener(item);
             }
         });
-
     }
 
     @Override
@@ -102,6 +101,7 @@ public class Activity_User extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //=====================Navigation Drawer========================
     public boolean navigationItemListener(MenuItem item){
         Intent intent = getIntent();
         final String username_message = intent.getStringExtra(USER_NAME);
@@ -132,7 +132,8 @@ public class Activity_User extends AppCompatActivity
         mDrawerLayout.closeDrawers();
         return true;
     }
-
+    //=======================Converts Order into SQL query================
+    //=====================probably should move into databasehelper===============
     public String foodNameConverter(String old_foodName, String stall_name, String user_name){
         // Initialise
         int ID = 0;

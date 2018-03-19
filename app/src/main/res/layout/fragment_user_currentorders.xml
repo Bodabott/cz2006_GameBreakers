@@ -12,7 +12,6 @@
         android:textColor="#00CCFF"
         android:fontFamily="cursive"
         android:layout_marginLeft="15sp"
-        android:layout_above="@id/pendingOrdersListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
