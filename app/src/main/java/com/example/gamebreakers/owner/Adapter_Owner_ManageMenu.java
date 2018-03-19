@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.gamebreakers.R;
+import com.example.gamebreakers.entities.Food;
 import com.example.gamebreakers.owner.Fragment_Owner_ManageMenu.OnMenuItemSelectedListener;
 
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
  */
 public class Adapter_Owner_ManageMenu extends RecyclerView.Adapter<Adapter_Owner_ManageMenu.ViewHolder> {
 
-    private final List<String> mValues;
+    private final List<Food> mValues;
     private final OnMenuItemSelectedListener mListener;
 
-    public Adapter_Owner_ManageMenu(List<String> items, OnMenuItemSelectedListener listener) {
+    public Adapter_Owner_ManageMenu(List<Food> items, OnMenuItemSelectedListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -36,8 +37,9 @@ public class Adapter_Owner_ManageMenu extends RecyclerView.Adapter<Adapter_Owner
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position));
-        holder.mContentView.setText(mValues.get(position));
+        holder.mIdView.setText(mValues.get(position).getFoodName());
+        holder.mContentView.setText("$"+mValues.get(position).getPrice()/100
+                +"."+mValues.get(position).getPrice()%100);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +47,7 @@ public class Adapter_Owner_ManageMenu extends RecyclerView.Adapter<Adapter_Owner
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onMenuItemSelected(holder.mItem);
+                    mListener.onMenuItemSelected(holder.mItem.getFoodName());
                 }
             }
         });
@@ -60,7 +62,7 @@ public class Adapter_Owner_ManageMenu extends RecyclerView.Adapter<Adapter_Owner
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public String mItem;
+        public Food mItem;
 
         public ViewHolder(View view) {
             super(view);

@@ -75,17 +75,24 @@ public class Activity_Owner extends AppCompatActivity
         mBuilder.setTitle("Set Food Name: ");
 
         // Set up the input
-        final EditText input = new EditText(this);
-        // Specify the type of input expected
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        mBuilder.setView(input);
+        final View addmenu = getLayoutInflater().inflate(R.layout.fragment_owner_addmenu,null);
+
+        mBuilder.setView(addmenu);
 
         // Set up the buttons
         mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String m_Text = input.getText().toString();
-                if(myDb.addMenuArrayData(m_Text,stallNameMessage))
+                //get inputs
+                EditText stallname = addmenu.findViewById(R.id.addmenu_foodname);
+                String m_Text=stallname.getText().toString();
+
+                EditText dollars= addmenu.findViewById(R.id.addmenu_dollar_price);
+                EditText cents= addmenu.findViewById(R.id.addmenu_cents_price);
+                int price = Integer.parseInt(dollars.getText().toString()) * 100 //add dollars
+                        + Integer.parseInt(cents.getText().toString());         //add cents
+
+                if(myDb.addMenuArrayData(m_Text,stallNameMessage, price))
                     Toast.makeText(Activity_Owner.this,"Data Added",Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(Activity_Owner.this,"Data not Added",Toast.LENGTH_SHORT).show();
