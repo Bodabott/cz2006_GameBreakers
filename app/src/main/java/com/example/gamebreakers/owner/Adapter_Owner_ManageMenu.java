@@ -1,9 +1,11 @@
 package com.example.gamebreakers.owner;
 
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gamebreakers.R;
@@ -40,6 +42,7 @@ public class Adapter_Owner_ManageMenu extends RecyclerView.Adapter<Adapter_Owner
         holder.mIdView.setText(mValues.get(position).getFoodName());
         holder.mContentView.setText("$"+mValues.get(position).getPrice()/100
                 +"."+mValues.get(position).getPrice()%100);
+        holder.mImageView.setImageResource(R.drawable.ic_delete);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +65,7 @@ public class Adapter_Owner_ManageMenu extends RecyclerView.Adapter<Adapter_Owner
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView mImageView;
         public Food mItem;
 
         public ViewHolder(View view) {
@@ -69,6 +73,7 @@ public class Adapter_Owner_ManageMenu extends RecyclerView.Adapter<Adapter_Owner
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.item_id);
             mContentView = (TextView) view.findViewById(R.id.item_content);
+            mImageView = view.findViewById(R.id.item_image);
         }
 
         @Override

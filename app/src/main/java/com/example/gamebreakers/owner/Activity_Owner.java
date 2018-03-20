@@ -57,8 +57,34 @@ public class Activity_Owner extends AppCompatActivity
 
     //====================List Adaptor Methods=====================
     @Override
-    public void onMenuItemSelected(String item) {
+    public void onMenuItemSelected(final String item) {
+        Toast.makeText(this,item,Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        mBuilder.setCancelable(true);
+        mBuilder.setTitle("Delete " + item + "?");
+        mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(myDb.deleteMenuArrayData(item,stallName) > 0)
+                    Toast.makeText(Activity_Owner.this,"Data Deleted",Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(Activity_Owner.this,"Data not Deleted",Toast.LENGTH_SHORT).show();
+                    // Resets the ListView
+                    fragman.popBackStack();
+                    fragman.beginTransaction()
+                            .replace(R.id.content_main, new Fragment_Owner_ManageMenu())
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
+        mBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
 
+        mBuilder.show();
     }
 
     @Override
