@@ -7,46 +7,95 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:id="@+id/content_layout"
-        android:background="@drawable/background"
+        android:background="#4D5DADE2  "
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:id="@+id/current_orders"
+            android:background="@drawable/user_main_rounded_buttons"
+            android:layout_margin="0dp"
+            android:layout_above="@+id/pastTransactions"
+            android:layout_height="wrap_content">
 
+            <!-- The color of the buttons can be changed in the user_main_rounded_buttons.xml inside drawable-->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/currentOrders"
+                android:minWidth="60dp"
+                android:minHeight="60dp"
+                android:background="@drawable/current_order"
+                android:layout_height="wrap_content" />
+        <Button
+            android:onClick="checkOrders"
+            android:id="@+id/checkorderbutton"
+            android:layout_centerVertical="true"
+            android:background="#00f5f5f5"
+            android:textStyle="normal"
+            android:fontFamily="casual"
+            android:layout_toRightOf="@+id/currentOrders"
+            android:textAllCaps="false"
+            android:text="Current Orders"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+
+            android:layout_width="250dp"
+            android:layout_margin="10dp"
+            android:id="@+id/pastTransactions"
+            android:background="@drawable/user_main_rounded_buttons"
+
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/transactionimage"
+                android:minWidth="60dp"
+                android:minHeight="60dp"
+                android:background="@drawable/calender_transactions"
+                android:layout_height="wrap_content" />
+        <Button
+            android:onClick="checkTransactions"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/transactionimage"
+            android:id="@+id/checktransactionbutton"
+            android:layout_margin="5dp"
+            android:fontFamily="casual"
+            android:textAllCaps="false"
+            android:textStyle="italic"
+            android:text="Past Transactions"
+            android:textSize="20dp"
+            android:background="#00f5f5f5"
+            android:padding="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        </RelativeLayout>
 
         <Button
             android:onClick="browseStall"
+            android:layout_margin="30dp"
             android:id="@+id/order"
-            android:text="ORDER ^_^"
-            android:textSize="30sp"
-            android:background="#2CAA12"
-            android:padding="10sp"
+            android:textSize="30dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/magnifying_glass"
+            android:layout_below="@id/pastTransactions"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <Button
-            android:onClick="checkOrders"
-            android:id="@+id/current_orders"
-            android:text="Current Orders"
-            android:textSize="30sp"
-            android:background="#2CAA12"
-            android:padding="10sp"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/order"/>
 
-        <Button
-            android:onClick="checkTransactions"
-            android:id="@+id/pastTransactions"
-            android:text="Past Transactions"
-            android:textSize="30sp"
-            android:background="#2CAA12"
-            android:padding="10sp"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/current_orders"/>
-        <Button
+        <!--<Button
             android:onClick="logout"
             android:id="@+id/logout"
             android:text="LOG OUT"
@@ -55,7 +104,7 @@
             android:layout_below="@id/pastTransactions"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" /> -->
     </RelativeLayout>
 
 </FrameLayout>

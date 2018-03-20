@@ -11,4 +11,4 @@
     app:layoutManager="LinearLayoutManager"
     tools:context="com.example.gamebreakers.user.Fragment_User_BrowseStall"
     tools:listitem="@layout/fragment_item"
-    android:background="#FFF"/>
+    android:background="#4D5DADE2"/>

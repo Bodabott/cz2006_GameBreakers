@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#005050"
+    android:background="#BA87CEEB"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,19 +9,22 @@
         android:id="@+id/user_settings"
         android:text="Settings"
         android:textSize="30sp"
-        android:textColor="#00CCFF"
+        android:textColor="#000000"
         android:fontFamily="cursive"
         android:layout_marginLeft="15sp"
-        android:layout_above="@id/buttonStorageLayout"
+        android:layout_alignTop="@+id/back"
+        android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/back"
-        android:text="BACK"
-        android:layout_marginRight="15sp"
+        android:text="Back"
+        android:textAllCaps="false"
+        android:background="#dcdcdc"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_margin="15dp"
+        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -69,10 +72,11 @@
             </LinearLayout>
 
             <Button
+                android:background="#dcdcdc"
                 android:onClick="editUsername"
                 android:id="@+id/settings_usernameButton"
                 android:text="EDIT"
-                android:layout_marginTop="20sp"
+                android:layout_margin="5sp"
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content" />
@@ -117,7 +121,9 @@
                 android:onClick="editPassword"
                 android:id="@+id/settings_passwordButton"
                 android:text="EDIT"
-                android:layout_marginTop="20sp"
+                android:background="#dcdcdc"
+
+                android:layout_margin="5sp"
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content" />
@@ -138,7 +144,7 @@
             android:onClick="deleteAccount"
             android:id="@+id/settings_deleteAccountButton"
             android:text="@string/delete_account"
-            android:background="#FF0000"
+            android:background="#ACFF2400"
             android:layout_marginBottom="20sp"
             android:layout_gravity="center"
             android:layout_weight="1"

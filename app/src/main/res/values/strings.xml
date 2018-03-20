@@ -16,9 +16,9 @@
     <string name="c_orders">Current\nOrders</string>
     <string name="m_menu">Manage\nMenu</string>
     <string name="delete_account">Delete\nAccount</string>
-    <string name="edit_stallname"><u>STALL NAME</u></string>
-    <string name="edit_username"><u>USERNAME</u></string>
-    <string name="edit_password"><u>PASSWORD</u></string>
+    <string name="edit_stallname"><u>STALL NAME: </u></string>
+    <string name="edit_username"><u>USERNAME: </u></string>
+    <string name="edit_password"><u>PASSWORD: </u></string>
     <string name="title_activity_user_ui">user_ui</string>
 
     <!-- TODO: Remove or change this placeholder text -->
