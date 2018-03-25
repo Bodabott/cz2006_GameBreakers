@@ -1,4 +1,4 @@
-package com.example.gamebreakers.user;
+package com.example.gamebreakers.owner;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,11 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
-import com.example.gamebreakers.entities.Food;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,25 +19,26 @@ import java.util.List;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnFoodSelectedListener}
+ * Activities containing this fragment MUST implement the {@link OnOrderSelectedListener}
  * interface.
  */
-public class Fragment_User_BrowseFood extends Fragment {
+public class Fragment_Owner_BusinessMode extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final java.lang.String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnFoodSelectedListener mListener;
+    private OnOrderSelectedListener mListener;
 
+    Activity_Owner_BusinessMode act;
     DatabaseHelper myDb;
-    List<Food> food_List;
+    List<java.lang.String> orders;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public Fragment_User_BrowseFood() {
+    public Fragment_Owner_BusinessMode() {
     }
 
     @Override
@@ -49,46 +48,28 @@ public class Fragment_User_BrowseFood extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-        //get database
+
         myDb= new DatabaseHelper(getContext());
-        //get selected stall
-        Activity_User act = (Activity_User) getActivity();
-        String stallName= act.stallName;
-        //get list of food
-        Food[] foodArray = myDb.getStallMenu(stallName);
-        food_List = Arrays.asList(foodArray);
+        act = (Activity_Owner_BusinessMode) getActivity();
+        java.lang.String[] ordersArray = myDb.getArrayOfOrders(act.stallName);
+        orders = Arrays.asList(ordersArray);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_food, container, false);
-
-        //check selected values. If have, update textview
-        Activity_User act = (Activity_User) getActivity();
-        String stallname= act.stallName;
-        String food=act.food;
-
-        if (stallname!=null) {
-            TextView selectedStall = view.findViewById(R.id.selected_stall);
-            selectedStall.setText("Stall: "+stallname);
-        }
-        if (food!=null) {
-            TextView selectedStall = view.findViewById(R.id.selected_food);
-            selectedStall.setText("Food: "+food);
-        }
+        View view = inflater.inflate(R.layout.fragment_order_list, container, false);
 
         // Set the adapter
-        View list = view.findViewById(R.id.item_list);
-        if (list instanceof RecyclerView) {
-            Context context = list.getContext();
-            RecyclerView recyclerView = (RecyclerView) list;
+        if (view instanceof RecyclerView) {
+            Context context = view.getContext();
+            RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new Adapter_User_FoodList(food_List, mListener));
+            recyclerView.setAdapter(new Adapter_Owner_BusinessMode(orders, mListener, act));
         }
         return view;
     }
@@ -97,8 +78,8 @@ public class Fragment_User_BrowseFood extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFoodSelectedListener) {
-            mListener = (OnFoodSelectedListener) context;
+        if (context instanceof OnOrderSelectedListener) {
+            mListener = (OnOrderSelectedListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnOrderSelectedListener");
@@ -121,8 +102,9 @@ public class Fragment_User_BrowseFood extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFoodSelectedListener {
-        // TODO: Update argument type and name
-        void onFoodSelected(String item);
+    public interface OnOrderSelectedListener {
+        void onOrderSelected(String order);
+        void finishOrder(String order);
+        void cancelOrder(String order);
     }
 }

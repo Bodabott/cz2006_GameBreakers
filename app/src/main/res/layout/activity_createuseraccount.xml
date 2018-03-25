@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#013243"
+    android:background="#4D5DADE2"
     android:padding="20sp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -56,7 +56,7 @@
         android:onClick="registerUserAccount"
         android:id="@+id/register_button"
         android:text="Register"
-        android:background="#00FFFF"
+        android:background="#87CEEB"
         android:paddingTop="20sp"
         android:paddingBottom="20sp"
         android:paddingLeft="50sp"
@@ -69,7 +69,7 @@
 
     <TextView
         android:id="@+id/already_member"
-        android:text="Already a member? Login"
+        android:text="Already a member? Login here ..."
         android:textColor="#FFFF00"
         android:layout_marginTop="40sp"
         android:layout_below="@id/register_button"
