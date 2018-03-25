@@ -9,10 +9,11 @@
 
     <TextView
         android:id="@+id/addmenu_foodText"
+        android:fontFamily="casual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="Food Name:"
+        android:text="Food Name :"
         android:textSize="30sp"
         tools:layout_editor_absoluteY="201dp"/>
 
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:layout_below="@id/addmenu_foodname"
+        android:fontFamily="cursive"
         android:text="$"
         android:textSize="50sp"
         tools:layout_editor_absoluteY="201dp" />

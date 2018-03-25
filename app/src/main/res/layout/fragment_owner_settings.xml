@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#4D5DADE2"
+    android:background="#B0E2FF"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -30,7 +30,7 @@
 
     <LinearLayout
         android:id="@+id/buttonStorageLayout"
-        android:background="#FFFFFF"
+        android:background="#F7F3ED"
         android:layout_margin="15sp"
         android:layout_below="@id/back"
         android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                 android:onClick="editUsername"
                 android:id="@+id/settings_usernameButton"
                 android:text="Edit"
-                android:background="#ACdcdcdc"
+                android:background="#dcdcdc"
                 android:layout_margin="5sp"
                 android:layout_weight="1"
                 android:layout_width="0sp"
@@ -123,7 +123,7 @@
                 android:onClick="editPassword"
                 android:id="@+id/settings_passwordButton"
                 android:text="Edit"
-                android:background="#ACdcdcdc"
+                android:background="#dcdcdc"
                 android:layout_margin="5sp"
                 android:layout_weight="1"
                 android:layout_width="0sp"
@@ -166,7 +166,7 @@
 
             <Button
                 android:textAllCaps="false"
-                android:background="#ACdcdcdc"
+                android:background="#dcdcdc"
                 android:onClick="editStallName"
                 android:id="@+id/settings_stallNameButton"
                 android:text="Edit"
@@ -188,7 +188,7 @@
             android:onClick="deleteAccount"
             android:id="@+id/settings_deleteAccountButton"
             android:text="@string/delete_account"
-            android:background="#A0FF2400"
+            android:background="#FA8072"
             android:layout_marginBottom="20sp"
             android:layout_gravity="center"
             android:layout_weight="1"

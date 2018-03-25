@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:background="#BA87CEEB"
+        android:background="#B0E2FF"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -40,7 +40,7 @@
             android:weightSum="2">
 
             <Button
-                android:background="#CEDCDCDC"
+                android:background="@drawable/manage_menu_button"
                 android:layout_margin="2dp"
                 android:fontFamily="monospace"
                 android:onClick="manageMenu"
@@ -48,17 +48,17 @@
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
-                android:text="@string/m_menu" />
+                 />
             <Button
                 android:layout_margin="2dp"
-                android:background="#CEDCDCDC"
+                android:background="@drawable/current_order_button"
                 android:fontFamily="monospace"
                 android:onClick="currentOrders"
                 android:id="@+id/current_orders"
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
-                android:text="@string/c_orders" />
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -69,25 +69,25 @@
             android:weightSum="2">
             <Button
                 android:layout_margin="2dp"
-                android:background="#CEDCDCDC"
+                android:background="@drawable/transaction_history_button"
                 android:fontFamily="monospace"
                 android:onClick="transactionHistory"
                 android:id="@+id/transaction_history"
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
-                android:text="@string/t_hist" />
+                 />
 
             <Button
                 android:layout_margin="2dp"
-                android:background="#CEDCDCDC"
+                android:background="@drawable/settings_button"
                 android:fontFamily="monospace"
                 android:onClick="owner_settings"
                 android:id="@+id/settings"
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="match_parent"
-                android:text="Settings" />
+                 />
         </LinearLayout>
 
     </LinearLayout>
@@ -95,7 +95,10 @@
     <Button
         android:id="@+id/logout"
         android:onClick="logout"
-        android:text="LOG OUT"
+        android:textAllCaps="false"
+        android:textStyle="italic"
+        android:text="Log Out"
+        android:fontFamily="sans-serif-condensed"
         android:background="#AE38B0DE"
         android:layout_marginBottom="10sp"
         android:layout_centerInParent="true"

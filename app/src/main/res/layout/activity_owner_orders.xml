@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#005050"
+    android:background="#B0E2FF"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,7 +9,7 @@
         android:id="@+id/current_orders_stallName"
         android:text="Current Orders"
         android:textSize="30sp"
-        android:textColor="#00CCFF"
+        android:textColor="#000000"
         android:fontFamily="cursive"
         android:layout_marginLeft="15sp"
         android:layout_width="wrap_content"
