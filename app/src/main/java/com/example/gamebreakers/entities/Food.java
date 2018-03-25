@@ -6,18 +6,15 @@ package com.example.gamebreakers.entities;
 
 public class Food {
     String foodName;
-    int price;
     String[] Reviews;
 
-    public Food(String foodName, int price) {
+    public Food(String foodName) {
         this.foodName = foodName;
-        this.price = price;
     }
 
     public String getFoodName() {
         return foodName;
     }
-    public int getPrice() {return price;}
 
     public void setFoodName(String foodName) {
         this.foodName = foodName;

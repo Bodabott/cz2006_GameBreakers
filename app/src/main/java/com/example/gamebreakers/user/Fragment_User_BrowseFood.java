@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
-import com.example.gamebreakers.entities.Food;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +32,7 @@ public class Fragment_User_BrowseFood extends Fragment {
     private OnFoodSelectedListener mListener;
 
     DatabaseHelper myDb;
-    List<Food> food_List;
+    List<java.lang.String> food_List;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -55,7 +54,7 @@ public class Fragment_User_BrowseFood extends Fragment {
         Activity_User act = (Activity_User) getActivity();
         String stallName= act.stallName;
         //get list of food
-        Food[] foodArray = myDb.getStallMenu(stallName);
+        java.lang.String[] foodArray = myDb.getStallMenu(stallName);
         food_List = Arrays.asList(foodArray);
     }
 

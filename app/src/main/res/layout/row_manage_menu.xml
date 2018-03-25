@@ -21,7 +21,6 @@
                 android:paddingTop="15sp"
                 android:text="Food Name"
                 android:textColor="#000000"
-                android:background="#5550"
                 android:layout_width="match_parent"
                 android:layout_height="50sp" />
 
@@ -34,7 +33,6 @@
 
             <ImageView
                 android:id="@+id/row_image"
-                android:background="#2520"
                 android:layout_width="match_parent"
                 android:layout_height="50sp" />
 

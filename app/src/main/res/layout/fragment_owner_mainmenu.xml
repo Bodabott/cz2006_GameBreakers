@@ -6,19 +6,17 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:background="#BA87CEEB"
+        android:background="@drawable/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <TextView
-        android:minHeight="50dp"
         android:id="@+id/stall_Name"
-        android:fontFamily="cursive"
         android:text="Stall Name"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textColor="#000000"
-        android:background="#87CEEB"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -40,9 +38,6 @@
             android:weightSum="2">
 
             <Button
-                android:background="#CEDCDCDC"
-                android:layout_margin="2dp"
-                android:fontFamily="monospace"
                 android:onClick="manageMenu"
                 android:id="@+id/manage_menu"
                 android:layout_weight="1"
@@ -50,9 +45,6 @@
                 android:layout_height="match_parent"
                 android:text="@string/m_menu" />
             <Button
-                android:layout_margin="2dp"
-                android:background="#CEDCDCDC"
-                android:fontFamily="monospace"
                 android:onClick="currentOrders"
                 android:id="@+id/current_orders"
                 android:layout_weight="1"
@@ -68,9 +60,6 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <Button
-                android:layout_margin="2dp"
-                android:background="#CEDCDCDC"
-                android:fontFamily="monospace"
                 android:onClick="transactionHistory"
                 android:id="@+id/transaction_history"
                 android:layout_weight="1"
@@ -79,9 +68,6 @@
                 android:text="@string/t_hist" />
 
             <Button
-                android:layout_margin="2dp"
-                android:background="#CEDCDCDC"
-                android:fontFamily="monospace"
                 android:onClick="owner_settings"
                 android:id="@+id/settings"
                 android:layout_weight="1"
@@ -96,7 +82,7 @@
         android:id="@+id/logout"
         android:onClick="logout"
         android:text="LOG OUT"
-        android:background="#AE38B0DE"
+        android:background="#FF0000"
         android:layout_marginBottom="10sp"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"

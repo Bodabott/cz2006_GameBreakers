@@ -57,34 +57,8 @@ public class Activity_Owner extends AppCompatActivity
 
     //====================List Adaptor Methods=====================
     @Override
-    public void onMenuItemSelected(final String item) {
-        Toast.makeText(this,item,Toast.LENGTH_SHORT).show();
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
-        mBuilder.setCancelable(true);
-        mBuilder.setTitle("Delete " + item + "?");
-        mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(myDb.deleteMenuArrayData(item,stallName) > 0)
-                    Toast.makeText(Activity_Owner.this,"Data Deleted",Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(Activity_Owner.this,"Data not Deleted",Toast.LENGTH_SHORT).show();
-                    // Resets the ListView
-                    fragman.popBackStack();
-                    fragman.beginTransaction()
-                            .replace(R.id.content_main, new Fragment_Owner_ManageMenu())
-                            .addToBackStack(null)
-                            .commit();
-                }
-            });
-        mBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+    public void onMenuItemSelected(String item) {
 
-        mBuilder.show();
     }
 
     @Override
@@ -101,24 +75,17 @@ public class Activity_Owner extends AppCompatActivity
         mBuilder.setTitle("Set Food Name: ");
 
         // Set up the input
-        final View addmenu = getLayoutInflater().inflate(R.layout.fragment_owner_addmenu,null);
-
-        mBuilder.setView(addmenu);
+        final EditText input = new EditText(this);
+        // Specify the type of input expected
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        mBuilder.setView(input);
 
         // Set up the buttons
         mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //get inputs
-                EditText stallname = addmenu.findViewById(R.id.addmenu_foodname);
-                String m_Text=stallname.getText().toString();
-
-                EditText dollars= addmenu.findViewById(R.id.addmenu_dollar_price);
-                EditText cents= addmenu.findViewById(R.id.addmenu_cents_price);
-                int price = Integer.parseInt(dollars.getText().toString()) * 100 //add dollars
-                        + Integer.parseInt(cents.getText().toString());         //add cents
-
-                if(myDb.addMenuArrayData(m_Text,stallNameMessage, price))
+                String m_Text = input.getText().toString();
+                if(myDb.addMenuArrayData(m_Text,stallNameMessage))
                     Toast.makeText(Activity_Owner.this,"Data Added",Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(Activity_Owner.this,"Data not Added",Toast.LENGTH_SHORT).show();
@@ -336,7 +303,7 @@ public class Activity_Owner extends AppCompatActivity
         Intent intent = getIntent();
         final String temp = intent.getStringExtra(Activity_Main.STALL_NAME);
 
-        Intent goIntent = new Intent(v.getContext(),Activity_Owner_BusinessMode.class);
+        Intent goIntent = new Intent(v.getContext(),Activity_Owner_Business_Mode.class);
         goIntent.putExtra(Activity_Main.STALL_NAME,temp);
         startActivity(goIntent);
     }
