@@ -5,8 +5,22 @@
 
     <Button
         android:id="@+id/butt2"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="PAYMENT" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:text="Update Payment Details" />
+
+    <Button
+        android:onClick="ShowTopupPopup"
+        android:id="@+id/top_up_butt"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Top-Up Value"
+        android:layout_alignLeft="@+id/butt2"
+        android:layout_alignStart="@+id/butt2"
+        android:layout_below="@+id/butt2"
+        android:layout_marginTop="16dp" />
 
 </RelativeLayout>
