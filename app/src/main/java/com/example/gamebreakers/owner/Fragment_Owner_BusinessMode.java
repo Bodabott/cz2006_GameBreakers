@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.Order;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Fragment_Owner_BusinessMode extends Fragment {
 
     Activity_Owner_BusinessMode act;
     DatabaseHelper myDb;
-    List<java.lang.String> orders;
+    List<Order> orders;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,7 +52,7 @@ public class Fragment_Owner_BusinessMode extends Fragment {
 
         myDb= new DatabaseHelper(getContext());
         act = (Activity_Owner_BusinessMode) getActivity();
-        java.lang.String[] ordersArray = myDb.getArrayOfOrders(act.stallName);
+        Order[] ordersArray = myDb.getArrayOfOrders(act.stallName);
         orders = Arrays.asList(ordersArray);
     }
 

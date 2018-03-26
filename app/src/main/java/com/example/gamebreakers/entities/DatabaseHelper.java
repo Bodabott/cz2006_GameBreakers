@@ -274,36 +274,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return (result != -1);
     }
     /////////////////////////////////////////// ORDER METHODS ///////////////////////////////////////////
-    public String[] getUserArrayOfOrders(String username){
+    public Order[] getUserArrayOfOrders(String username){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery(
                 "SELECT * FROM " + ORDERS_TABLE_NAME
                         + " WHERE " + ORDERS_COL_3 + " = '" + username + "'"
                         +  " ORDER BY " + ORDERS_COL_1 + " ASC;",null);
-        String[] stringList = new String[res.getCount()];
+        Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            stringList[i] = res.getString(1);
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3));
             i++;
         }
         res.close();
-        return stringList;
+        return orderList;
     }
 
-    public String[] getArrayOfOrders(String stallName){
+    public Order[] getArrayOfOrders(String stallName){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery(
                 "SELECT * FROM " + ORDERS_TABLE_NAME
                     + " WHERE " + ORDERS_COL_4 + " = '" + stallName + "'"
                         + " ORDER BY " + ORDERS_COL_1 + " ASC;",null);
-        String[] stringList = new String[res.getCount()];
+        Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            stringList[i] = res.getString(1);
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3));
             i++;
         }
         res.close();
-        return stringList;
+        return orderList;
     }
 
     public boolean addOrderArrayData(String foodName, String username,String stallName){

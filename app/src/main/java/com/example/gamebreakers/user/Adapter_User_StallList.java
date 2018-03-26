@@ -13,7 +13,7 @@ import com.example.gamebreakers.user.Fragment_User_BrowseStall.OnStallNameSelect
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link String} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Stall} and makes a call to the
  * specified {@link OnStallNameSelectedListener}.
  * TODO: Replace the implementation with code for your data type.
  */

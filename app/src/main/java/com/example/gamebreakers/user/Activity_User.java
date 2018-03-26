@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.Order;
 import com.example.gamebreakers.login.Activity_Main;
 
 import static com.example.gamebreakers.login.Activity_Main.USER_NAME;
@@ -137,13 +138,13 @@ public class Activity_User extends AppCompatActivity
         // Initialise
         int ID = 0;
         int Max_ID = 1;
-        String[] strings_orders = myDb.getArrayOfOrders(stall_name);
+        Order[] orders_array = myDb.getArrayOfOrders(stall_name);
         String[] strings_owner_history = myDb.getArrayOfHistory(stall_name);
         String[] strings_user_history = myDb.getUserArrayOfHistory(user_name);
 
         // Initial Check, increment ID to 1
-        for(String element : strings_orders)
-            if(old_foodName.matches(element))
+        for(Order element : orders_array)
+            if(old_foodName.matches(element.getFoodName()))
                 ID++;
         for(String element : strings_owner_history)
             if(old_foodName.matches(element))
@@ -153,11 +154,11 @@ public class Activity_User extends AppCompatActivity
                 ID++;
 
         // Check if there are duplicates in Order List
-        for(String element : strings_orders)
-            for(int j=0;j<element.length();j++)
-                if(element.charAt(j) == '-')
-                    if(old_foodName.matches(element.substring(0,j)))
-                        if((ID = Integer.valueOf(element.substring(j+1)) + 1) > Max_ID)
+        for(Order element : orders_array)
+            for(int j=0;j<element.getFoodName().length();j++)
+                if(element.getFoodName().charAt(j) == '-')
+                    if(old_foodName.matches(element.getFoodName().substring(0,j)))
+                        if((ID = Integer.valueOf(element.getFoodName().substring(j+1)) + 1) > Max_ID)
                             Max_ID = ID;
 
         // Check if there are duplicates in Owner History List
