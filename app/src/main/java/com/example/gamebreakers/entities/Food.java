@@ -8,6 +8,8 @@ public class Food {
     String foodName;
     int price;
     String[] Reviews;
+    int totalscore;
+    int totalvotes;
 
     public Food(String foodName, int price) {
         this.foodName = foodName;
@@ -22,4 +24,6 @@ public class Food {
     public void setFoodName(String foodName) {
         this.foodName = foodName;
     }
+
+    public float getRating(){return ((float) totalscore)/totalvotes;}
 }

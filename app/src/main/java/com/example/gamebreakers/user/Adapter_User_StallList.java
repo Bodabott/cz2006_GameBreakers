@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.gamebreakers.R;
+import com.example.gamebreakers.entities.Stall;
 import com.example.gamebreakers.user.Fragment_User_BrowseStall.OnStallNameSelectedListener;
 
 import java.util.List;
@@ -18,10 +19,10 @@ import java.util.List;
  */
 public class Adapter_User_StallList extends RecyclerView.Adapter<Adapter_User_StallList.ViewHolder> {
 
-    private final List<String> mValues;
+    private final List<Stall> mValues;
     private final OnStallNameSelectedListener mListener;
 
-    public Adapter_User_StallList(List<String> items, OnStallNameSelectedListener listener) {
+    public Adapter_User_StallList(List<Stall> items, OnStallNameSelectedListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -36,7 +37,7 @@ public class Adapter_User_StallList extends RecyclerView.Adapter<Adapter_User_St
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position));
+        holder.mIdView.setText(mValues.get(position).getStallName());
         holder.mContentView.setText("queue time: wait long long");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +46,7 @@ public class Adapter_User_StallList extends RecyclerView.Adapter<Adapter_User_St
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onStallNameSelected(holder.mItem);
+                    mListener.onStallNameSelected(holder.mItem.getStallName());
                 }
             }
         });
@@ -60,7 +61,7 @@ public class Adapter_User_StallList extends RecyclerView.Adapter<Adapter_User_St
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
-        public String mItem;
+        public Stall mItem;
 
         public ViewHolder(View view) {
             super(view);

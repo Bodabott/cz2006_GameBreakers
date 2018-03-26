@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.Stall;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Fragment_User_BrowseStall extends Fragment {
     private OnStallNameSelectedListener mListener;
 
     DatabaseHelper myDb;
-    List<String> stallName_List;
+    List<Stall> stallName_List;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,8 +52,8 @@ public class Fragment_User_BrowseStall extends Fragment {
 
         myDb= new DatabaseHelper(getContext());
 
-        String[] stallName_Array = myDb.getArrayOfStall();
-        stallName_List = Arrays.asList(stallName_Array);
+        Stall[] stall_Array = myDb.getArrayOfStall();
+        stallName_List = Arrays.asList(stall_Array);
     }
 
     @Override

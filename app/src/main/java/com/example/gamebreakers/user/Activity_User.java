@@ -186,15 +186,20 @@ public class Activity_User extends AppCompatActivity
     @Override
     public void onFoodSelected(String food){
         this.food=food;
-        TextView v = findViewById(R.id.selected_food);
-        v.setText("Food: "+food);
+
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_Payment())
+                .commit();
     }
 
     @Override
     public void onStallNameSelected(String stallName) {
         this.stallName =  stallName;
-        TextView v = findViewById(R.id.selected_stall);
-        v.setText("Stall: "+stallName);
+
+        fragman.beginTransaction()
+                .replace(R.id.content_main, new Fragment_User_BrowseFood())
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
