@@ -26,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String OWNER_COL_2 = "O_USERNAME";
     private static final String OWNER_COL_3 = "O_STALLNAME";
     private static final String OWNER_COL_4 = "O_PASSWORD";
+    private static final String OWNER_COL_5 = "O_TYPE";
 
     // Stall-Owner Menu Table
     private static final String OWNER_MENU_TABLE_NAME = "owner_menu_table";
@@ -56,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String SQL_String = "CREATE TABLE " + USER_TABLE_NAME + "(" + USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_COL_2 + " TEXT," + USER_COL_3 + " TEXT" + ")";
         sqLiteDatabase.execSQL(SQL_String);
-        SQL_String = "CREATE TABLE " + OWNER_TABLE_NAME + "(" + OWNER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + OWNER_COL_2 + " TEXT," + OWNER_COL_3 + " TEXT," + OWNER_COL_4 + " TEXT" + ")";
+        SQL_String = "CREATE TABLE " + OWNER_TABLE_NAME + "(" + OWNER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + OWNER_COL_2 + " TEXT," + OWNER_COL_3 + " TEXT," + OWNER_COL_4 + " TEXT" + OWNER_COL_5 + " TEXT" +")";
         sqLiteDatabase.execSQL(SQL_String);
         SQL_String = "CREATE TABLE " + OWNER_MENU_TABLE_NAME + "(" + OWNER_MENU_COL_1 + " TEXT PRIMARY KEY," + OWNER_MENU_COL_2 + " TEXT" + ")";
         sqLiteDatabase.execSQL(SQL_String);
@@ -231,17 +232,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public String[] getArrayOfStall(){
+    public Stall[] getArrayOfStall(){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        Cursor res = sqLiteDatabase.rawQuery("SELECT DISTINCT " + OWNER_MENU_COL_2 + " FROM " + OWNER_MENU_TABLE_NAME,null);
-        String[] stringList = new String[res.getCount()];
+        Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM " + OWNER_TABLE_NAME,null);
+        Stall[] stallList = new Stall[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            stringList[i] = res.getString(0);
+            stallList[i] = new Stall(res.getInt(0),res.getString(2));
             i++;
         }
         res.close();
-        return stringList;
+        return stallList;
     }
 
     public String[] getStallMenu(String stallName){
@@ -271,36 +272,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return (result != -1);
     }
     /////////////////////////////////////////// ORDER METHODS ///////////////////////////////////////////
-    public String[] getUserArrayOfOrders(String username){
+    public Order[] getUserArrayOfOrders(String username){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery(
                 "SELECT * FROM " + ORDERS_TABLE_NAME
                         + " WHERE " + ORDERS_COL_3 + " = '" + username + "'"
                         +  " ORDER BY " + ORDERS_COL_1 + " ASC;",null);
-        String[] stringList = new String[res.getCount()];
+        Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            stringList[i] = res.getString(1);
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3));
             i++;
         }
         res.close();
-        return stringList;
+        return orderList;
     }
 
-    public String[] getArrayOfOrders(String stallName){
+    public Order[] getArrayOfOrders(String stallName){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery(
                 "SELECT * FROM " + ORDERS_TABLE_NAME
                     + " WHERE " + ORDERS_COL_4 + " = '" + stallName + "'"
                         + " ORDER BY " + ORDERS_COL_1 + " ASC;",null);
-        String[] stringList = new String[res.getCount()];
+        Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            stringList[i] = res.getString(1);
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3));
             i++;
         }
         res.close();
-        return stringList;
+        return orderList;
     }
 
     public boolean addOrderArrayData(String foodName, String username,String stallName){

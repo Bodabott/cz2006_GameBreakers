@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     android:background="#005050"
+=======
+    android:background="#B0E2FF"
+>>>>>>> eb6faf89fc478fce912a19d00a313948da580967
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

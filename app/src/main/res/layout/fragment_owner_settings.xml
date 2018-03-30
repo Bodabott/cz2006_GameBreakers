@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     android:background="#005050"
+=======
+    android:background="#B0E2FF"
+>>>>>>> eb6faf89fc478fce912a19d00a313948da580967
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -28,7 +32,7 @@
 
     <LinearLayout
         android:id="@+id/buttonStorageLayout"
-        android:background="#FFFFFF"
+        android:background="#F7F3ED"
         android:layout_margin="15sp"
         android:layout_below="@id/back"
         android:layout_width="match_parent"
@@ -72,8 +76,14 @@
             <Button
                 android:onClick="editUsername"
                 android:id="@+id/settings_usernameButton"
+<<<<<<< HEAD
                 android:text="EDIT"
                 android:layout_marginTop="20sp"
+=======
+                android:text="Edit"
+                android:background="#dcdcdc"
+                android:layout_margin="5sp"
+>>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content" />
@@ -117,8 +127,14 @@
             <Button
                 android:onClick="editPassword"
                 android:id="@+id/settings_passwordButton"
+<<<<<<< HEAD
                 android:text="EDIT"
                 android:layout_marginTop="20sp"
+=======
+                android:text="Edit"
+                android:background="#dcdcdc"
+                android:layout_margin="5sp"
+>>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content" />
@@ -159,6 +175,11 @@
             </LinearLayout>
 
             <Button
+<<<<<<< HEAD
+=======
+                android:textAllCaps="false"
+                android:background="#dcdcdc"
+>>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:onClick="editStallName"
                 android:id="@+id/settings_stallNameButton"
                 android:text="EDIT"
@@ -179,7 +200,11 @@
             android:onClick="deleteAccount"
             android:id="@+id/settings_deleteAccountButton"
             android:text="@string/delete_account"
+<<<<<<< HEAD
             android:background="#FF0000"
+=======
+            android:background="#FA8072"
+>>>>>>> eb6faf89fc478fce912a19d00a313948da580967
             android:layout_marginBottom="20sp"
             android:layout_gravity="center"
             android:layout_weight="1"

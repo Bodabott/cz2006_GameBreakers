@@ -9,7 +9,9 @@ public class Stall {
 
     int stall_ID;
     String stallName;
-    Food[] Menu;
+    int price;
+    int type;
+    String averageTime;
 
     public Stall() {}
 

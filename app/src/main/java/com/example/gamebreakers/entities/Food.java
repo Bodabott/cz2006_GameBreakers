@@ -7,6 +7,8 @@ package com.example.gamebreakers.entities;
 public class Food {
     String foodName;
     String[] Reviews;
+    int totalscore;
+    int totalvotes;
 
     public Food(String foodName) {
         this.foodName = foodName;
@@ -19,4 +21,6 @@ public class Food {
     public void setFoodName(String foodName) {
         this.foodName = foodName;
     }
+
+    public float getRating(){return ((float) totalscore)/totalvotes;}
 }

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.Order;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Fragment_User_CurrentOrders extends Fragment {
     private OnOrderSelectedListener mListener;
 
     DatabaseHelper myDb;
-    List<String> current_Orders;
+    List<Order> current_Orders;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,7 +52,7 @@ public class Fragment_User_CurrentOrders extends Fragment {
         Activity_User act = (Activity_User) getActivity();
         myDb= new DatabaseHelper(getContext());
 
-        String[] orders = myDb.getUserArrayOfOrders(act.username);
+        Order[] orders = myDb.getUserArrayOfOrders(act.username);
         current_Orders = Arrays.asList(orders);
     }
 
