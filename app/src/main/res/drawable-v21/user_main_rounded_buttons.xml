@@ -1,4 +1,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android" >
+<<<<<<< HEAD
     <item android:state_pressed="true" >
         <shape android:shape="rectangle"  >
             <corners android:radius="50dp" />
@@ -13,11 +14,17 @@
             <solid android:color="#B0E2FF"/>
         </shape>
     </item>
+=======
+>>>>>>> parent of 4839ec0... Revert "Merge remote-tracking branch 'origin/master'"
     <item >
         <shape android:shape="rectangle"  >
             <corners android:radius="50dp" />
             <stroke android:width="0.5dp" android:color="#5e7974" />
+<<<<<<< HEAD
             <gradient android:angle="-90" android:startColor="#87CEEB" android:endColor="#B0E2FF" />
+=======
+            <gradient android:angle="-90" android:startColor="#87CEEB" android:endColor="#4D5DADE2" />
+>>>>>>> parent of 4839ec0... Revert "Merge remote-tracking branch 'origin/master'"
         </shape>
     </item>
 </selector>

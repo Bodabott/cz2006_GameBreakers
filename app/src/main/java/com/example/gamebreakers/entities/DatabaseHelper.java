@@ -32,6 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String OWNER_MENU_TABLE_NAME = "owner_menu_table";
     private static final String OWNER_MENU_COL_1 = "FOOD_NAME";
     private static final String OWNER_MENU_COL_2 = "O_STALLNAME";
+    private static final String OWNER_MENU_COL_3 = "FOOD_PRICE";
 
     // Orders Table
     private static final String ORDERS_TABLE_NAME = "all_orders_table";
@@ -59,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_String);
         SQL_String = "CREATE TABLE " + OWNER_TABLE_NAME + "(" + OWNER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + OWNER_COL_2 + " TEXT," + OWNER_COL_3 + " TEXT," + OWNER_COL_4 + " TEXT" + OWNER_COL_5 + " TEXT" +")";
         sqLiteDatabase.execSQL(SQL_String);
-        SQL_String = "CREATE TABLE " + OWNER_MENU_TABLE_NAME + "(" + OWNER_MENU_COL_1 + " TEXT PRIMARY KEY," + OWNER_MENU_COL_2 + " TEXT" + ")";
+        SQL_String = "CREATE TABLE " + OWNER_MENU_TABLE_NAME + "(" + OWNER_MENU_COL_1 + " TEXT PRIMARY KEY," + OWNER_MENU_COL_2 + " TEXT,"+ OWNER_MENU_COL_3 + " INTEGER " + ")";
         sqLiteDatabase.execSQL(SQL_String);
         SQL_String = "CREATE TABLE " + OWNER_HISTORY_TABLE_NAME + "(" + HISTORY_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + HISTORY_COL_2 + " TEXT," + HISTORY_COL_3 + " TEXT," + HISTORY_COL_4 + " TEXT" + ")";
         sqLiteDatabase.execSQL(SQL_String);
@@ -245,17 +246,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stallList;
     }
 
-    public String[] getStallMenu(String stallName){
+    public Food[] getStallMenu(String stallName){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM " + OWNER_MENU_TABLE_NAME + " WHERE " + OWNER_MENU_COL_2 + " = '" + stallName + "'",null);
-        String[] stringList = new String[res.getCount()];
+        Food[] foodList = new Food[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            stringList[i] = res.getString(0);
+            foodList[i] = new Food(res.getString(0), res.getInt(2));
             i++;
         }
         res.close();
-        return stringList;
+        return foodList;
     }
 
     public Integer deleteMenuArrayData(String food_name, String stall_name){
@@ -263,11 +264,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return sqLiteDatabase.delete(OWNER_MENU_TABLE_NAME,"FOOD_NAME = ? AND O_STALLNAME = ?",new String[]{food_name,stall_name});
     }
 
-    public boolean addMenuArrayData(String foodName, String stallName){
+    public boolean addMenuArrayData(String foodName, String stallName, int price){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(OWNER_MENU_COL_1,foodName);
         contentValues.put(OWNER_MENU_COL_2,stallName);
+        contentValues.put(OWNER_MENU_COL_3, price);
         long result = sqLiteDatabase.insert(OWNER_MENU_TABLE_NAME,null,contentValues);
         return (result != -1);
     }

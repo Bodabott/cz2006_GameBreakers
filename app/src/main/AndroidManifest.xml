@@ -38,7 +38,7 @@
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".owner.Activity_Owner_Business_Mode"
+        <activity android:name=".owner.Activity_Owner_BusinessMode"
             android:label="@string/app_name">
         </activity>
 

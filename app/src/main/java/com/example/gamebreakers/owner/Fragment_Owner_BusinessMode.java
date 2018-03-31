@@ -12,7 +12,10 @@ import android.view.ViewGroup;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+<<<<<<< HEAD
 import com.example.gamebreakers.entities.Order;
+=======
+>>>>>>> parent of 4839ec0... Revert "Merge remote-tracking branch 'origin/master'"
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +36,11 @@ public class Fragment_Owner_BusinessMode extends Fragment {
 
     Activity_Owner_BusinessMode act;
     DatabaseHelper myDb;
+<<<<<<< HEAD
     List<Order> orders;
+=======
+    List<java.lang.String> orders;
+>>>>>>> parent of 4839ec0... Revert "Merge remote-tracking branch 'origin/master'"
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -52,7 +59,11 @@ public class Fragment_Owner_BusinessMode extends Fragment {
 
         myDb= new DatabaseHelper(getContext());
         act = (Activity_Owner_BusinessMode) getActivity();
+<<<<<<< HEAD
         Order[] ordersArray = myDb.getArrayOfOrders(act.stallName);
+=======
+        java.lang.String[] ordersArray = myDb.getArrayOfOrders(act.stallName);
+>>>>>>> parent of 4839ec0... Revert "Merge remote-tracking branch 'origin/master'"
         orders = Arrays.asList(ordersArray);
     }
 
