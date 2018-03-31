@@ -22,8 +22,6 @@
             android:layout_above="@+id/pastTransactions"
             android:layout_height="wrap_content">
 
-            <!-- The color of the buttons can be changed in the user_main_rounded_buttons.xml inside drawable-->
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:id="@+id/currentOrders"
@@ -47,6 +45,7 @@
             android:layout_height="wrap_content"
             />
         </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_centerVertical="true"
@@ -88,18 +87,13 @@
             android:layout_margin="30dp"
             android:id="@+id/order"
             android:textSize="30dp"
-            android:layout_centerVertical="true"
             android:background="@drawable/magnifying_glass"
             android:layout_below="@id/pastTransactions"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!--<Button
-<<<<<<< HEAD
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
-=======
->>>>>>> parent of 4839ec0... Revert "Merge remote-tracking branch 'origin/master'"
+        <Button
             android:onClick="logout"
             android:id="@+id/logout"
             android:text="LOG OUT"
@@ -109,6 +103,7 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" /> -->
+
     </RelativeLayout>
 
 </FrameLayout>

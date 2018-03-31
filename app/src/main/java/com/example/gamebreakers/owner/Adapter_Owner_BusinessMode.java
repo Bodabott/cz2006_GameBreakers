@@ -13,11 +13,7 @@ import com.example.gamebreakers.owner.Fragment_Owner_BusinessMode.OnOrderSelecte
 import java.util.List;
 
 /**
-<<<<<<< HEAD
  * {@link RecyclerView.Adapter} that can display a {@link Order} and makes a call to the
-=======
- * {@link RecyclerView.Adapter} that can display a {@link String} and makes a call to the
->>>>>>> parent of 4839ec0... Revert "Merge remote-tracking branch 'origin/master'"
  * specified {@link OnOrderSelectedListener}.
  * TODO: Replace the implementation with code for your data type.
  */
