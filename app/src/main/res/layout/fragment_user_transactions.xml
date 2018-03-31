@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#005050"
+    android:background="#4D5DADE2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,19 +9,24 @@
         android:id="@+id/back"
         android:onClick="back"
         android:text="BACK"
-        android:layout_marginRight="15sp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:fontFamily="serif-monospace"
+        android:background="#4D5DADE2"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/tran_hist_stallName"
+        android:layout_toRightOf="@+id/back"
+        android:layout_toEndOf="@+id/back"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:text="Transaction History"
-        android:textSize="25sp"
-        android:textColor="#00CCFF"
+        android:layout_alignTop="@id/back"
+        android:textSize="30sp"
+        android:textColor="#80000000"
         android:fontFamily="cursive"
-        android:layout_marginLeft="15sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -36,18 +41,19 @@
 
     <RelativeLayout
         android:id="@+id/clearAllStorageLayout"
-        android:background="#FF0000"
+        android:background="#4D5DADE2"
         android:layout_marginLeft="15sp"
         android:layout_marginRight="15sp"
+        android:layout_marginBottom="15dp"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <Button
             android:onClick="clearAllTransactions"
             android:id="@+id/clearAllButton"
             android:textSize="50sp"
-            android:scaleX="0.17"
+            android:scaleX="0.15"
             android:background="@drawable/ic_clear_all"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

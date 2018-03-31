@@ -6,21 +6,19 @@
     android:layout_height="match_parent">
 
     <ImageView
-<<<<<<< HEAD
-        android:background="@drawable/background"
-=======
-        android:background="#B0E2FF"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="#B0E2FF"/>
 
     <TextView
+        android:minHeight="50dp"
         android:id="@+id/stall_Name"
+        android:fontFamily="cursive"
         android:text="Stall Name"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textColor="#000000"
-        android:background="@color/colorPrimary"
+        android:background="#87CEEB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -42,12 +40,9 @@
             android:weightSum="2">
 
             <Button
-<<<<<<< HEAD
-=======
-                android:background="@drawable/manage_menu_button"
+                android:background="#CEDCDCDC"
                 android:layout_margin="2dp"
                 android:fontFamily="monospace"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:onClick="manageMenu"
                 android:id="@+id/manage_menu"
                 android:layout_weight="1"
@@ -55,12 +50,9 @@
                 android:layout_height="match_parent"
                  />
             <Button
-<<<<<<< HEAD
-=======
                 android:layout_margin="2dp"
-                android:background="@drawable/current_order_button"
+                android:background="#CEDCDCDC"
                 android:fontFamily="monospace"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:onClick="currentOrders"
                 android:id="@+id/current_orders"
                 android:layout_weight="1"
@@ -76,12 +68,9 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <Button
-<<<<<<< HEAD
-=======
                 android:layout_margin="2dp"
-                android:background="@drawable/transaction_history_button"
+                android:background="#CEDCDCDC"
                 android:fontFamily="monospace"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:onClick="transactionHistory"
                 android:id="@+id/transaction_history"
                 android:layout_weight="1"
@@ -90,12 +79,9 @@
                  />
 
             <Button
-<<<<<<< HEAD
-=======
                 android:layout_margin="2dp"
-                android:background="@drawable/settings_button"
+                android:background="#CEDCDCDC"
                 android:fontFamily="monospace"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:onClick="owner_settings"
                 android:id="@+id/settings"
                 android:layout_weight="1"
@@ -109,16 +95,11 @@
     <Button
         android:id="@+id/logout"
         android:onClick="logout"
-<<<<<<< HEAD
-        android:text="LOG OUT"
-        android:background="#FF0000"
-=======
         android:textAllCaps="false"
         android:textStyle="italic"
         android:text="Log Out"
         android:fontFamily="sans-serif-condensed"
         android:background="#AE38B0DE"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
         android:layout_marginBottom="10sp"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"

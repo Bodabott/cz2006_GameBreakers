@@ -7,13 +7,7 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout
         android:id="@+id/content_layout"
-<<<<<<< HEAD
-        android:background="@drawable/background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-=======
-        android:background="#B0E2FF  "
+        android:background="#4D5DADE2  "
 
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,50 +15,47 @@
         <RelativeLayout
             android:layout_width="250dp"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:id="@+id/current_orders"
             android:background="@drawable/user_main_rounded_buttons"
             android:layout_margin="0dp"
-            android:layout_below="@+id/pastTransactions"
+            android:layout_above="@+id/pastTransactions"
             android:layout_height="wrap_content">
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
 
+            <!-- The color of the buttons can be changed in the user_main_rounded_buttons.xml inside drawable-->
 
-        <Button
-            android:onClick="browseStall"
-            android:id="@+id/order"
-            android:text="ORDER ^_^"
-            android:textSize="30sp"
-            android:background="#2CAA12"
-            android:padding="10sp"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:id="@+id/currentOrders"
+                android:minWidth="60dp"
+                android:minHeight="60dp"
+                android:background="@drawable/current_order"
+                android:layout_height="wrap_content" />
         <Button
             android:onClick="checkOrders"
-            android:id="@+id/current_orders"
+            android:id="@+id/checkorderbutton"
+            android:layout_centerVertical="true"
+            android:background="#00f5f5f5"
+            android:textStyle="normal"
+            android:fontFamily="casual"
+            android:layout_toRightOf="@+id/currentOrders"
+            android:textAllCaps="false"
             android:text="Current Orders"
-            android:textSize="30sp"
-            android:background="#2CAA12"
-            android:padding="10sp"
-            android:layout_centerInParent="true"
+            android:textSize="20dp"
+            android:padding="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:layout_below="@id/order"/>
-
-        <Button
-            android:onClick="checkTransactions"
-            android:id="@+id/pastTransactions"
-=======
             />
         </RelativeLayout>
 
         <RelativeLayout
+            android:layout_centerVertical="true"
+
             android:layout_width="250dp"
             android:layout_margin="10dp"
             android:id="@+id/pastTransactions"
             android:background="@drawable/user_main_rounded_buttons"
+
             android:layout_centerInParent="true"
             android:layout_height="wrap_content">
             <ImageView
@@ -76,36 +67,39 @@
                 android:layout_height="wrap_content" />
         <Button
             android:onClick="checkTransactions"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/transactionimage"
             android:id="@+id/checktransactionbutton"
             android:layout_margin="5dp"
             android:fontFamily="casual"
             android:textAllCaps="false"
             android:textStyle="italic"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
             android:text="Past Transactions"
-            android:textSize="30sp"
-            android:background="#2CAA12"
-            android:padding="10sp"
-            android:layout_centerInParent="true"
+            android:textSize="20dp"
+            android:background="#00f5f5f5"
+            android:padding="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/current_orders"/>
+            />
+        </RelativeLayout>
+
         <Button
-<<<<<<< HEAD
-=======
             android:onClick="browseStall"
             android:layout_margin="30dp"
             android:id="@+id/order"
             android:textSize="30dp"
-            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/magnifying_glass"
-            android:layout_above="@id/pastTransactions"
+            android:layout_below="@id/pastTransactions"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <!--<Button
+<<<<<<< HEAD
 >>>>>>> eb6faf89fc478fce912a19d00a313948da580967
+=======
+>>>>>>> parent of 4839ec0... Revert "Merge remote-tracking branch 'origin/master'"
             android:onClick="logout"
             android:id="@+id/logout"
             android:text="LOG OUT"
@@ -114,7 +108,7 @@
             android:layout_below="@id/pastTransactions"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content" /> -->
     </RelativeLayout>
 
 </FrameLayout>

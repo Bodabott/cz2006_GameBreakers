@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
-    android:background="#005050"
-=======
-    android:background="#B0E2FF"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
+    android:background="#4D5DADE2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,20 +9,22 @@
         android:id="@+id/owner_settings_stallName"
         android:text="Settings"
         android:textSize="30sp"
-        android:textColor="#00CCFF"
+        android:textColor="#000000"
         android:fontFamily="cursive"
-        android:layout_marginLeft="15sp"
-        android:layout_above="@id/buttonStorageLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/back"
         android:onClick="back"
-        android:text="BACK"
-        android:layout_marginRight="15sp"
+        android:text="Back"
+        android:background="#dcdcdc"
+        android:textAllCaps="false"
+        android:layout_margin="10sp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -74,16 +72,12 @@
             </LinearLayout>
 
             <Button
+                android:textAllCaps="false"
                 android:onClick="editUsername"
                 android:id="@+id/settings_usernameButton"
-<<<<<<< HEAD
-                android:text="EDIT"
-                android:layout_marginTop="20sp"
-=======
                 android:text="Edit"
-                android:background="#dcdcdc"
+                android:background="#ACdcdcdc"
                 android:layout_margin="5sp"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content" />
@@ -125,16 +119,12 @@
             </LinearLayout>
 
             <Button
+                android:textAllCaps="false"
                 android:onClick="editPassword"
                 android:id="@+id/settings_passwordButton"
-<<<<<<< HEAD
-                android:text="EDIT"
-                android:layout_marginTop="20sp"
-=======
                 android:text="Edit"
-                android:background="#dcdcdc"
+                android:background="#ACdcdcdc"
                 android:layout_margin="5sp"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content" />
@@ -175,15 +165,12 @@
             </LinearLayout>
 
             <Button
-<<<<<<< HEAD
-=======
                 android:textAllCaps="false"
-                android:background="#dcdcdc"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
+                android:background="#ACdcdcdc"
                 android:onClick="editStallName"
                 android:id="@+id/settings_stallNameButton"
-                android:text="EDIT"
-                android:layout_marginTop="20sp"
+                android:text="Edit"
+                android:layout_margin="5sp"
                 android:layout_weight="1"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content" />
@@ -197,14 +184,11 @@
         </Space>
 
         <Button
+            android:textAllCaps="false"
             android:onClick="deleteAccount"
             android:id="@+id/settings_deleteAccountButton"
             android:text="@string/delete_account"
-<<<<<<< HEAD
-            android:background="#FF0000"
-=======
-            android:background="#FA8072"
->>>>>>> eb6faf89fc478fce912a19d00a313948da580967
+            android:background="#A0FF2400"
             android:layout_marginBottom="20sp"
             android:layout_gravity="center"
             android:layout_weight="1"
