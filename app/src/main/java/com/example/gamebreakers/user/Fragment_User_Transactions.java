@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
@@ -60,6 +61,7 @@ public class Fragment_User_Transactions extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_transactions, container, false);
 
+        System.out.println(pastTransactions);
         // Set the adapter
         View list = view.findViewById(R.id.item_list);
         if (list instanceof RecyclerView) {
@@ -104,7 +106,6 @@ public class Fragment_User_Transactions extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnTransactionSelectedListener {
-        // TODO: Update argument type and name
         void onTransactionSelecteed(String item);
     }
 }

@@ -29,7 +29,7 @@ public class Adapter_User_Transactions extends RecyclerView.Adapter<Adapter_User
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_user_transactions, parent, false);
+                .inflate(R.layout.fragment_item, parent, false);
         return new ViewHolder(view);
     }
 
