@@ -5,9 +5,16 @@ package com.example.gamebreakers.entities;
  */
 
 public class User {
+    int id;
     String name;
+    int balance;
 
-    User (String user, String pass) {
+    public User (int id, String user, int bal) {
+        this.id = id;
         name = user;
+        balance=bal;
     }
+
+    public String getName() {return name;}
+    public int getBalance() {return balance;}
 }

@@ -52,7 +52,7 @@ public class Fragment_User_Transactions extends Fragment {
         Activity_User act = (Activity_User) getActivity();
         myDb= new DatabaseHelper(getContext());
 
-        String[] transactions = myDb.getUserArrayOfHistory(act.username);
+        String[] transactions = myDb.getUserArrayOfHistory(act.user.getName());
         pastTransactions = Arrays.asList(transactions);
     }
 

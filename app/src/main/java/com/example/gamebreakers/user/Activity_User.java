@@ -3,6 +3,7 @@ package com.example.gamebreakers.user;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,8 +23,10 @@ import android.widget.Toast;
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
+import com.example.gamebreakers.entities.User;
 import com.example.gamebreakers.login.Activity_Main;
 
+import static com.example.gamebreakers.login.Activity_Main.PASSWORD;
 import static com.example.gamebreakers.login.Activity_Main.USER_NAME;
 
 
@@ -36,7 +39,8 @@ public class Activity_User extends AppCompatActivity
         ,Fragment_User_CurrentOrders.OnOrderSelectedListener, Fragment_User_Transactions.OnTransactionSelectedListener {
 
     DrawerLayout mDrawerLayout;
-    String username, stallName, food;
+    String stallName, food;
+    User user;
     DatabaseHelper myDb;
 
     android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
@@ -53,7 +57,14 @@ public class Activity_User extends AppCompatActivity
                 .replace(R.id.content_main, new Fragment_User_MainMenu())
                 .commit();
         //get arguments
-        username = getIntent().getStringExtra(USER_NAME);
+        String username = getIntent().getStringExtra(USER_NAME);
+        String password = getIntent().getStringExtra(PASSWORD);
+        //get user
+        Cursor user_res = myDb.checkUserLoginData(username, password);
+        user_res.moveToNext();
+        user = new User(user_res.getInt(0),user_res.getString(1),user_res.getInt(3));
+
+
         //drawer
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
@@ -219,7 +230,7 @@ public class Activity_User extends AppCompatActivity
         Intent intent = getIntent();
         final String stallMessage = stallName;
         final String foodMessage = food;
-        final String usernameMessage = username;
+        final String usernameMessage = user.getName();
 
         String newFoodMessage = foodNameConverter(foodMessage,stallMessage,usernameMessage);
         if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage)){

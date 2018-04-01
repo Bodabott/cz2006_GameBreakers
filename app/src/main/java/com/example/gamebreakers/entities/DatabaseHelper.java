@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String USER_COL_1 = "U_ID";
     private static final String USER_COL_2 = "U_USERNAME";
     private static final String USER_COL_3 = "U_PASSWORD";
+    private static final String USER_COL_4 = "U_BALANCE";
 
     // Stall-Owner Table
     private static final String OWNER_TABLE_NAME = "owner_table";
@@ -56,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String SQL_String = "CREATE TABLE " + USER_TABLE_NAME + "(" + USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_COL_2 + " TEXT," + USER_COL_3 + " TEXT" + ")";
+        String SQL_String = "CREATE TABLE " + USER_TABLE_NAME + "(" + USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_COL_2 + " TEXT," + USER_COL_3 + " TEXT," + USER_COL_4 +" INTEGER" + ")";
         sqLiteDatabase.execSQL(SQL_String);
         SQL_String = "CREATE TABLE " + OWNER_TABLE_NAME + "(" + OWNER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + OWNER_COL_2 + " TEXT," + OWNER_COL_3 + " TEXT," + OWNER_COL_4 + " TEXT" + OWNER_COL_5 + " TEXT" +")";
         sqLiteDatabase.execSQL(SQL_String);
@@ -98,8 +99,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(USER_COL_2,username);
         contentValues.put(USER_COL_3,password);
+        contentValues.put(USER_COL_4, "0");
         long result = sqLiteDatabase.insert(USER_TABLE_NAME,null,contentValues);
         return !(result == -1);
+    }
+
+    public boolean saveUserAccount(User user){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_COL_4, user.balance);
+        return (sqLiteDatabase.update(USER_TABLE_NAME,contentValues,"U_ID = ?",new String[]{String.valueOf(user.id)}) > 0);
     }
 
     public String getBuyerUsername(String food_name,String stall_name){

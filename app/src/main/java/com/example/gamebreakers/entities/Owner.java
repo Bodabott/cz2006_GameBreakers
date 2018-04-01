@@ -7,8 +7,8 @@ package com.example.gamebreakers.entities;
 public class Owner extends User {
     Stall stall;
 
-    Owner(String owner, String pass, Stall stall){
-        super(owner, pass);
+    Owner(int id, String owner, int balance, Stall stall){
+        super(id, owner, balance);
         this.stall = stall;
     }
 }

@@ -52,7 +52,7 @@ public class Fragment_User_CurrentOrders extends Fragment {
         Activity_User act = (Activity_User) getActivity();
         myDb= new DatabaseHelper(getContext());
 
-        Order[] orders = myDb.getUserArrayOfOrders(act.username);
+        Order[] orders = myDb.getUserArrayOfOrders(act.user.getName());
         current_Orders = Arrays.asList(orders);
     }
 
