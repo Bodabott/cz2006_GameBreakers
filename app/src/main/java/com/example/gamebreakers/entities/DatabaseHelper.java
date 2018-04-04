@@ -111,6 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return (sqLiteDatabase.update(USER_TABLE_NAME,contentValues,"U_ID = ?",new String[]{String.valueOf(user.id)}) > 0);
     }
 
+    //check column index
     public String getBuyerUsername(String food_name,String stall_name){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM " + ORDERS_TABLE_NAME + " WHERE " + ORDERS_COL_2 + " = '" + food_name + "' AND " + ORDERS_COL_4 + " = '" + stall_name + "'",null);
