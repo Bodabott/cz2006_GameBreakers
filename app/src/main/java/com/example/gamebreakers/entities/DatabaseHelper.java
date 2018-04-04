@@ -41,6 +41,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String ORDERS_COL_2 = "FOOD_NAME";
     private static final String ORDERS_COL_3 = "U_USERNAME";
     private static final String ORDERS_COL_4 = "O_STALLNAME";
+    private static final String ORDERS_COL_5 = "COLLECTION_TIME";
+
 
     // History Table
     private static final String OWNER_HISTORY_TABLE_NAME = "owner_history_table";
@@ -67,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_String);
         SQL_String = "CREATE TABLE " + USER_HISTORY_TABLE_NAME + "(" + HISTORY_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + HISTORY_COL_2 + " TEXT," + HISTORY_COL_3 + " TEXT," + HISTORY_COL_4 + " TEXT" + ")";
         sqLiteDatabase.execSQL(SQL_String);
-        SQL_String = "CREATE TABLE " + ORDERS_TABLE_NAME + "(" + ORDERS_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + ORDERS_COL_2 + " TEXT," + ORDERS_COL_3 + " TEXT," + ORDERS_COL_4 + " TEXT" + ")";
+        SQL_String = "CREATE TABLE " + ORDERS_TABLE_NAME + "(" + ORDERS_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + ORDERS_COL_2 + " TEXT," + ORDERS_COL_3 + " TEXT," + ORDERS_COL_4 + " TEXT," +ORDERS_COL_5 +" TEXT" + ")";
         sqLiteDatabase.execSQL(SQL_String);
     }
 
@@ -292,7 +294,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3));
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3),res.getString(4));
             i++;
         }
         res.close();
@@ -308,19 +310,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3));
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3),res.getString(4));
             i++;
         }
         res.close();
         return orderList;
     }
 
-    public boolean addOrderArrayData(String foodName, String username,String stallName){
+    public boolean addOrderArrayData(String foodName, String username,String stallName, String collectionTime){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(ORDERS_COL_2,foodName);
         contentValues.put(ORDERS_COL_3,username);
         contentValues.put(ORDERS_COL_4,stallName);
+        contentValues.put(ORDERS_COL_5,collectionTime);
         long result = sqLiteDatabase.insert(ORDERS_TABLE_NAME,null,contentValues);
         return !(result == -1);
     }

@@ -26,6 +26,8 @@ import com.example.gamebreakers.entities.Order;
 import com.example.gamebreakers.entities.User;
 import com.example.gamebreakers.login.Activity_Main;
 
+import java.time.LocalDateTime;
+
 import static com.example.gamebreakers.login.Activity_Main.PASSWORD;
 import static com.example.gamebreakers.login.Activity_Main.USER_NAME;
 
@@ -231,9 +233,11 @@ public class Activity_User extends AppCompatActivity
         final String stallMessage = stallName;
         final String foodMessage = food;
         final String usernameMessage = user.getName();
+        //get time
+        String time= LocalDateTime.now().toString();
 
         String newFoodMessage = foodNameConverter(foodMessage,stallMessage,usernameMessage);
-        if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage)){
+        if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage, time)){
             Toast.makeText(getApplicationContext(),"PAYMENT SUCCESSFUL",Toast.LENGTH_LONG).show();
             setResult(Activity.RESULT_OK);
         }
