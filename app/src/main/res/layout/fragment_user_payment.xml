@@ -34,6 +34,52 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/earliestTime"
+            android:text="Earliest Collection Time: "
+            android:layout_margin="5dp"
+
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/collectionTime"/>
+        <TextView
+            android:id="@+id/collectionTime"
+            android:text="Choose time: "
+            android:layout_margin="5dp"
+
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/timeRow"/>
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:id="@+id/timeRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/paymentButton"
+            android:paddingHorizontal="20sp">
+
+        <Spinner
+            android:id= "@+id/hourInput"
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:background="#BFFFFFFF"
+            android:entries="@array/hours"
+            />
+
+        <Spinner
+            android:id= "@+id/minInput"
+            android:layout_width="0dp"
+            android:layout_weight=".5"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFFFF"
+            android:entries="@array/minutes"
+            />
+        </android.support.v7.widget.LinearLayoutCompat>
+
         <Button
             android:onClick="makePayment"
             android:id="@+id/paymentButton"

@@ -28,6 +28,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String OWNER_COL_3 = "O_STALLNAME";
     private static final String OWNER_COL_4 = "O_PASSWORD";
     private static final String OWNER_COL_5 = "O_TYPE";
+    private static final String OWNER_COL_6 = "O_QUEUENUM";
+    private static final String OWNER_COL_7 = "O_AVERAGECOOKTIME";
 
     // Stall-Owner Menu Table
     private static final String OWNER_MENU_TABLE_NAME = "owner_menu_table";
@@ -61,7 +63,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String SQL_String = "CREATE TABLE " + USER_TABLE_NAME + "(" + USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_COL_2 + " TEXT," + USER_COL_3 + " TEXT," + USER_COL_4 +" INTEGER" + ")";
         sqLiteDatabase.execSQL(SQL_String);
-        SQL_String = "CREATE TABLE " + OWNER_TABLE_NAME + "(" + OWNER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + OWNER_COL_2 + " TEXT," + OWNER_COL_3 + " TEXT," + OWNER_COL_4 + " TEXT" + OWNER_COL_5 + " TEXT" +")";
+        SQL_String = "CREATE TABLE " + OWNER_TABLE_NAME + "(" + OWNER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + OWNER_COL_2 + " TEXT," + OWNER_COL_3 + " TEXT,"
+                + OWNER_COL_4 + " TEXT," + OWNER_COL_5 + " TEXT," +OWNER_COL_6 +" INTEGER, "+OWNER_COL_7 + " INTEGER" + ")";
         sqLiteDatabase.execSQL(SQL_String);
         SQL_String = "CREATE TABLE " + OWNER_MENU_TABLE_NAME + "(" + OWNER_MENU_COL_1 + " TEXT PRIMARY KEY," + OWNER_MENU_COL_2 + " TEXT,"+ OWNER_MENU_COL_3 + " INTEGER " + ")";
         sqLiteDatabase.execSQL(SQL_String);
@@ -184,6 +187,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(OWNER_COL_2,username);
         contentValues.put(OWNER_COL_3,stall_name);
         contentValues.put(OWNER_COL_4,password);
+        contentValues.put(OWNER_COL_6,"0");
+        contentValues.put(OWNER_COL_7, "150");
         long result = sqLiteDatabase.insert(OWNER_TABLE_NAME,null,contentValues);
         return !(result == -1);
     }
@@ -219,6 +224,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         res.close();
         return buffer.toString();
+    }
+
+    public boolean updateQueueNum(int queueNum,String stall_name){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(OWNER_COL_6,queueNum);
+        return (sqLiteDatabase.update(OWNER_TABLE_NAME,contentValues,"O_STALLNAME = ?",new String[]{stall_name}) > 0);
     }
 
     public boolean updateOwnerAccountUsername(String username,String stall_name){
@@ -275,7 +287,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Stall[] stallList = new Stall[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            stallList[i] = new Stall(res.getInt(0),res.getString(2));
+            stallList[i] = new Stall(res.getInt(0),res.getString(2),res.getInt(5 ));
             i++;
         }
         res.close();
@@ -309,6 +321,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = sqLiteDatabase.insert(OWNER_MENU_TABLE_NAME,null,contentValues);
         return (result != -1);
     }
+
+
     /////////////////////////////////////////// ORDER METHODS ///////////////////////////////////////////
     public Order[] getUserArrayOfOrders(String username){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();

@@ -30,4 +30,8 @@ public class Order {
         String time = ""+localdate.getHour()+ ":" +localdate.getMinute();
         return time;
     }
+
+    public String getFullCollectiontime() {
+        return collectiontime;
+    }
 }

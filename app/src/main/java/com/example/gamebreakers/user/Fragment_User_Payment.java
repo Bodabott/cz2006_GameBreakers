@@ -18,7 +18,7 @@ public class Fragment_User_Payment extends Fragment {
 
         //check selected values. If have, update textview
         Activity_User act = (Activity_User) getActivity();
-        String stallname= act.stallName;
+        String stallname= act.stall.getStallName();
         String food=act.food;
 
         if (stallname!=null) {
@@ -26,9 +26,12 @@ public class Fragment_User_Payment extends Fragment {
             selectedStall.setText("Stall: "+stallname);
         }
         if (food!=null) {
-            TextView selectedStall = view.findViewById(R.id.selected_food);
-            selectedStall.setText("Food: "+food);
+            TextView selectedfood = view.findViewById(R.id.selected_food);
+            selectedfood.setText("Food: "+food);
         }
+
+        TextView text =view.findViewById(R.id.earliestTime);
+        text.setText("Earliest Collection Time: "+ act.getEarliestOrderTime().getHour()+ ":" +act.getEarliestOrderTime().getMinute());
 
         return view;
     }

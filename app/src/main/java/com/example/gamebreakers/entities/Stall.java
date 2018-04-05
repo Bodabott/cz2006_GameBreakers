@@ -7,17 +7,16 @@ package com.example.gamebreakers.entities;
 
 public class Stall {
 
-    int stall_ID;
+    int stall_ID, price, type, inQueue;
     String stallName;
-    int price;
-    int type;
     String averageTime;
 
     public Stall() {}
 
-    public Stall(int stall_ID, String stallName) {
+    public Stall(int stall_ID, String stallName, int inQueue) {
         this.stall_ID = stall_ID;
         this.stallName = stallName;
+        this.inQueue = inQueue;
     }
 
     public int getStall_ID() {
@@ -34,6 +33,10 @@ public class Stall {
 
     public void setStallName(String stallName) {
         this.stallName = stallName;
+    }
+
+    public int getQueueNum() {
+        return inQueue;
     }
 
 }

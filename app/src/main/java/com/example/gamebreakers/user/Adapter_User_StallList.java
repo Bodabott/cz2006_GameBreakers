@@ -38,7 +38,7 @@ public class Adapter_User_StallList extends RecyclerView.Adapter<Adapter_User_St
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getStallName());
-        holder.mContentView.setText("queue time: wait long long");
+        holder.mContentView.setText("ppl in queue: "+mValues.get(position).getQueueNum());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +46,7 @@ public class Adapter_User_StallList extends RecyclerView.Adapter<Adapter_User_St
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onStallNameSelected(holder.mItem.getStallName());
+                    mListener.onStallNameSelected(holder.mItem);
                 }
             }
         });
