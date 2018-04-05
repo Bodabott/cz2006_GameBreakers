@@ -40,7 +40,7 @@ public class Adapter_Owner_BusinessMode extends RecyclerView.Adapter<Adapter_Own
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getFoodName());
-        holder.mContentView.setText(mValues.get(position).getFoodName());
+        holder.mContentView.setText(mValues.get(position).getCollectiontime());
 
         holder.mView.setOnTouchListener(new OnSwipeTouchListener(mActivity) {
             public void onTap() {
