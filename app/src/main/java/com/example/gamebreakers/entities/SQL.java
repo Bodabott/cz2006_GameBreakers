@@ -1,24 +1,16 @@
 package com.example.gamebreakers.entities;
 
-<<<<<<< HEAD
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Toast;
-=======
-import android.os.StrictMode;
-import android.util.Log;
->>>>>>> 2784b1e69b0fa63a51901a9cecee01c9092cdea9
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-<<<<<<< HEAD
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-=======
->>>>>>> 2784b1e69b0fa63a51901a9cecee01c9092cdea9
 
 /**
  * Connection class
@@ -33,18 +25,6 @@ public final class SQL {
 
     // Create connection with sql server
     static Connection connectionClass(){
-=======
- */
-
-public class SQL {
-
-    public Connection ConnectToDatabase(){
-        Connection con = connectionclass();
-        return con;
-    }
-
-    Connection connectionclass(){
->>>>>>> 2784b1e69b0fa63a51901a9cecee01c9092cdea9
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection connection = null;
@@ -65,7 +45,6 @@ public class SQL {
         }
         return connection;
     }
-<<<<<<< HEAD
 
     // Add a new user account
     // Return true if successful, false otherwise
@@ -283,6 +262,4 @@ public class SQL {
         }
     }
 
-=======
->>>>>>> 2784b1e69b0fa63a51901a9cecee01c9092cdea9
 }
