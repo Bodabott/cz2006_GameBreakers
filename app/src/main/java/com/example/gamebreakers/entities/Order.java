@@ -12,13 +12,15 @@ public class Order {
     String user;
     String stallname;
     String collectiontime;
+    boolean completed;
 
-    public Order( int id, String foodname, String user, String stallname, String collectiontime) {
+    public Order( int id, String foodname, String user, String stallname, String collectiontime, boolean completed) {
         this.id=id;
         this.foodname = foodname;
         this.user = user;
         this.stallname = stallname;
         this.collectiontime=collectiontime;
+        this.completed = completed;
     }
 
     public String getFoodName() {
@@ -31,7 +33,11 @@ public class Order {
         return time;
     }
 
+    public String getStallName() {return stallname;}
+
     public String getFullCollectiontime() {
         return collectiontime;
     }
+    public boolean isCompleted() {return completed;}
+    public void complete() {completed=true;}
 }

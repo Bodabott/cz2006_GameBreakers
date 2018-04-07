@@ -103,7 +103,7 @@ public class Fragment_Owner_BusinessMode extends Fragment {
      */
     public interface OnOrderSelectedListener {
         void onOrderSelected(String order);
-        void finishOrder(String order);
+        void finishOrder(Order order);
         void cancelOrder(String order);
     }
 }

@@ -325,8 +325,23 @@ public class Activity_User extends AppCompatActivity
     }
 
     @Override
-    public void onOrderSelected(String item) {
+    public void onOrderSelected(Order order) {
+        if (order.isCompleted()) {
+            myDb.addHistoryArrayData(order.getFoodName(), myDb.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
+            myDb.addUserHistoryArrayData(order.getFoodName(), myDb.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
+            Integer deletedRows = myDb.deleteOrderArrayData(order.getFoodName(), order.getStallName());
 
+            if (deletedRows > 0) {
+                Toast.makeText(Activity_User.this, "Order Collected", Toast.LENGTH_LONG).show();
+            } else
+                Toast.makeText(Activity_User.this, "Order not Collected", Toast.LENGTH_LONG).show();
+
+            // Resets the ListView
+            fragman.beginTransaction()
+                    .replace(R.id.content_main, new Fragment_User_CurrentOrders())
+                    .commit();
+        }
+        else Toast.makeText(Activity_User.this, "Order not Collected", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -335,30 +350,32 @@ public class Activity_User extends AppCompatActivity
     }
 
     //================COMPLEX ON CLICK METHODS======================
-    public void makePayment(View v){
+    public void makePayment(View v) {
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         final String stallMessage = stall.getStallName();
         final String foodMessage = food;
         final String usernameMessage = user.getName();
         //get time
-        String hour =((Spinner) v.getRootView().findViewById(R.id.hourInput)).getSelectedItem().toString();
-        String min =((Spinner) v.getRootView().findViewById(R.id.minInput)).getSelectedItem().toString();
-        String time= LocalDateTime.now().toString().substring(0,11) + hour + ":" + min ;
+        String hour = ((Spinner) v.getRootView().findViewById(R.id.hourInput)).getSelectedItem().toString();
+        String min = ((Spinner) v.getRootView().findViewById(R.id.minInput)).getSelectedItem().toString();
+        String time = LocalDateTime.now().toString().substring(0, 11) + hour + ":" + min;
 
-        String newFoodMessage = foodNameConverter(foodMessage,stallMessage,usernameMessage);
-        if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage, time) && afterEarliestOrderTime(time)){
-            int foodprice = myDb.getFoodPrice(foodMessage, stallMessage);
-            int bal_left = myDb.getUserBalance(usernameMessage) - foodprice;
-            myDb.updateUserBalance(usernameMessage, bal_left);
-            invalidateOptionsMenu();
-            Toast.makeText(getApplicationContext(),"PAYMENT SUCCESSFUL",Toast.LENGTH_LONG).show();
-            setResult(Activity.RESULT_OK);
+        String newFoodMessage = foodNameConverter(foodMessage, stallMessage, usernameMessage);
+        if(afterEarliestOrderTime(time)) {
+            if (myDb.addOrderArrayData(newFoodMessage, usernameMessage, stallMessage, time)) {
+                int foodprice = myDb.getFoodPrice(foodMessage, stallMessage);
+                int bal_left = myDb.getUserBalance(usernameMessage) - foodprice;
+                myDb.updateUserBalance(usernameMessage, bal_left);
+                invalidateOptionsMenu();
+                Toast.makeText(getApplicationContext(), "PAYMENT SUCCESSFUL", Toast.LENGTH_LONG).show();
+                setResult(Activity.RESULT_OK);
 
-            fragman.popBackStack();
-            fragman.beginTransaction()
-                    .replace(R.id.content_main, new Fragment_User_MainMenu())
-                    .commit();
+                fragman.popBackStack();
+                fragman.beginTransaction()
+                        .replace(R.id.content_main, new Fragment_User_MainMenu())
+                        .commit();
+            }
         }
         else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();
     }

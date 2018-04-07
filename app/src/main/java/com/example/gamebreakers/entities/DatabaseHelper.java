@@ -335,7 +335,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3),res.getString(4));
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3),res.getString(4)
+            , (res.getString(5).equals("y"))? true: false);
             i++;
         }
         res.close();
@@ -351,7 +352,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3),res.getString(4));
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3),res.getString(4)
+                    , (res.getString(5).equals("y"))? true: false);
             i++;
         }
         res.close();
@@ -367,6 +369,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(ORDERS_COL_5,collectionTime);
         contentValues.put(ORDERS_COL_6, "n");
         long result = sqLiteDatabase.insert(ORDERS_TABLE_NAME,null,contentValues);
+        return !(result == -1);
+    }
+
+    public boolean updateOrder(String food_name, String stall_name) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(ORDERS_COL_6, "y");
+        long result = sqLiteDatabase.update(ORDERS_TABLE_NAME,contentValues,"FOOD_NAME = ? AND O_STALLNAME = ?",new String[]{food_name,stall_name});
         return !(result == -1);
     }
 
