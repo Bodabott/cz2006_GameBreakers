@@ -133,6 +133,68 @@ public final class SQL {
         return (connectionClass() != null);
     }
 
+    /////////////////////////////////////////// USER BALANCE ///////////////////////////////////////////
+
+
+    // Search the database for buyer username using food name and stall name
+    // Return 0 if no result or 0 balance, good to check username exist first
+    public static int getUserBalance(String username) {
+        String query = "SELECT * FROM user_table WHERE " +
+                "  CONVERT(VARCHAR,U_USERNAME) = '" + username + "';";
+        ArrayList <HashMap> a = sendQuery(query);
+        if (a == null || a.size() == 0)
+            return 0;
+
+        ArrayList<String> StringList = new ArrayList<String>();
+        for (int i = 0; i < a.size(); i++){
+            HashMap row = a.get(i);
+            StringList.add((String)row.get("U_BALANCE"));
+        }
+        return Integer.parseInt(StringList.get(0));
+    }
+
+
+    // Return true if update to user table is successful, false otherwise
+    // Note: Assumption is new balance not equals to old balance
+    public static boolean updateUserBalance(String username, int new_amt){
+        String query = "UPDATE user_table " +
+                " SET U_BALANCE = '" + new_amt +
+                "' WHERE CONVERT(VARCHAR,U_USERNAME) = '" + username + "';";
+
+        String query2 = "SELECT * FROM user_table WHERE " +
+                "CONVERT(VARCHAR,U_USERNAME) = '" + username +
+                "' AND CONVERT(VARCHAR,U_BALANCE) = '" + new_amt + "';";
+
+        ArrayList a = sendQuery(query2);
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+        if (a == null || a2 == null)
+            return false;
+        else if (a.size()<1 && a2.size()>0)
+            return true;
+        else
+            return false;
+    }
+
+
+    // Search the database for food price using food name and stall name
+    // Return 0 if no result or 0 price, good to check stall name exist first
+    public static int getFoodPrice(String food_name, String stall_name) {
+        String query = "SELECT * FROM owner_menu_table WHERE " +
+                "  CONVERT(VARCHAR,FOOD_NAME) = '" + food_name +
+                "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "';";
+        ArrayList <HashMap> a = sendQuery(query);
+        if (a == null || a.size() == 0)
+            return 0;
+
+        ArrayList<String> StringList = new ArrayList<String>();
+        for (int i = 0; i < a.size(); i++){
+            HashMap row = a.get(i);
+            StringList.add((String)row.get("FOOD_PRICE"));
+        }
+        return Integer.parseInt(StringList.get(0));
+    }
+
     /////////////////////////////////////////// USER METHODS ///////////////////////////////////////////
 
     // Add a new user account
@@ -743,5 +805,188 @@ public final class SQL {
             return 0;
     }
 
+    /////////////////////////////////////////// HISTORY METHODS ///////////////////////////////////////////
+
+
+    // Search the database for user previous order for food
+    // Return String array of food
+    // Return null if no result
+    public static String[] getUserArrayOfHistory(String username){
+        String query = "SELECT * FROM user_history_table WHERE " +
+                " CONVERT(VARCHAR,U_USERNAME) = '" + username
+                + "' ORDER BY ORDER_ID ASC;";
+
+        ArrayList <HashMap> a = sendQuery(query);
+        if (a == null)
+            return null;
+
+        ArrayList<String> StringList = new ArrayList<String>();
+        for (int i = 0; i < a.size(); i++){
+            HashMap row = a.get(i);
+            StringList.add((String)row.get("FOOD_NAME"));
+        }
+        return StringList.toArray(new String[StringList.size()]);
+    }
+
+    // Search the database for owner previous order for food
+    // Return String array of food
+    // Return null if no result
+    public static String[] getArrayOfHistory(String stall_name){
+        String query = "SELECT * FROM owner_history_table WHERE " +
+                " CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "';";
+
+        ArrayList <HashMap> a = sendQuery(query);
+        if (a == null)
+            return null;
+
+        ArrayList<String> StringList = new ArrayList<String>();
+        for (int i = 0; i < a.size(); i++){
+            HashMap row = a.get(i);
+            StringList.add((String)row.get("FOOD_NAME"));
+        }
+        return StringList.toArray(new String[StringList.size()]);
+    }
+
+
+    // Orginal method is void, this returns boolean
+    // Add a new order to user order history table
+    // Return true if successful, false otherwise
+    public static boolean addUserHistoryArrayData(String food_name, String username,String stall_name){
+        String query = "INSERT INTO user_history_table (FOOD_NAME,U_USERNAME,O_STALLNAME) " +
+                " VALUES ('" + food_name + "', '" + username + "', '" + stall_name + "');";
+
+        String query2 = "SELECT * FROM user_history_table WHERE CONVERT(VARCHAR,FOOD_NAME) = '" +
+                food_name + "' AND CONVERT(VARCHAR,U_USERNAME) = '" +
+                username + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" +
+                stall_name + "';";
+
+        // Make sure does not already exist
+        ArrayList a = sendQuery(query2);
+        if (a == null || a.size()>0)
+            return false;
+
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        // Check successful update
+        if (a2 == null)
+            return false;
+        else if (a2.size()>0)
+            return true;
+        else
+            return false;
+    }
+
+
+    // Orginal method is void, this returns boolean
+    // Add a new order to owner order history table
+    // Return true if successful, false otherwise
+    public static boolean addHistoryArrayData(String food_name, String username,String stall_name) {
+        String query = "INSERT INTO owner_history_table (FOOD_NAME,U_USERNAME,O_STALLNAME) " +
+                " VALUES ('" + food_name + "', '" + username + "', '" + stall_name + "');";
+
+        String query2 = "SELECT * FROM owner_history_table WHERE CONVERT(VARCHAR,FOOD_NAME) = '" +
+                food_name + "' AND CONVERT(VARCHAR,U_USERNAME) = '" +
+                username + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" +
+                stall_name + "';";
+
+        // Make sure does not already exist
+        ArrayList a = sendQuery(query2);
+        if (a == null || a.size() > 0)
+            return false;
+
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        // Check successful update
+        if (a2 == null)
+            return false;
+        else if (a2.size() > 0)
+            return true;
+        else
+            return false;
+    }
+
+
+    // Delete orders from user order history table
+    // return 1 if successful, 0 otherwise
+    public static Integer deleteUserHistoryArrayData(String food_name, String username){
+        String query = "DELETE FROM user_history_table WHERE CONVERT(VARCHAR,FOOD_NAME) = '" +
+                food_name + "' AND CONVERT(VARCHAR,U_USERNAME) = '" + username + "';";
+
+        String query2 = "SELECT * FROM user_history_table WHERE CONVERT(VARCHAR,FOOD_NAME) = '" +
+                food_name + "' AND CONVERT(VARCHAR,U_USERNAME) = '" + username +  "';";
+
+        ArrayList a = sendQuery(query2);
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        if (a == null || a2 == null)
+            return 0;
+        else if (a.size()>0 && a2.size()<1)
+            return 1;
+        else
+            return 0;
+    }
+
+
+    // Delete all user data from user order history table
+    // return 1 if successful, 0 otherwise
+    public static Integer deleteAllUserHistoryData(String username){
+        String query = "DELETE FROM user_history_table WHERE CONVERT(VARCHAR,USERNAME) = '" + username + "';";
+        String query2 = "SELECT * FROM user_history_table WHERE CONVERT(VARCHAR,USERNAME) = '" + username + "';";
+
+        ArrayList a = sendQuery(query2);
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        if (a == null || a2 == null)
+            return 0;
+        else if (a.size()>0 && a2.size()<1)
+            return 1;
+        else
+            return 0;
+    }
+
+
+    // Delete orders from owner order history table
+    // return 1 if successful, 0 otherwise
+    public static Integer deleteHistoryArrayData(String food_name, String stall_name){
+        String query = "DELETE FROM order_history_table WHERE CONVERT(VARCHAR,FOOD_NAME) = '" +
+                food_name + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "';";
+
+        String query2 = "SELECT * FROM order_history_table WHERE CONVERT(VARCHAR,FOOD_NAME) = '" +
+                food_name + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +  "';";
+
+        ArrayList a = sendQuery(query2);
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        if (a == null || a2 == null)
+            return 0;
+        else if (a.size()>0 && a2.size()<1)
+            return 1;
+        else
+            return 0;
+    }
+
+
+    // Delete all owner data from owner order history table
+    // return 1 if successful, 0 otherwise
+    public static Integer deleteAllHistoryData(String stall_name){
+        String query = "DELETE FROM owner_history_table WHERE CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "';";
+        String query2 = "SELECT * FROM owner_history_table WHERE CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "';";
+
+        ArrayList a = sendQuery(query2);
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        if (a == null || a2 == null)
+            return 0;
+        else if (a.size()>0 && a2.size()<1)
+            return 1;
+        else
+            return 0;
+    }
 
 }
