@@ -93,6 +93,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    /////////////////////////////////////////// SEARCH /////////////////////////////////////////////////
+
+    public Cursor checkifStallExists(String stallname){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM " + OWNER_MENU_TABLE_NAME + " WHERE " + OWNER_MENU_COL_2 + " = '" + stallname + "'",null);
+        return res;
+    }
+
+    /////////////////////////////////////////// USER BALANCE ///////////////////////////////////////////
+
+    public int getUserBalance(String username) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res = sqLiteDatabase.rawQuery("SELECT " + USER_COL_4 + " FROM " + USER_TABLE_NAME + " WHERE " + USER_COL_2 + " = '" + username + "'",null);
+        res.moveToNext();
+        int bal = res.getInt(0);
+        return bal;
+    }
+
+    public void updateUserBalance(String username, int new_amt) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res = sqLiteDatabase.rawQuery("UPDATE " + USER_TABLE_NAME + " SET " + USER_COL_4 + " = '" + new_amt + "'" + " WHERE " + USER_COL_2 + " = '" + username + "'", null);
+        res.moveToNext();
+    }
+
+    public int getFoodPrice(String foodname, String stallname) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res = sqLiteDatabase.rawQuery("SELECT " + OWNER_MENU_COL_3 + " FROM " + OWNER_MENU_TABLE_NAME + " WHERE " + OWNER_MENU_COL_1 + " ='" + foodname + "' AND " + OWNER_MENU_COL_2 + " ='" + stallname + "'", null );
+        res.moveToNext();
+        int foodprice = res.getInt(0);
+        return foodprice;
+    }
+
     /////////////////////////////////////////// USER METHODS ///////////////////////////////////////////
     public boolean addUserAccount(String username, String password){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
