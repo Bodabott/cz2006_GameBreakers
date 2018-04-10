@@ -40,7 +40,7 @@ public class Adapter_Owner_BusinessMode extends RecyclerView.Adapter<Adapter_Own
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getFoodName());
-        holder.mContentView.setText(mValues.get(position).getCollectiontime());
+        holder.mContentView.setText(mValues.get(position).getFoodName());
 
         holder.mView.setOnTouchListener(new OnSwipeTouchListener(mActivity) {
             public void onTap() {
@@ -54,7 +54,7 @@ public class Adapter_Owner_BusinessMode extends RecyclerView.Adapter<Adapter_Own
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.finishOrder(holder.mItem);
+                    mListener.finishOrder(holder.mItem.getFoodName());
                 }
             }
             public void onSwipeLeft() {

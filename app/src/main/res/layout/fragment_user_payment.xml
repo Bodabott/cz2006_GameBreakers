@@ -8,25 +8,23 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/stallandfood"
         android:layout_width="wrap_content"
         android:background="#87CEEB"
         android:minHeight="60dp"
         android:layout_height="wrap_content">
     <TextView
         android:id="@id/selected_stall"
-        android:text="The Chosen Stall Is : "
+        android:text="Stall: "
         android:layout_margin="5dp"
-        android:fontFamily="casual"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
         android:id="@id/selected_food"
-        android:text="The Chosen Food Is: "
+        android:text="Food: "
         android:layout_margin="5dp"
-        android:fontFamily="casual"
+
         android:textSize="20sp"
         android:layout_below="@id/selected_stall"
         android:layout_width="match_parent"
@@ -36,84 +34,24 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:fontFamily="casual"
-            android:textSize="20dp"
-            android:layout_marginBottom="20dp"
-            android:textAlignment="center"
-            android:layout_above="@id/earliestTime"
-            android:layout_width="match_parent"
-            android:text="Earliest Collection Time Is"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:textAlignment="center"
-            android:id="@+id/earliestTime"
-            android:layout_marginBottom="30dp"
-            android:textSize="50sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/collectionTime"/>
-        <TextView
-            android:id="@+id/collectionTime"
-            android:text="Choose A Timing: "
-            android:layout_margin="10dp"
-            android:fontFamily="casual"
-            android:textSize="20sp"
-            android:layout_width="match_parent"
-            android:textAlignment="center"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/timeRow"/>
-
-        <android.support.v7.widget.LinearLayoutCompat
-            android:id="@+id/timeRow"
-            android:layout_centerInParent="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:paddingHorizontal="20sp">
-        <Spinner
-            android:id= "@+id/hourInput"
-            android:layout_width="0dp"
-            android:layout_weight=".5"
-            android:layout_height="wrap_content"
-            android:background="#BFFFFFFF"
-            android:entries="@array/hours"
-            />
-
-        <Spinner
-            android:id= "@+id/minInput"
-            android:layout_width="0dp"
-            android:layout_weight=".5"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFFFF"
-            android:entries="@array/minutes"
-            />
-        </android.support.v7.widget.LinearLayoutCompat>
-
         <Button
             android:onClick="makePayment"
             android:id="@+id/paymentButton"
-            android:text="Confirm Payment"
+            android:text="CONFIRM PAYMENT"
             android:textSize="25sp"
-            android:fontFamily="cursive"
             android:padding="15sp"
-            android:layout_margin="15dp"
-            android:textAllCaps="false"
             android:background="#AC39B7CD"
-            android:layout_above="@id/cancelPayment"
-            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/cancelPayment"
             android:onClick="back"
-            android:textAllCaps="false"
-            android:text="Cancel"
-            android:layout_margin="20dp"
+            android:text="CANCEL"
+            android:layout_marginTop="10sp"
             android:background="#AEFF2400"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@id/paymentButton"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

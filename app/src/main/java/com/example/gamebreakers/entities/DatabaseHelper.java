@@ -28,8 +28,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String OWNER_COL_3 = "O_STALLNAME";
     private static final String OWNER_COL_4 = "O_PASSWORD";
     private static final String OWNER_COL_5 = "O_TYPE";
-    private static final String OWNER_COL_6 = "O_QUEUENUM";
-    private static final String OWNER_COL_7 = "O_AVERAGECOOKTIME";
 
     // Stall-Owner Menu Table
     private static final String OWNER_MENU_TABLE_NAME = "owner_menu_table";
@@ -43,9 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String ORDERS_COL_2 = "FOOD_NAME";
     private static final String ORDERS_COL_3 = "U_USERNAME";
     private static final String ORDERS_COL_4 = "O_STALLNAME";
-    private static final String ORDERS_COL_5 = "COLLECTION_TIME";
-    private static final String ORDERS_COL_6 = "COMPLETED";
-
 
     // History Table
     private static final String OWNER_HISTORY_TABLE_NAME = "owner_history_table";
@@ -64,8 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String SQL_String = "CREATE TABLE " + USER_TABLE_NAME + "(" + USER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + USER_COL_2 + " TEXT," + USER_COL_3 + " TEXT," + USER_COL_4 +" INTEGER" + ")";
         sqLiteDatabase.execSQL(SQL_String);
-        SQL_String = "CREATE TABLE " + OWNER_TABLE_NAME + "(" + OWNER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + OWNER_COL_2 + " TEXT," + OWNER_COL_3 + " TEXT,"
-                + OWNER_COL_4 + " TEXT," + OWNER_COL_5 + " TEXT," +OWNER_COL_6 +" INTEGER, "+OWNER_COL_7 + " INTEGER" + ")";
+        SQL_String = "CREATE TABLE " + OWNER_TABLE_NAME + "(" + OWNER_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + OWNER_COL_2 + " TEXT," + OWNER_COL_3 + " TEXT," + OWNER_COL_4 + " TEXT" + OWNER_COL_5 + " TEXT" +")";
         sqLiteDatabase.execSQL(SQL_String);
         SQL_String = "CREATE TABLE " + OWNER_MENU_TABLE_NAME + "(" + OWNER_MENU_COL_1 + " TEXT PRIMARY KEY," + OWNER_MENU_COL_2 + " TEXT,"+ OWNER_MENU_COL_3 + " INTEGER " + ")";
         sqLiteDatabase.execSQL(SQL_String);
@@ -73,8 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(SQL_String);
         SQL_String = "CREATE TABLE " + USER_HISTORY_TABLE_NAME + "(" + HISTORY_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + HISTORY_COL_2 + " TEXT," + HISTORY_COL_3 + " TEXT," + HISTORY_COL_4 + " TEXT" + ")";
         sqLiteDatabase.execSQL(SQL_String);
-        SQL_String = "CREATE TABLE " + ORDERS_TABLE_NAME + "(" + ORDERS_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + ORDERS_COL_2 + " TEXT," + ORDERS_COL_3 + " TEXT,"
-                + ORDERS_COL_4 + " TEXT," +ORDERS_COL_5 +" TEXT," + ORDERS_COL_6 + " TEXT" + ")";
+        SQL_String = "CREATE TABLE " + ORDERS_TABLE_NAME + "(" + ORDERS_COL_1 + " INTEGER PRIMARY KEY AUTOINCREMENT," + ORDERS_COL_2 + " TEXT," + ORDERS_COL_3 + " TEXT," + ORDERS_COL_4 + " TEXT" + ")";
         sqLiteDatabase.execSQL(SQL_String);
     }
 
@@ -98,6 +91,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + OWNER_HISTORY_TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + USER_HISTORY_TABLE_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+    /////////////////////////////////////////// SEARCH /////////////////////////////////////////////////
+
+    public Cursor checkifStallExists(String stallname){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM " + OWNER_MENU_TABLE_NAME + " WHERE " + OWNER_MENU_COL_2 + " = '" + stallname + "'",null);
+        return res;
     }
 
     /////////////////////////////////////////// USER BALANCE ///////////////////////////////////////////
@@ -142,7 +143,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return (sqLiteDatabase.update(USER_TABLE_NAME,contentValues,"U_ID = ?",new String[]{String.valueOf(user.id)}) > 0);
     }
 
-    //check column index
     public String getBuyerUsername(String food_name,String stall_name){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         Cursor res = sqLiteDatabase.rawQuery("SELECT * FROM " + ORDERS_TABLE_NAME + " WHERE " + ORDERS_COL_2 + " = '" + food_name + "' AND " + ORDERS_COL_4 + " = '" + stall_name + "'",null);
@@ -189,8 +189,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(OWNER_COL_2,username);
         contentValues.put(OWNER_COL_3,stall_name);
         contentValues.put(OWNER_COL_4,password);
-        contentValues.put(OWNER_COL_6,"0");
-        contentValues.put(OWNER_COL_7, "150");
         long result = sqLiteDatabase.insert(OWNER_TABLE_NAME,null,contentValues);
         return !(result == -1);
     }
@@ -226,13 +224,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         res.close();
         return buffer.toString();
-    }
-
-    public boolean updateQueueNum(int queueNum,String stall_name){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(OWNER_COL_6,queueNum);
-        return (sqLiteDatabase.update(OWNER_TABLE_NAME,contentValues,"O_STALLNAME = ?",new String[]{stall_name}) > 0);
     }
 
     public boolean updateOwnerAccountUsername(String username,String stall_name){
@@ -289,7 +280,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Stall[] stallList = new Stall[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            stallList[i] = new Stall(res.getInt(0),res.getString(2),res.getInt(5 ));
+            stallList[i] = new Stall(res.getInt(0),res.getString(2));
             i++;
         }
         res.close();
@@ -323,8 +314,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = sqLiteDatabase.insert(OWNER_MENU_TABLE_NAME,null,contentValues);
         return (result != -1);
     }
-
-
     /////////////////////////////////////////// ORDER METHODS ///////////////////////////////////////////
     public Order[] getUserArrayOfOrders(String username){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -335,8 +324,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3),res.getString(4)
-            , (res.getString(5).equals("y"))? true: false);
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3));
             i++;
         }
         res.close();
@@ -352,31 +340,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Order[] orderList = new Order[res.getCount()];
         int i = 0;
         while(res.moveToNext()){
-            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3),res.getString(4)
-                    , (res.getString(5).equals("y"))? true: false);
+            orderList[i] = new Order(res.getInt(0), res.getString(1),res.getString(2), res.getString(3));
             i++;
         }
         res.close();
         return orderList;
     }
 
-    public boolean addOrderArrayData(String foodName, String username,String stallName, String collectionTime){
+    public boolean addOrderArrayData(String foodName, String username,String stallName){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(ORDERS_COL_2,foodName);
         contentValues.put(ORDERS_COL_3,username);
         contentValues.put(ORDERS_COL_4,stallName);
-        contentValues.put(ORDERS_COL_5,collectionTime);
-        contentValues.put(ORDERS_COL_6, "n");
         long result = sqLiteDatabase.insert(ORDERS_TABLE_NAME,null,contentValues);
-        return !(result == -1);
-    }
-
-    public boolean updateOrder(String food_name, String stall_name) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(ORDERS_COL_6, "y");
-        long result = sqLiteDatabase.update(ORDERS_TABLE_NAME,contentValues,"FOOD_NAME = ? AND O_STALLNAME = ?",new String[]{food_name,stall_name});
         return !(result == -1);
     }
 

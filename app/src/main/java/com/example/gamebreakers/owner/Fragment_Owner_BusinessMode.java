@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
-import com.example.gamebreakers.user.Activity_User;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,7 +50,10 @@ public class Fragment_Owner_BusinessMode extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        orders = ((Activity_Owner_BusinessMode) getContext()).orders;
+        myDb= new DatabaseHelper(getContext());
+        act = (Activity_Owner_BusinessMode) getActivity();
+        Order[] ordersArray = myDb.getArrayOfOrders(act.stallName);
+        orders = Arrays.asList(ordersArray);
     }
 
     @Override
@@ -103,7 +105,7 @@ public class Fragment_Owner_BusinessMode extends Fragment {
      */
     public interface OnOrderSelectedListener {
         void onOrderSelected(String order);
-        void finishOrder(Order order);
+        void finishOrder(String order);
         void cancelOrder(String order);
     }
 }

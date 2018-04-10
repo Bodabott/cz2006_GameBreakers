@@ -62,10 +62,10 @@ public class Fragment_User_BrowseStall extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_stall, container, false);
         //check selected values. If have, update textview
         Activity_User act = (Activity_User) getActivity();
-        Stall stall= act.stall;
-        if (stall!=null) {
+        String stallname= act.stallName;
+        if (stallname!=null) {
             TextView selectedStall = view.findViewById(R.id.selected_stall);
-            selectedStall.setText("Stall: "+stall.getStallName());
+            selectedStall.setText("Stall: "+stallname);
         }
 
         // Set the adapter
@@ -111,6 +111,6 @@ public class Fragment_User_BrowseStall extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnStallNameSelectedListener {
-        void onStallNameSelected(Stall stall);
+        void onStallNameSelected(String name);
     }
 }

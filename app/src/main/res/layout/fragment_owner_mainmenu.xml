@@ -40,9 +40,6 @@
             android:weightSum="2">
 
             <Button
-                android:text="Manage Menu"
-                android:textAllCaps="false"
-
                 android:background="@drawable/manage_menu_button"
                 android:layout_margin="2dp"
                 android:fontFamily="monospace"
@@ -53,9 +50,6 @@
                 android:layout_height="match_parent"
                  />
             <Button
-                android:text="Current Orders"
-                android:textAllCaps="false"
-
                 android:layout_margin="2dp"
                 android:background="@drawable/current_order_button"
                 android:fontFamily="monospace"
@@ -74,8 +68,6 @@
             android:orientation="horizontal"
             android:weightSum="2">
             <Button
-                android:text="Transaction History"
-                android:textAllCaps="false"
                 android:layout_margin="2dp"
                 android:background="@drawable/transaction_history_button"
                 android:fontFamily="monospace"
@@ -87,9 +79,6 @@
                  />
 
             <Button
-                android:text="Settings"
-                android:fontFamily="monospace"
-                android:textAllCaps="false"
                 android:layout_margin="2dp"
                 android:background="@drawable/settings_button"
                 android:onClick="owner_settings"

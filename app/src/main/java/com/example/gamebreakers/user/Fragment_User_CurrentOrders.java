@@ -106,6 +106,6 @@ public class Fragment_User_CurrentOrders extends Fragment {
      */
     public interface OnOrderSelectedListener {
         // TODO: Update argument type and name
-        void onOrderSelected(Order item);
+        void onOrderSelected(String item);
     }
 }

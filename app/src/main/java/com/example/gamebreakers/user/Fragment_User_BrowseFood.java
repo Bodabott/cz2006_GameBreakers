@@ -53,7 +53,7 @@ public class Fragment_User_BrowseFood extends Fragment {
         myDb= new DatabaseHelper(getContext());
         //get selected stall
         Activity_User act = (Activity_User) getActivity();
-        String stallName= act.stall.getStallName();
+        String stallName= act.stallName;
         //get list of food
         Food[] foodArray = myDb.getStallMenu(stallName);
         food_List = Arrays.asList(foodArray);
@@ -66,7 +66,7 @@ public class Fragment_User_BrowseFood extends Fragment {
 
         //check selected values. If have, update textview
         Activity_User act = (Activity_User) getActivity();
-        String stallname= act.stall.getStallName();
+        String stallname= act.stallName;
         String food=act.food;
 
         if (stallname!=null) {

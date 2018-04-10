@@ -24,19 +24,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
-import com.example.gamebreakers.entities.Stall;
 import com.example.gamebreakers.entities.User;
 import com.example.gamebreakers.login.Activity_Main;
 import com.example.gamebreakers.owner.Activity_Owner;
-
-import java.time.LocalDateTime;
 
 import static com.example.gamebreakers.login.Activity_Main.PASSWORD;
 import static com.example.gamebreakers.login.Activity_Main.USER_NAME;
@@ -51,8 +47,7 @@ public class Activity_User extends AppCompatActivity
         ,Fragment_User_CurrentOrders.OnOrderSelectedListener, Fragment_User_Transactions.OnTransactionSelectedListener {
 
     DrawerLayout mDrawerLayout;
-    String food;
-    Stall stall;
+    String stallName, food;
     User user;
     DatabaseHelper myDb;
     Dialog myDialog;
@@ -110,84 +105,6 @@ public class Activity_User extends AppCompatActivity
             }
         });
 
-    }
-
-    public void ShowTopupPopup(View v) {
-
-        Button buttonCancel;
-        Button buttonConfirm;
-        final EditText mEdit;
-
-        myDialog.setContentView(R.layout.topup_popup);
-
-
-        mEdit = (EditText) myDialog.findViewById(R.id.top_up_value);
-        buttonCancel = (Button) myDialog.findViewById(R.id.cancel_button);
-        buttonConfirm = (Button) myDialog.findViewById(R.id.confirm_button);
-
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String un = user.getName();
-                String txt = mEdit.getText().toString();
-                int bal = Integer.parseInt(txt);
-                int totalbal = myDb.getUserBalance(un) + bal;
-                myDb.updateUserBalance(un, totalbal);
-                invalidateOptionsMenu();
-                myDialog.dismiss();
-            }
-        });
-
-        buttonCancel.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        String val_ue;
-        int val;
-        String un = user.getName();
-        val = myDb.getUserBalance(un);
-        val_ue = "$" + Integer.toString(val);
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.custom_menu, menu);
-        MenuItem item = menu.findItem(R.id.value);
-        Button itemButt = (Button) item.getActionView();
-        if(itemButt != null) {
-            itemButt.setText(val_ue);
-            itemButt.setTextColor(Color.WHITE);
-            itemButt.setBackgroundColor(Color.TRANSPARENT);
-        }
-        return true;
-    }
-
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.clear();
-
-        String val_ue;
-        int val;
-        String un = user.getName();
-        val = myDb.getUserBalance(un);
-        val_ue = "$" + Integer.toString(val);
-
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.custom_menu, menu);
-        MenuItem item = menu.findItem(R.id.value);
-        Button itemButt = (Button) item.getActionView();
-        if(itemButt != null) {
-            itemButt.setText(val_ue);
-            itemButt.setTextColor(Color.WHITE);
-            itemButt.setBackgroundColor(Color.TRANSPARENT);
-        }
-        return super.onPrepareOptionsMenu(menu);
     }
 
     public void ShowTopupPopup(View v) {
@@ -323,12 +240,6 @@ public class Activity_User extends AppCompatActivity
                     .replace(R.id.content_main, new Fragment_User_Manage_Payment_Details())
                     .addToBackStack(null)
                     .commit();
-        }else if(item.toString().matches("Top Up")) {
-            // Go to Top Up Settings.
-            fragman.beginTransaction()
-                    .replace(R.id.content_main, new Fragment_User_Manage_Payment_Details())
-                    .addToBackStack(null)
-                    .commit();
         }else if(item.toString().matches("History")){
             // Go to User Transaction History. Item is recorded only if Order is Successfully completed by Owner of that stall
             fragman.beginTransaction()
@@ -347,7 +258,7 @@ public class Activity_User extends AppCompatActivity
         mDrawerLayout.closeDrawers();
         return true;
     }
-    //====================Custom Methods=====================
+
     public String foodNameConverter(String old_foodName, String stall_name, String user_name){
         // Initialise
         int ID = 0;
@@ -397,17 +308,6 @@ public class Activity_User extends AppCompatActivity
             return old_foodName;
         }
     }
-
-    public boolean afterEarliestOrderTime(String time) {
-        LocalDateTime collectTime = LocalDateTime.parse(time);
-        return collectTime.isAfter(getEarliestOrderTime());
-    }
-
-    public LocalDateTime getEarliestOrderTime() {
-        LocalDateTime local = LocalDateTime.now();
-        local.plusMinutes(stall.getQueueNum()*2);   //add 2 minutes per person in queue
-        return local;
-    }
     //====================List Adaptor Methods=====================
     @Override
     public void onFoodSelected(String food){
@@ -419,8 +319,8 @@ public class Activity_User extends AppCompatActivity
     }
 
     @Override
-    public void onStallNameSelected(Stall stall) {
-        this.stall=stall;
+    public void onStallNameSelected(String stallName) {
+        this.stallName =  stallName;
 
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_BrowseFood())
@@ -429,23 +329,8 @@ public class Activity_User extends AppCompatActivity
     }
 
     @Override
-    public void onOrderSelected(Order order) {
-        if (order.isCompleted()) {
-            myDb.addHistoryArrayData(order.getFoodName(), myDb.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
-            myDb.addUserHistoryArrayData(order.getFoodName(), myDb.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
-            Integer deletedRows = myDb.deleteOrderArrayData(order.getFoodName(), order.getStallName());
+    public void onOrderSelected(String item) {
 
-            if (deletedRows > 0) {
-                Toast.makeText(Activity_User.this, "Order Collected", Toast.LENGTH_LONG).show();
-            } else
-                Toast.makeText(Activity_User.this, "Order not Collected", Toast.LENGTH_LONG).show();
-
-            // Resets the ListView
-            fragman.beginTransaction()
-                    .replace(R.id.content_main, new Fragment_User_CurrentOrders())
-                    .commit();
-        }
-        else Toast.makeText(Activity_User.this, "Order not Collected", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -454,16 +339,12 @@ public class Activity_User extends AppCompatActivity
     }
 
     //================COMPLEX ON CLICK METHODS======================
-    public void makePayment(View v) {
+    public void makePayment(View v){
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        final String stallMessage = stall.getStallName();
+        final String stallMessage = stallName;
         final String foodMessage = food;
         final String usernameMessage = user.getName();
-        //get time
-        String hour = ((Spinner) v.getRootView().findViewById(R.id.hourInput)).getSelectedItem().toString();
-        String min = ((Spinner) v.getRootView().findViewById(R.id.minInput)).getSelectedItem().toString();
-        String time = LocalDateTime.now().toString().substring(0, 11) + hour + ":" + min;
 
         String newFoodMessage = foodNameConverter(foodMessage,stallMessage,usernameMessage);
         if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage)){
@@ -485,26 +366,7 @@ public class Activity_User extends AppCompatActivity
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_MainMenu())
                 .commit();
-        String newFoodMessage = foodNameConverter(foodMessage, stallMessage, usernameMessage);
-        if(afterEarliestOrderTime(time)) {
-            if (myDb.addOrderArrayData(newFoodMessage, usernameMessage, stallMessage, time)) {
-                int foodprice = myDb.getFoodPrice(foodMessage, stallMessage);
-                int bal_left = myDb.getUserBalance(usernameMessage) - foodprice;
-                myDb.updateUserBalance(usernameMessage, bal_left);
-                invalidateOptionsMenu();
-                Toast.makeText(getApplicationContext(), "PAYMENT SUCCESSFUL", Toast.LENGTH_LONG).show();
-                setResult(Activity.RESULT_OK);
-
-                fragman.popBackStack();
-                fragman.beginTransaction()
-                        .replace(R.id.content_main, new Fragment_User_MainMenu())
-                        .commit();
-            }
-        }
-        else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();
     }
-
-
 
     public void clearAllTransactions(View v){
         Intent intent = getIntent();
@@ -548,7 +410,7 @@ public class Activity_User extends AppCompatActivity
     }
 
     public void browseFood(View v){
-        if (stall==null) {
+        if (stallName==null) {
             Toast.makeText(v.getContext(),"Please choose a stall",Toast.LENGTH_LONG).show();
             return;
         }
