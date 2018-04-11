@@ -24,15 +24,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
+import com.example.gamebreakers.entities.Stall;
 import com.example.gamebreakers.entities.User;
 import com.example.gamebreakers.login.Activity_Main;
-import com.example.gamebreakers.owner.Activity_Owner;
+
+import java.time.LocalDateTime;
 
 import static com.example.gamebreakers.login.Activity_Main.PASSWORD;
 import static com.example.gamebreakers.login.Activity_Main.USER_NAME;
@@ -47,7 +50,8 @@ public class Activity_User extends AppCompatActivity
         ,Fragment_User_CurrentOrders.OnOrderSelectedListener, Fragment_User_Transactions.OnTransactionSelectedListener {
 
     DrawerLayout mDrawerLayout;
-    String stallName, food;
+    String food;
+    Stall stall;
     User user;
     DatabaseHelper myDb;
     Dialog myDialog;
@@ -143,26 +147,7 @@ public class Activity_User extends AppCompatActivity
         myDialog.show();
     }
 
-    public void SearchStall(View v) {
-
-        final EditText mSearchField = (EditText) findViewById(R.id.search_field);
-        ImageButton mSearchBtn = (ImageButton) findViewById(R.id.search_button);
-
-        mSearchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Cursor stall_res = myDb.checkifStallExists(mSearchField.getText().toString());
-                if (stall_res.getCount() == 1) {
-                    stallName = mSearchField.getText().toString();
-                    fragman.beginTransaction()
-                            .replace(R.id.content_main, new Fragment_User_BrowseFood())
-                            .addToBackStack(null)
-                            .commit();
-                }
-            }
-        });
-    }
-
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         String val_ue;
@@ -258,7 +243,7 @@ public class Activity_User extends AppCompatActivity
         mDrawerLayout.closeDrawers();
         return true;
     }
-
+    //====================Custom Methods=====================
     public String foodNameConverter(String old_foodName, String stall_name, String user_name){
         // Initialise
         int ID = 0;
@@ -308,6 +293,17 @@ public class Activity_User extends AppCompatActivity
             return old_foodName;
         }
     }
+
+    public boolean afterEarliestOrderTime(String time) {
+        LocalDateTime collectTime = LocalDateTime.parse(time);
+        return collectTime.isAfter(getEarliestOrderTime());
+    }
+
+    public LocalDateTime getEarliestOrderTime() {
+        LocalDateTime local = LocalDateTime.now();
+        local.plusMinutes(stall.getQueueNum()*2);   //add 2 minutes per person in queue
+        return local;
+    }
     //====================List Adaptor Methods=====================
     @Override
     public void onFoodSelected(String food){
@@ -319,8 +315,8 @@ public class Activity_User extends AppCompatActivity
     }
 
     @Override
-    public void onStallNameSelected(String stallName) {
-        this.stallName =  stallName;
+    public void onStallNameSelected(Stall stall) {
+        this.stall=stall;
 
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_BrowseFood())
@@ -329,8 +325,23 @@ public class Activity_User extends AppCompatActivity
     }
 
     @Override
-    public void onOrderSelected(String item) {
+    public void onOrderSelected(Order order) {
+        if (order.isCompleted()) {
+            myDb.addHistoryArrayData(order.getFoodName(), myDb.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
+            myDb.addUserHistoryArrayData(order.getFoodName(), myDb.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
+            Integer deletedRows = myDb.deleteOrderArrayData(order.getFoodName(), order.getStallName());
 
+            if (deletedRows > 0) {
+                Toast.makeText(Activity_User.this, "Order Collected", Toast.LENGTH_LONG).show();
+            } else
+                Toast.makeText(Activity_User.this, "Order not Collected", Toast.LENGTH_LONG).show();
+
+            // Resets the ListView
+            fragman.beginTransaction()
+                    .replace(R.id.content_main, new Fragment_User_CurrentOrders())
+                    .commit();
+        }
+        else Toast.makeText(Activity_User.this, "Order not Collected", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -339,34 +350,37 @@ public class Activity_User extends AppCompatActivity
     }
 
     //================COMPLEX ON CLICK METHODS======================
-    public void makePayment(View v){
+    public void makePayment(View v) {
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        final String stallMessage = stallName;
+        final String stallMessage = stall.getStallName();
         final String foodMessage = food;
         final String usernameMessage = user.getName();
+        //get time
+        String hour = ((Spinner) v.getRootView().findViewById(R.id.hourInput)).getSelectedItem().toString();
+        String min = ((Spinner) v.getRootView().findViewById(R.id.minInput)).getSelectedItem().toString();
+        String time = LocalDateTime.now().toString().substring(0, 11) + hour + ":" + min;
 
-        String newFoodMessage = foodNameConverter(foodMessage,stallMessage,usernameMessage);
-        if(myDb.addOrderArrayData(newFoodMessage,usernameMessage,stallMessage)){
-            int foodprice = myDb.getFoodPrice(foodMessage, stallMessage);
-            int current_bal = myDb.getUserBalance(usernameMessage);
-            if (foodprice > current_bal) {
-                Toast.makeText(getApplicationContext(),"INSUFFICIENT BALANCE",Toast.LENGTH_LONG).show();
-            }
-            else {
+        String newFoodMessage = foodNameConverter(foodMessage, stallMessage, usernameMessage);
+        if(afterEarliestOrderTime(time)) {
+            if (myDb.addOrderArrayData(newFoodMessage, usernameMessage, stallMessage, time)) {
+                int foodprice = myDb.getFoodPrice(foodMessage, stallMessage);
                 int bal_left = myDb.getUserBalance(usernameMessage) - foodprice;
                 myDb.updateUserBalance(usernameMessage, bal_left);
                 invalidateOptionsMenu();
                 Toast.makeText(getApplicationContext(), "PAYMENT SUCCESSFUL", Toast.LENGTH_LONG).show();
+                setResult(Activity.RESULT_OK);
+
+                fragman.popBackStack();
+                fragman.beginTransaction()
+                        .replace(R.id.content_main, new Fragment_User_MainMenu())
+                        .commit();
             }
-            setResult(Activity.RESULT_OK);
         }
         else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();
-        fragman.popBackStack();
-        fragman.beginTransaction()
-                .replace(R.id.content_main, new Fragment_User_MainMenu())
-                .commit();
     }
+
+
 
     public void clearAllTransactions(View v){
         Intent intent = getIntent();
@@ -401,7 +415,6 @@ public class Activity_User extends AppCompatActivity
     }
 
     //================SIMPLE ON CLICK METHODS======================
-
     public void browseStall(View v){
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_BrowseStall())
@@ -410,7 +423,7 @@ public class Activity_User extends AppCompatActivity
     }
 
     public void browseFood(View v){
-        if (stallName==null) {
+        if (stall==null) {
             Toast.makeText(v.getContext(),"Please choose a stall",Toast.LENGTH_LONG).show();
             return;
         }

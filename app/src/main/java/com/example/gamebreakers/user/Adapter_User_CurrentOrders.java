@@ -38,7 +38,10 @@ public class Adapter_User_CurrentOrders extends RecyclerView.Adapter<Adapter_Use
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getFoodName());
-        holder.mContentView.setText(mValues.get(position).getFoodName());
+        boolean cooked = mValues.get(position).isCompleted();
+        holder.mContentView.setText(
+                mValues.get(position).getCollectiontime() +
+                        (cooked ? " finished": " still cooking"));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +49,7 @@ public class Adapter_User_CurrentOrders extends RecyclerView.Adapter<Adapter_Use
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onOrderSelected(holder.mItem.getFoodName());
+                    mListener.onOrderSelected(holder.mItem);
                 }
             }
         });
