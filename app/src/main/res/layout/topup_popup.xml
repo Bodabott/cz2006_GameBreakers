@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="250dp"
     android:layout_height="305dp"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/topuppopup_bg"
     android:padding="5dp"
     android:layout_gravity="center">
 
@@ -36,8 +36,8 @@
         android:layout_alignBottom="@+id/cancel_button"
         android:layout_toLeftOf="@+id/cancel_button"
         android:layout_toStartOf="@+id/cancel_button"
-        android:background="@drawable/button_style"
-        android:text="Confirm" />
+        android:text="Confirm"
+        android:background="@drawable/button_style"/>
 
     <Button
         android:id="@+id/cancel_button"
