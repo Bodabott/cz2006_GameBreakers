@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.login.Activity_Main;
 
 import static com.example.gamebreakers.login.Activity_Main.STALL_NAME;
@@ -28,7 +29,7 @@ public class Activity_Owner extends AppCompatActivity
         implements Fragment_Owner_ManageMenu.OnMenuItemSelectedListener,Fragment_Owner_Transactions.OnTransactionSelectedListener {
 
     String stallName;
-    DatabaseHelper myDb;
+    SQL myDb;
 
     android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
 
@@ -37,7 +38,7 @@ public class Activity_Owner extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner);
 
-        myDb = new DatabaseHelper(this);
+        myDb = new SQL();
 
         //set initial fragment (Main Menu)
         fragman.beginTransaction()

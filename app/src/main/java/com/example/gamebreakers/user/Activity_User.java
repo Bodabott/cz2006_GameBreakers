@@ -31,11 +31,14 @@ import android.widget.Toast;
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.entities.Stall;
 import com.example.gamebreakers.entities.User;
 import com.example.gamebreakers.login.Activity_Main;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static com.example.gamebreakers.login.Activity_Main.PASSWORD;
 import static com.example.gamebreakers.login.Activity_Main.USER_NAME;
@@ -53,7 +56,7 @@ public class Activity_User extends AppCompatActivity
     String food;
     Stall stall;
     User user;
-    DatabaseHelper myDb;
+    SQL myDb;
     Dialog myDialog;
     Value val = new Value();
     android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
@@ -63,7 +66,7 @@ public class Activity_User extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-        myDb = new DatabaseHelper(this);
+        myDb = new SQL();
 
         myDialog = new Dialog(this);
 
@@ -75,9 +78,10 @@ public class Activity_User extends AppCompatActivity
         String username = getIntent().getStringExtra(USER_NAME);
         String password = getIntent().getStringExtra(PASSWORD);
         //get user
-        Cursor user_res = myDb.checkUserLoginData(username, password);
-        user_res.moveToNext();
-        user = new User(user_res.getInt(0),user_res.getString(1),user_res.getInt(3));
+        ArrayList user_res = myDb.checkUserLoginData(username, password);
+        System.out.println(user_res);
+        HashMap row = (HashMap) user_res.get(0);
+        user = new User((int) row.get("U_ID"), (String) row.get("U_USERNAME"),(int) row.get("U_BALANCE"));
 
 
         //drawer
