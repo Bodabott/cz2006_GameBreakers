@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.user.Activity_User;
 
 import java.util.Arrays;
@@ -33,7 +34,6 @@ public class Fragment_Owner_BusinessMode extends Fragment {
     private OnOrderSelectedListener mListener;
 
     Activity_Owner_BusinessMode act;
-    DatabaseHelper myDb;
     List<Order> orders;
 
     /**

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.login.Activity_Main;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ import java.util.List;
 public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fragment_Owner_BusinessMode.OnOrderSelectedListener {
 
     String stallName;
-    DatabaseHelper myDb;
+    SQL myDb;
     List<Order> orders = new LinkedList<>();
     Handler mHandler;
 
@@ -44,12 +45,11 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
         setContentView(R.layout.activity_owner_orders);
 
         //initialisation
-        myDb = new DatabaseHelper(this);
+        myDb = new SQL();
         //get args from intent
         Intent intent = getIntent();
         stallName = intent.getStringExtra(Activity_Main.STALL_NAME);
 
-        myDb= new DatabaseHelper(this);
         Order[] ordersArray = myDb.getArrayOfOrders(this.stallName);
         orders.addAll(Arrays.asList(ordersArray));
         removeCompletedOrders();

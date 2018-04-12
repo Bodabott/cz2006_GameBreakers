@@ -12,10 +12,13 @@ import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.owner.Activity_Owner;
 import com.example.gamebreakers.user.Activity_User;
 
 import static com.example.gamebreakers.entities.SQL.testConnection;
+
+import java.util.ArrayList;
 
 public class Activity_Main extends AppCompatActivity {
 
@@ -23,14 +26,14 @@ public class Activity_Main extends AppCompatActivity {
     public static final String USER_NAME = "MY_USERNAME";
     public static final String PASSWORD = "MY_PASSWORD";
 
-    DatabaseHelper myDb;
+    SQL myDb;
     EditText editUserName,editPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myDb = new DatabaseHelper(this);
+        myDb = new SQL();
     }
 
     public void create(View v){
@@ -57,18 +60,18 @@ public class Activity_Main extends AppCompatActivity {
         editPassword = findViewById(R.id.passwordText);
         // make sure username & password fields are not empty
         if (isLoginAcceptable(editUserName.getText().toString(), editPassword.getText().toString())) {
-            Cursor user_res = myDb.checkUserLoginData(editUserName.getText().toString(), editPassword.getText().toString());
-            Cursor owner_res = myDb.checkOwnerLoginData(editUserName.getText().toString(), editPassword.getText().toString());
+            ArrayList user_res = myDb.checkUserLoginData(editUserName.getText().toString(), editPassword.getText().toString());
+            ArrayList owner_res = myDb.checkOwnerLoginData(editUserName.getText().toString(), editPassword.getText().toString());
 
             // make sure account exists in database
-            if (user_res.getCount() == 1) { // if user account
+            if (user_res.size()==1) { // if user account
                 Toast.makeText(Activity_Main.this, "Login Successful", Toast.LENGTH_LONG).show();
                 Intent goIntent = new Intent(v.getContext(), Activity_User.class);
 
                 goIntent.putExtra(USER_NAME, editUserName.getText().toString());
                 goIntent.putExtra(PASSWORD, editPassword.getText().toString());
                 startActivity(goIntent);
-            } else if (owner_res.getCount() == 1) { // if owner account
+            } else if (owner_res.size()==1) { // if owner account
                 Toast.makeText(Activity_Main.this, "Login Successful", Toast.LENGTH_LONG).show();
                 Intent goIntent = new Intent(v.getContext(), Activity_Owner.class);
                 goIntent.putExtra(STALL_NAME, myDb.getStallName(editUserName.getText().toString(), editPassword.getText().toString()));

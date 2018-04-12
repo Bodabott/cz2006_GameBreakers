@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
+import com.example.gamebreakers.entities.SQL;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Fragment_User_CurrentOrders extends Fragment {
     private int mColumnCount = 1;
     private OnOrderSelectedListener mListener;
 
-    DatabaseHelper myDb;
+    SQL myDb;
     List<Order> current_Orders;
 
     /**
@@ -50,7 +51,7 @@ public class Fragment_User_CurrentOrders extends Fragment {
         }
 
         Activity_User act = (Activity_User) getActivity();
-        myDb= new DatabaseHelper(getContext());
+        myDb= new SQL();
 
         Order[] orders = myDb.getUserArrayOfOrders(act.user.getName());
         current_Orders = Arrays.asList(orders);

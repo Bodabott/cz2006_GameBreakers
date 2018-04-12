@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.login.Activity_Main;
 
 /**
@@ -24,7 +25,7 @@ import com.example.gamebreakers.login.Activity_Main;
 
 public class Activity_Owner_Settings extends Activity {
 
-    DatabaseHelper myDb;
+    SQL myDb;
     Button backButton;
     TextView textView,userName,passWord,stallName;
 
@@ -32,7 +33,7 @@ public class Activity_Owner_Settings extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_owner_settings);
-        myDb = new DatabaseHelper(this);
+        myDb = new SQL();
 
         textView = findViewById(R.id.owner_settings_stallName);
         backButton = findViewById(R.id.back);

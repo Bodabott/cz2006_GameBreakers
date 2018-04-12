@@ -11,6 +11,7 @@ import com.example.gamebreakers.entities.Order;
 import com.example.gamebreakers.user.Fragment_User_CurrentOrders.OnOrderSelectedListener;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Order} and makes a call to the
@@ -39,9 +40,13 @@ public class Adapter_User_CurrentOrders extends RecyclerView.Adapter<Adapter_Use
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).getFoodName());
         boolean cooked = mValues.get(position).isCompleted();
+
+        Random ran =  new Random();
+        int pass = ran.nextInt(9999);
+
         holder.mContentView.setText(
-                mValues.get(position).getCollectiontime() +
-                        (cooked ? " finished": " still cooking"));
+                mValues.get(position).getCollectiontime() + "status:" +
+                        (cooked ? " finished": " "+pass));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
