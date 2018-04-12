@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Food;
+import com.example.gamebreakers.entities.SQL;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Fragment_User_BrowseFood extends Fragment {
     private int mColumnCount = 1;
     private OnFoodSelectedListener mListener;
 
-    DatabaseHelper myDb;
+    SQL myDb;
     List<Food> food_List;
 
     /**
@@ -50,7 +51,7 @@ public class Fragment_User_BrowseFood extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
         //get database
-        myDb= new DatabaseHelper(getContext());
+        myDb= new SQL();
         //get selected stall
         Activity_User act = (Activity_User) getActivity();
         String stallName= act.stall.getStallName();

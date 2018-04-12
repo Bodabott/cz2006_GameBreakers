@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.entities.Stall;
 
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class Fragment_User_BrowseStall extends Fragment {
     private int mColumnCount = 1;
     private OnStallNameSelectedListener mListener;
 
-    DatabaseHelper myDb;
+    SQL myDb;
     List<Stall> stallName_List;
 
     /**
@@ -50,7 +51,7 @@ public class Fragment_User_BrowseStall extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        myDb= new DatabaseHelper(getContext());
+        myDb= new SQL();
 
         Stall[] stall_Array = myDb.getArrayOfStall();
         stallName_List = Arrays.asList(stall_Array);

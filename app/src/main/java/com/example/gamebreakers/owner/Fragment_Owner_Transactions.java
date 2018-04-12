@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Fragment_Owner_Transactions extends Fragment {
     private int mColumnCount = 1;
     private OnTransactionSelectedListener mListener;
 
-    DatabaseHelper myDb;
+    SQL myDb;
     List<java.lang.String> transactions;
 
     /**
@@ -49,7 +50,7 @@ public class Fragment_Owner_Transactions extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        myDb= new DatabaseHelper(getContext());
+        myDb= new SQL();
         Activity_Owner act = (Activity_Owner) getActivity();
 
         java.lang.String[] trans_Array= myDb.getArrayOfHistory(act.stallName);

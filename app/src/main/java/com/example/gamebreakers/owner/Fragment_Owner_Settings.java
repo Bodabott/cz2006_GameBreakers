@@ -11,16 +11,17 @@ import android.widget.TextView;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 
 public class Fragment_Owner_Settings extends Fragment {
-    DatabaseHelper myDb;
+    SQL myDb;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_owner_settings,container, false);
 
-        myDb=new DatabaseHelper(getContext());
+        myDb=new SQL();
         String stallName = ((Activity_Owner) getActivity()).stallName;
 
         TextView stalltext= view.findViewById(R.id.settings_stallName);

@@ -12,13 +12,14 @@ import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 
 /**
  * Created by zNotAgain on 5/3/2018.
  */
 
 public class Activity_CreateOwnerAccount extends Activity {
-    DatabaseHelper myDb;
+    SQL myDb;
     EditText username,stallName,password,confirmPassword;
     TextView alreadyMember;
 
@@ -26,7 +27,7 @@ public class Activity_CreateOwnerAccount extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createowneraccount);
-        myDb = new DatabaseHelper(this);
+        myDb = new SQL();
 
         username = findViewById(R.id.register_usernameText);
         stallName = findViewById(R.id.register_stallName);
