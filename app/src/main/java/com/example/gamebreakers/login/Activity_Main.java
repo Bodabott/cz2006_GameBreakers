@@ -15,6 +15,8 @@ import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.owner.Activity_Owner;
 import com.example.gamebreakers.user.Activity_User;
 
+import static com.example.gamebreakers.entities.SQL.testConnection;
+
 public class Activity_Main extends AppCompatActivity {
 
     public static final String STALL_NAME = "MY_STALL";

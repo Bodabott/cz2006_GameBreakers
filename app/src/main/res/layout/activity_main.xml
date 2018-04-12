@@ -9,63 +9,76 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="#FFFFFF" />
+
     <EditText
         android:id="@+id/usernameText"
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="255dp"
+        android:background="#73FFFFFF"
+        android:drawableLeft="@drawable/ic_action_user"
         android:hint="Username"
-        android:paddingLeft="20sp"
         android:inputType="text"
-        android:background="#BFFFFFFF"
-        android:layout_margin="5dp"
-        android:layout_above="@id/passwordText"
-        android:layout_width="match_parent"
         android:minHeight="30dp"
-        android:layout_height="wrap_content" />
+        android:paddingLeft="20sp" />
 
     <EditText
         android:id="@+id/passwordText"
-        android:layout_width="match_parent"
-        android:minHeight="30dp"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/login"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_margin="5dp"
-        android:background="#BFFFFFFF"
+        android:layout_width="167dp"
+        android:layout_height="31dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="216dp"
+        android:background="#73FFFFFF"
+        android:drawableLeft="@drawable/ic_action_password"
         android:hint="Password"
         android:inputType="textPassword"
+        android:minHeight="30dp"
         android:paddingLeft="20sp" />
+
     <Button
-        android:onClick="login"
         android:id="@+id/login"
-        android:background="#EADCDCDC"
-        android:layout_marginTop="15dp"
-        android:textAllCaps="false"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="150dp"
+        android:background="@drawable/login_button"
         android:fontFamily="sans-serif-condensed"
+        android:onClick="login"
         android:text="Login"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp" />
+
     <TextView
-        android:onClick="create"
         android:id="@+id/createAccountText"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:layout_below="@id/login"
-        android:text="No account yet? Create one"
-        android:textSize="16sp"
-        android:textColor="#FFFF00"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="114dp"
+        android:gravity="center"
+        android:onClick="create"
+        android:text="No account yet? Create one"
+        android:textColor="#E43F3F"
+        android:textSize="16sp" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_width="292dp"
+        android:layout_height="233dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="13dp"
-        app:srcCompat="@drawable/foodlogo" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="34dp"
+        app:srcCompat="@drawable/fastfood" />
 
 
 </RelativeLayout>
