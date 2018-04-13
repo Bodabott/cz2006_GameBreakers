@@ -12,12 +12,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 /**
  * Connection class
  * Created by chris on 3/4/2018.
+ *
  */
+
 
 public final class SQL {
 
@@ -762,19 +763,17 @@ public final class SQL {
 
     // Add a new order to orders table
     // Return true if successful, false otherwise
-    public static boolean addOrderArrayData(String food_name, String username,String stall_name){
-        String query = "INSERT INTO all_orders_table (FOOD_NAME,U_USERNAME,O_STALLNAME) " +
-                " VALUES ('" + food_name + "', '" + username + "', '" + stall_name + "');";
+    // Note: Orders are non-unique, identifier will be order id.
+    // No limit imposed on adding new orders
+    public static boolean addOrderArrayData(String food_name, String username,String stall_name, String collection_time){
+        String query = "INSERT INTO all_orders_table (FOOD_NAME,U_USERNAME,O_STALLNAME,COLLECTION_TIME,COMPLETED) " +
+                " VALUES ('" + food_name + "', '" + username + "', '" + stall_name + "', '" + collection_time + "', 'N');";
 
         String query2 = "SELECT * FROM all_orders_table WHERE CONVERT(VARCHAR,FOOD_NAME) = '" +
                 food_name + "' AND CONVERT(VARCHAR,U_USERNAME) = '" +
                 username + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" +
-                stall_name + "';";
-
-        // Make sure does not already exist
-        ArrayList a = sendQuery(query2);
-        if (a == null || a.size()>0)
-            return false;
+                stall_name + "' AND CONVERT(VARCHAR,COLLECTION_TIME) = '" +
+                collection_time + "';";
 
         sendUpdate(query);
         ArrayList a2 = sendQuery(query2);
@@ -788,6 +787,33 @@ public final class SQL {
             return false;
     }
 
+    // Update orders from all orders table to completed
+    // Return true if successful, false otherwise
+    // Note: Orders with the same food, stall and collection time will be updated together as completed
+    public static boolean updateOrder(String food_name, String stall_name, String collection_time){
+        String query = "UPDATE all_orders_table " +
+                " SET COMPLETED = 'Y'"  +
+                " WHERE CONVERT(VARCHAR,FOOD_NAME) = '" + food_name +
+                "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +
+                "' AND CONVERT(VARCHAR,COLLECTION_TIME) = '" + collection_time + "';";
+
+        String query2 = "SELECT * FROM all_orders_table WHERE " +
+                " CONVERT(VARCHAR,COMPLETED) = 'Y' " +
+                " AND CONVERT(VARCHAR,FOOD_NAME) = '" + food_name +
+                "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +
+                "' AND CONVERT(VARCHAR,COLLECTION_TIME) = '" + collection_time + "';";
+
+        ArrayList a = sendQuery(query2);
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        if (a == null || a2 == null)
+            return false;
+        else if (a.size()<1 && a2.size()>0)
+            return true;
+        else
+            return false;
+    }
 
     // Delete orders from all orders table
     // return 1 if successful, 0 otherwise
@@ -809,6 +835,7 @@ public final class SQL {
         else
             return 0;
     }
+
     /////////////////////////////////////////// HISTORY METHODS ///////////////////////////////////////////
 
 

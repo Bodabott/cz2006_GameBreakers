@@ -16,6 +16,8 @@ import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.owner.Activity_Owner;
 import com.example.gamebreakers.user.Activity_User;
 
+import static com.example.gamebreakers.entities.SQL.testConnection;
+
 import java.util.ArrayList;
 
 public class Activity_Main extends AppCompatActivity {
