@@ -21,8 +21,8 @@
     <EditText
         android:id="@+id/register_usernameText"
         android:hint="Username"
-        android:textColorHint="#FFFFFF"
-        android:textColor="#FFFFFF"
+        android:textColorHint="#999999"
+        android:textColor="#999999"
         android:inputType="text"
         android:backgroundTint="#FFFFFF"
         android:layout_below="@id/logo"
@@ -33,8 +33,8 @@
     <EditText
         android:id="@+id/register_stallName"
         android:hint="Stall Name"
-        android:textColorHint="#FFFFFF"
-        android:textColor="#FFFFFF"
+        android:textColorHint="#999999"
+        android:textColor="#999999"
         android:inputType="text"
         android:backgroundTint="#FFFFFF"
         android:layout_below="@id/register_usernameText"
@@ -44,8 +44,8 @@
     <EditText
         android:id="@+id/register_passwordText"
         android:hint="Password"
-        android:textColorHint="#FFFFFF"
-        android:textColor="#FFFFFF"
+        android:textColorHint="#999999"
+        android:textColor="#999999"
         android:inputType="textPassword"
         android:backgroundTint="#FFFFFF"
         android:layout_below="@id/register_stallName"
@@ -55,8 +55,8 @@
     <EditText
         android:id="@+id/register_confirmPasswordText"
         android:hint="Confirm Password"
-        android:textColorHint="#FFFFFF"
-        android:textColor="#FFFFFF"
+        android:textColorHint="#999999"
+        android:textColor="#999999"
         android:inputType="textPassword"
         android:backgroundTint="#FFFFFF"
         android:layout_below="@id/register_passwordText"
@@ -81,7 +81,7 @@
     <TextView
         android:id="@+id/already_member"
         android:text="Already a member? Login here ..."
-        android:textColor="#FFFF00"
+        android:textColor="#cccc00"
         android:layout_marginTop="40sp"
         android:layout_below="@id/register_button"
         android:layout_centerInParent="true"

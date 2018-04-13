@@ -33,7 +33,7 @@
         android:text="Choose a Stall:"
         android:textSize="30dp"
         android:background="#80A9CCE3"
-        android:textColor="#EEEEEE"
+        android:textColor="#999999"
         android:layout_below="@id/selected_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
