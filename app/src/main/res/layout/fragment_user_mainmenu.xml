@@ -10,149 +10,174 @@
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#4D5DADE2  ">
-
-        <RelativeLayout
-            android:id="@+id/current_orders"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/pastTransactions"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="0dp"
-            android:background="@drawable/user_main_rounded_buttons">
-
-            <ImageView
-                android:id="@+id/currentOrders"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/current_order"
-                android:minHeight="60dp"
-                android:minWidth="60dp" />
-
-            <Button
-                android:id="@+id/checkorderbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/currentOrders"
-                android:background="#00f5f5f5"
-                android:fontFamily="casual"
-                android:onClick="checkOrders"
-                android:padding="10dp"
-                android:text="Current Orders"
-                android:textAllCaps="false"
-                android:textSize="20dp"
-                android:textStyle="normal" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/pastTransactions"
-
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-
-            android:layout_margin="10dp"
-            android:background="@drawable/user_main_rounded_buttons">
-
-            <ImageView
-                android:id="@+id/transactionimage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/calender_transactions"
-                android:minHeight="60dp"
-                android:minWidth="60dp" />
-
-            <Button
-                android:id="@+id/checktransactionbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_margin="5dp"
-                android:layout_toRightOf="@+id/transactionimage"
-                android:background="#00f5f5f5"
-                android:fontFamily="casual"
-                android:onClick="checkTransactions"
-                android:padding="0dp"
-                android:text="Past Transactions"
-                android:textAllCaps="false"
-                android:textSize="20dp"
-                android:textStyle="italic" />
-        </RelativeLayout>
+        android:layout_centerHorizontal="true"
+        android:background="#FFFFFF">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true">
+            android:layout_centerHorizontal="true">
 
-            <TextView
-                android:id="@+id/search_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="20dp"
-                android:text="Search"
-                android:textSize="30dp" />
 
             <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/search_text"
-                android:layout_height="wrap_content">
-            <EditText
-                android:layout_centerHorizontal="true"
-                android:textAlignment="center"
-                android:id="@+id/search_field"
+                android:id="@+id/relativeLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/search_layout"
-                android:ems="10"
-                android:fontFamily="@font/nunito_semibold"
-                android:inputType="textPersonName"
-                android:paddingBottom="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="10dp"
-                android:hint="Search Here"
-                android:textColor="#999999" />
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true">
 
-            <ImageButton
-                android:onClick="searchStall"
-                android:id="@+id/search_button"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentRight="true"
-                app:srcCompat="@mipmap/search_button" />
+
+                <EditText
+                    android:id="@+id/search_field"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/search_layout"
+                    android:ems="10"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:hint="Search for Stalls"
+                    android:inputType="textPersonName"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:textAlignment="center"
+                    android:textColor="#999999" />
+
+                <ImageButton
+                    android:id="@+id/search_button"
+                    android:layout_width="39dp"
+                    android:layout_height="39dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_alignTop="@+id/search_field"
+                    android:layout_toEndOf="@+id/search_field"
+                    android:background="@drawable/redsearchbutt"
+                    android:onClick="searchStall" />
+
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/browse_stall"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/relativeLayout"
+                android:layout_marginTop="68dp"
+                android:background="@drawable/butt">
+
+                <Button
+                    android:id="@+id/order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="58dp"
+                    android:layout_toEndOf="@+id/stallimage"
+                    android:background="#00f5f5f5"
+                    android:fontFamily="@font/nunito_bold"
+                    android:onClick="browseStall"
+                    android:text="Browse Stalls"
+                    android:textAllCaps="false"
+                    android:textColor="#E43F3f"
+                    android:textSize="25dp" />
+
+                <ImageView
+                    android:id="@+id/stallimage"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="30dp"
+                    android:background="@drawable/stall"
+                    android:minHeight="35dp"
+                    android:minWidth="35dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/current_orders"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/browse_stall"
+                android:background="@drawable/butt">
+
+                <ImageView
+                    android:id="@+id/currentOrders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/order_list"
+                    android:minHeight="70dp"
+                    android:minWidth="70dp" />
+
+                <Button
+                    android:id="@+id/checkorderbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="38dp"
+                    android:layout_toEndOf="@+id/currentOrders"
+                    android:background="#00f5f5f5"
+                    android:fontFamily="@font/nunito_bold"
+                    android:onClick="checkOrders"
+                    android:padding="10dp"
+                    android:text="Current Orders"
+                    android:textAllCaps="false"
+                    android:textColor="#E43F3f"
+                    android:textSize="25dp"
+                    android:textStyle="normal" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/pastTransactions"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/current_orders"
+                android:background="@drawable/butt">
+
+
+                <ImageView
+                    android:id="@+id/transactionimage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="26dp"
+                    android:background="@drawable/transaction"
+                    android:minHeight="70dp"
+                    android:minWidth="70dp" />
+
+                <Button
+                    android:id="@+id/checktransactionbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="36dp"
+                    android:layout_toEndOf="@+id/transactionimage"
+                    android:background="#00f5f5f5"
+                    android:fontFamily="@font/nunito_bold"
+                    android:onClick="checkTransactions"
+                    android:text="Past Transactions"
+                    android:textColor="#E43F3f"
+                    android:textAllCaps="false"
+                    android:textSize="25dp" />
+            </RelativeLayout>
+
+
+
 
         </RelativeLayout>
 
-        <Button
-            android:onClick="browseStall"
-            android:id="@+id/order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pastTransactions"
-            android:layout_centerInParent="true"
-            android:layout_margin="30dp"
-            android:background="@drawable/magnifying_glass"
-            android:textSize="30dp" />
-
-
-        <TextView
-            android:id="@+id/balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/current_orders"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10sp"
-            android:background="#FF0000" />
 
     </RelativeLayout>
 
 </FrameLayout>
+

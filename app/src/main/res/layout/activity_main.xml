@@ -72,15 +72,6 @@
         android:textColor="#CCCC00"
         android:layout_height="wrap_content"/>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/usernameText"
-        android:layout_marginTop="0dp"
-        app:srcCompat="@drawable/foodlogo"
-        android:textColor="#E43F3F"
-        android:textSize="16sp" />
 
     <ImageView
         android:layout_width="292dp"

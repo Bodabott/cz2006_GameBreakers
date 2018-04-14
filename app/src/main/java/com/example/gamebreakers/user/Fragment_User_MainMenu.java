@@ -16,9 +16,6 @@ public class Fragment_User_MainMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_mainmenu,container, false);
 
-        Activity_User act = (Activity_User) getActivity();
-        TextView text = view.findViewById(R.id.balance);
-        text.setText("Balance: $" +act.user.getBalance());
         return view;
     }
 }
