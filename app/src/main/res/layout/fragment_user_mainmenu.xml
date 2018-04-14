@@ -9,7 +9,6 @@
     <RelativeLayout
         android:id="@+id/content_layout"
         android:layout_width="match_parent"
-
         android:layout_height="match_parent"
         android:background="#4D5DADE2  ">
 
@@ -119,11 +118,11 @@
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:paddingTop="10dp"
-                android:text="Search Here"
+                android:hint="Search Here"
                 android:textColor="#999999" />
 
             <ImageButton
-                android:onClick="SearchStall"
+                android:onClick="searchStall"
                 android:id="@+id/search_button"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

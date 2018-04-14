@@ -114,41 +114,6 @@ public class Activity_User extends AppCompatActivity
 
     }
 
-    public void ShowTopupPopup(View v) {
-
-        Button buttonCancel;
-        Button buttonConfirm;
-        final EditText mEdit;
-
-        myDialog.setContentView(R.layout.topup_popup);
-
-        mEdit = (EditText) myDialog.findViewById(R.id.top_up_value);
-        buttonCancel = (Button) myDialog.findViewById(R.id.cancel_button);
-        buttonConfirm = (Button) myDialog.findViewById(R.id.confirm_button);
-
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String un = user.getName();
-                String txt = mEdit.getText().toString();
-                int bal = Integer.parseInt(txt);
-                int totalbal = SQL.getUserBalance(un) + bal;
-                SQL.updateUserBalance(un, totalbal);
-                invalidateOptionsMenu();
-                myDialog.dismiss();
-            }
-        });
-
-        buttonCancel.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -210,6 +175,11 @@ public class Activity_User extends AppCompatActivity
     }
 
     public boolean navigationItemListener(MenuItem item){
+        // Clears all fragments from the stack
+        for(int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); ++i) {
+            getSupportFragmentManager().popBackStack();
+        }
+
         Intent intent = getIntent();
         final String username_message = intent.getStringExtra(USER_NAME);
         final String password_message = intent.getStringExtra(Activity_Main.PASSWORD);
@@ -306,6 +276,7 @@ public class Activity_User extends AppCompatActivity
         local.plusMinutes(stall.getQueueNum()*2);   //add 2 minutes per person in queue
         return local;
     }
+
     //====================List Adaptor Methods=====================
     @Override
     public void onFoodSelected(String food){
@@ -348,11 +319,48 @@ public class Activity_User extends AppCompatActivity
     }
 
     @Override
-    public void onTransactionSelecteed(String item) {
-
-    }
+    public void onTransactionSelecteed(String item) {}
 
     //================COMPLEX ON CLICK METHODS======================
+
+    public void ShowTopupPopup(View v) {
+        Button buttonCancel;
+        Button buttonConfirm;
+        final EditText mEdit;
+
+        myDialog.setContentView(R.layout.topup_popup);
+
+        mEdit = (EditText) myDialog.findViewById(R.id.top_up_value);
+        buttonCancel = (Button) myDialog.findViewById(R.id.cancel_button);
+        buttonConfirm = (Button) myDialog.findViewById(R.id.confirm_button);
+
+        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String un = user.getName();
+                String txt = mEdit.getText().toString();
+                int bal = Integer.parseInt(txt);
+                int totalbal = SQL.getUserBalance(un) + bal;
+                SQL.updateUserBalance(un, totalbal);
+                invalidateOptionsMenu();
+                myDialog.dismiss();
+            }
+        });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
+    }
+
+    public void updatePaymentDetails(View v){
+        Toast.makeText(v.getContext(), "you are inside payment", Toast.LENGTH_SHORT).show();
+    }
+
     public void makePayment(View v) {
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
@@ -382,8 +390,6 @@ public class Activity_User extends AppCompatActivity
         }
         else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();
     }
-
-
 
     public void clearAllTransactions(View v){
         Intent intent = getIntent();
@@ -415,6 +421,10 @@ public class Activity_User extends AppCompatActivity
             }
         });
         mBuilder.show();
+    }
+
+    public void searchStall(View v){
+        Toast.makeText(v.getContext(),"This is not done yet!",Toast.LENGTH_SHORT).show();
     }
 
     //================SIMPLE ON CLICK METHODS======================
