@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.login.Activity_Main;
 
 
@@ -23,7 +24,7 @@ import com.example.gamebreakers.login.Activity_Main;
  */
 
 public class Activity_User_Settings extends Activity{
-    DatabaseHelper myDb;
+
     Button backButton;
     TextView userName,passWord;
 
@@ -31,7 +32,6 @@ public class Activity_User_Settings extends Activity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
-        myDb = new DatabaseHelper(this);
 
         backButton = findViewById(R.id.back);
         userName = findViewById(R.id.settings_username);
@@ -78,7 +78,7 @@ public class Activity_User_Settings extends Activity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                if(myDb.updateUserAccountUsername(userName.getText().toString(),m_Text)){
+                if(SQL.updateUserAccountUsername(userName.getText().toString(),m_Text)){
                     Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
                     userName.setText(m_Text);
                 }
@@ -120,7 +120,7 @@ public class Activity_User_Settings extends Activity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                if(myDb.updateUserAccountPassword(passWord.getText().toString(),m_Text)){
+                if(SQL.updateUserAccountPassword(passWord.getText().toString(),m_Text)){
                     Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
                     passWord.setText(m_Text);
                 }
@@ -154,7 +154,7 @@ public class Activity_User_Settings extends Activity{
         mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(myDb.deleteUserAccount(userName.getText().toString(),passWord.getText().toString()) > 0){
+                if(SQL.deleteUserAccount(userName.getText().toString(),passWord.getText().toString()) > 0){
                     Toast.makeText(v.getContext(),"Account Successfully Deleted",Toast.LENGTH_LONG).show();
                     setResult(Activity.RESULT_OK);
                     finish();

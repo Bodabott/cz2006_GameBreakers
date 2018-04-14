@@ -11,12 +11,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -56,7 +58,6 @@ public class Activity_User extends AppCompatActivity
     String food;
     Stall stall;
     User user;
-    SQL myDb;
     Dialog myDialog;
     Value val = new Value();
     android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
@@ -65,8 +66,6 @@ public class Activity_User extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-
-        myDb = new SQL();
 
         myDialog = new Dialog(this);
 
@@ -78,10 +77,10 @@ public class Activity_User extends AppCompatActivity
         String username = getIntent().getStringExtra(USER_NAME);
         String password = getIntent().getStringExtra(PASSWORD);
         //get user
-        ArrayList user_res = myDb.checkUserLoginData(username, password);
+        ArrayList user_res = SQL.checkUserLoginData(username, password);
         System.out.println(user_res);
         HashMap row = (HashMap) user_res.get(0);
-        user = new User((int) row.get("U_ID"), (String) row.get("U_USERNAME"),(int) row.get("U_BALANCE"));
+        user = new User(Integer.parseInt(row.get("U_ID").toString()), (String) row.get("U_USERNAME"), Integer.parseInt(row.get("U_BALANCE").toString()));
 
 
         //drawer
@@ -123,7 +122,6 @@ public class Activity_User extends AppCompatActivity
 
         myDialog.setContentView(R.layout.topup_popup);
 
-
         mEdit = (EditText) myDialog.findViewById(R.id.top_up_value);
         buttonCancel = (Button) myDialog.findViewById(R.id.cancel_button);
         buttonConfirm = (Button) myDialog.findViewById(R.id.confirm_button);
@@ -134,8 +132,8 @@ public class Activity_User extends AppCompatActivity
                 String un = user.getName();
                 String txt = mEdit.getText().toString();
                 int bal = Integer.parseInt(txt);
-                int totalbal = myDb.getUserBalance(un) + bal;
-                myDb.updateUserBalance(un, totalbal);
+                int totalbal = SQL.getUserBalance(un) + bal;
+                SQL.updateUserBalance(un, totalbal);
                 invalidateOptionsMenu();
                 myDialog.dismiss();
             }
@@ -157,7 +155,7 @@ public class Activity_User extends AppCompatActivity
         String val_ue;
         int val;
         String un = user.getName();
-        val = myDb.getUserBalance(un);
+        val = SQL.getUserBalance(un);
         val_ue = "$" + Integer.toString(val);
 
         MenuInflater inflater = getMenuInflater();
@@ -178,7 +176,7 @@ public class Activity_User extends AppCompatActivity
         String val_ue;
         int val;
         String un = user.getName();
-        val = myDb.getUserBalance(un);
+        val = SQL.getUserBalance(un);
         val_ue = "$" + Integer.toString(val);
 
         MenuInflater inflater = getMenuInflater();
@@ -252,9 +250,9 @@ public class Activity_User extends AppCompatActivity
         // Initialise
         int ID = 0;
         int Max_ID = 1;
-        Order[] orders_array = myDb.getArrayOfOrders(stall_name);
-        String[] strings_owner_history = myDb.getArrayOfHistory(stall_name);
-        String[] strings_user_history = myDb.getUserArrayOfHistory(user_name);
+        Order[] orders_array = SQL.getArrayOfOrders(stall_name);
+        String[] strings_owner_history = SQL.getArrayOfHistory(stall_name);
+        String[] strings_user_history = SQL.getUserArrayOfHistory(user_name);
 
         // Initial Check, increment ID to 1
         for(Order element : orders_array)
@@ -315,6 +313,7 @@ public class Activity_User extends AppCompatActivity
 
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_Payment())
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -331,9 +330,9 @@ public class Activity_User extends AppCompatActivity
     @Override
     public void onOrderSelected(Order order) {
         if (order.isCompleted()) {
-            myDb.addHistoryArrayData(order.getFoodName(), myDb.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
-            myDb.addUserHistoryArrayData(order.getFoodName(), myDb.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
-            Integer deletedRows = myDb.deleteOrderArrayData(order.getFoodName(), order.getStallName());
+            SQL.addHistoryArrayData(order.getFoodName(), SQL.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
+            SQL.addUserHistoryArrayData(order.getFoodName(), SQL.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
+            Integer deletedRows = SQL.deleteOrderArrayData(order.getFoodName(), order.getStallName());
 
             if (deletedRows > 0) {
                 Toast.makeText(Activity_User.this, "Order Collected", Toast.LENGTH_LONG).show();
@@ -367,10 +366,10 @@ public class Activity_User extends AppCompatActivity
 
         String newFoodMessage = foodNameConverter(foodMessage, stallMessage, usernameMessage);
         if(afterEarliestOrderTime(time)) {
-            if (myDb.addOrderArrayData(newFoodMessage, usernameMessage, stallMessage, time)) {
-                int foodprice = myDb.getFoodPrice(foodMessage, stallMessage);
-                int bal_left = myDb.getUserBalance(usernameMessage) - foodprice;
-                myDb.updateUserBalance(usernameMessage, bal_left);
+            if (SQL.addOrderArrayData(newFoodMessage, usernameMessage, stallMessage, time)) {
+                int foodprice = SQL.getFoodPrice(foodMessage, stallMessage);
+                int bal_left = SQL.getUserBalance(usernameMessage) - foodprice;
+                SQL.updateUserBalance(usernameMessage, bal_left);
                 invalidateOptionsMenu();
                 Toast.makeText(getApplicationContext(), "PAYMENT SUCCESSFUL", Toast.LENGTH_LONG).show();
                 setResult(Activity.RESULT_OK);
@@ -395,7 +394,7 @@ public class Activity_User extends AppCompatActivity
         mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Integer deletedRows = myDb.deleteAllUserHistoryData(usernameMessage);
+                Integer deletedRows = SQL.deleteAllUserHistoryData(usernameMessage);
                 if(deletedRows > 0)
                     Toast.makeText(Activity_User.this,"All Data Deleted",Toast.LENGTH_LONG).show();
                 else
@@ -440,6 +439,7 @@ public class Activity_User extends AppCompatActivity
     public void goPayment(View v){
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_Payment())
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -458,13 +458,23 @@ public class Activity_User extends AppCompatActivity
     }
 
     public void backtoMain(View v){
-        fragman.beginTransaction()
-                .replace(R.id.content_main, new Fragment_User_MainMenu())
-                .commit();
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().popBackStack();
     }
 
     public void back(View v) {
-        this.onBackPressed();
+        getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Log.e("Fragment Count",String.valueOf(fragmentManager.getBackStackEntryCount()));
+        if(fragmentManager.getBackStackEntryCount() == 0){
+            super.onBackPressed();
+        }else{
+            fragmentManager.popBackStack();
+        }
     }
 
     public void logout(View v) {

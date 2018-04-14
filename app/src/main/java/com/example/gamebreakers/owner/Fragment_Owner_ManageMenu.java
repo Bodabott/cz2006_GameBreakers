@@ -33,7 +33,6 @@ public class Fragment_Owner_ManageMenu extends Fragment {
     private int mColumnCount = 1;
     private OnMenuItemSelectedListener mListener;
 
-    SQL myDb;
     List<Food> menu;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -50,10 +49,9 @@ public class Fragment_Owner_ManageMenu extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        myDb= new SQL();
         Activity_Owner act = (Activity_Owner) getActivity();
 
-        Food[] menu_Array= myDb.getStallMenu(act.stallName);
+        Food[] menu_Array= SQL.getStallMenu(act.stallName);
         menu = Arrays.asList(menu_Array);
     }
 

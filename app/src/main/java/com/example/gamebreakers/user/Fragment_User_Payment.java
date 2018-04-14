@@ -23,15 +23,18 @@ public class Fragment_User_Payment extends Fragment {
 
         if (stallname!=null) {
             TextView selectedStall = view.findViewById(R.id.selected_stall);
-            selectedStall.setText("Stall: "+stallname);
+            String temp = "Stall: " + stallname;
+            selectedStall.setText(temp);
         }
         if (food!=null) {
             TextView selectedfood = view.findViewById(R.id.selected_food);
-            selectedfood.setText("Food: "+food);
+            String temp = "Food: " + food;
+            selectedfood.setText(temp);
         }
 
         TextView text =view.findViewById(R.id.earliestTime);
-        text.setText("Earliest Collection Time: "+ act.getEarliestOrderTime().getHour()+ ":" +act.getEarliestOrderTime().getMinute());
+        String temp = "Earliest Collection Time = " + act.getEarliestOrderTime().getHour() + ":" + act.getEarliestOrderTime().getMinute();
+        text.setText(temp);
 
         return view;
     }

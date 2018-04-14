@@ -19,7 +19,6 @@ import java.util.HashMap;
  *
  */
 
-
 public final class SQL {
 
     // Create connection with sql server
@@ -836,6 +835,7 @@ public final class SQL {
             return 0;
     }
 
+    public void updateQueueNum(){}
     /////////////////////////////////////////// HISTORY METHODS ///////////////////////////////////////////
 
 

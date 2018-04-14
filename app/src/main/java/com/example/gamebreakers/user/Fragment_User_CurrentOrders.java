@@ -32,7 +32,6 @@ public class Fragment_User_CurrentOrders extends Fragment {
     private int mColumnCount = 1;
     private OnOrderSelectedListener mListener;
 
-    SQL myDb;
     List<Order> current_Orders;
 
     /**
@@ -51,9 +50,8 @@ public class Fragment_User_CurrentOrders extends Fragment {
         }
 
         Activity_User act = (Activity_User) getActivity();
-        myDb= new SQL();
 
-        Order[] orders = myDb.getUserArrayOfOrders(act.user.getName());
+        Order[] orders = SQL.getUserArrayOfOrders(act.user.getName());
         current_Orders = Arrays.asList(orders);
     }
 

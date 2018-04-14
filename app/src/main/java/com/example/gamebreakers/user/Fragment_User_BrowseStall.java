@@ -33,7 +33,6 @@ public class Fragment_User_BrowseStall extends Fragment {
     private int mColumnCount = 1;
     private OnStallNameSelectedListener mListener;
 
-    SQL myDb;
     List<Stall> stallName_List;
 
     /**
@@ -51,9 +50,8 @@ public class Fragment_User_BrowseStall extends Fragment {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
 
-        myDb= new SQL();
 
-        Stall[] stall_Array = myDb.getArrayOfStall();
+        Stall[] stall_Array = SQL.getArrayOfStall();
         stallName_List = Arrays.asList(stall_Array);
     }
 

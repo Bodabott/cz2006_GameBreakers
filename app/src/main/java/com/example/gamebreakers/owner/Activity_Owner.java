@@ -29,7 +29,6 @@ public class Activity_Owner extends AppCompatActivity
         implements Fragment_Owner_ManageMenu.OnMenuItemSelectedListener,Fragment_Owner_Transactions.OnTransactionSelectedListener {
 
     String stallName;
-    SQL myDb;
 
     android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
 
@@ -38,7 +37,6 @@ public class Activity_Owner extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner);
 
-        myDb = new SQL();
 
         //set initial fragment (Main Menu)
         fragman.beginTransaction()
@@ -66,7 +64,7 @@ public class Activity_Owner extends AppCompatActivity
         mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(myDb.deleteMenuArrayData(item,stallName) > 0)
+                if(SQL.deleteMenuArrayData(item,stallName) > 0)
                     Toast.makeText(Activity_Owner.this,"Data Deleted",Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(Activity_Owner.this,"Data not Deleted",Toast.LENGTH_SHORT).show();
@@ -119,7 +117,7 @@ public class Activity_Owner extends AppCompatActivity
                 int price = Integer.parseInt(dollars.getText().toString()) * 100 //add dollars
                         + Integer.parseInt(cents.getText().toString());         //add cents
 
-                if(myDb.addMenuArrayData(m_Text,stallNameMessage, price))
+                if(SQL.addMenuArrayData(m_Text,stallNameMessage, price))
                     Toast.makeText(Activity_Owner.this,"Data Added",Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(Activity_Owner.this,"Data not Added",Toast.LENGTH_SHORT).show();
@@ -159,7 +157,7 @@ public class Activity_Owner extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                if(myDb.updateOwnerAccountUsername(m_Text,stallName)){
+                if(SQL.updateOwnerAccountUsername(m_Text,stallName)){
                     Toast.makeText(Activity_Owner.this,"Edit Successful",Toast.LENGTH_SHORT).show();
 
                     fragman.popBackStack();
@@ -200,7 +198,7 @@ public class Activity_Owner extends AppCompatActivity
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                if(myDb.updateOwnerAccountPassword(m_Text,stallName)){
+                if(SQL.updateOwnerAccountPassword(m_Text,stallName)){
                     Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
 
                     fragman.popBackStack();
@@ -247,7 +245,7 @@ public class Activity_Owner extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String m_Text = input.getText().toString();
-                        if(myDb.updateOwnerAccountStallName(stallName,m_Text) > 0){
+                        if(SQL.updateOwnerAccountStallName(stallName,m_Text) > 0){
                             Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
 
                             stallName=m_Text;
@@ -291,7 +289,7 @@ public class Activity_Owner extends AppCompatActivity
         mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(myDb.deleteOwnerAccount(stallName) > 0){
+                if(SQL.deleteOwnerAccount(stallName) > 0){
                     Toast.makeText(v.getContext(),"Account Successfully Deleted",Toast.LENGTH_LONG).show();
                     setResult(Activity.RESULT_OK);
                     finish();
@@ -315,7 +313,7 @@ public class Activity_Owner extends AppCompatActivity
         mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Integer deletedRows = myDb.deleteAllHistoryData(stallName);
+                Integer deletedRows = SQL.deleteAllHistoryData(stallName);
                 if(deletedRows > 0)
                     Toast.makeText(Activity_Owner.this,"All Data Deleted",Toast.LENGTH_LONG).show();
                 else

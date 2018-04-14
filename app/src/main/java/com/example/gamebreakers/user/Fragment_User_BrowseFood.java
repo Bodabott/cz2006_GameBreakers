@@ -33,7 +33,6 @@ public class Fragment_User_BrowseFood extends Fragment {
     private int mColumnCount = 1;
     private OnFoodSelectedListener mListener;
 
-    SQL myDb;
     List<Food> food_List;
 
     /**
@@ -50,13 +49,12 @@ public class Fragment_User_BrowseFood extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
-        //get database
-        myDb= new SQL();
+
         //get selected stall
         Activity_User act = (Activity_User) getActivity();
         String stallName= act.stall.getStallName();
         //get list of food
-        Food[] foodArray = myDb.getStallMenu(stallName);
+        Food[] foodArray = SQL.getStallMenu(stallName);
         food_List = Arrays.asList(foodArray);
     }
 

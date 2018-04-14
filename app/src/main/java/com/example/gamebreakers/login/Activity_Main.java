@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,14 +27,12 @@ public class Activity_Main extends AppCompatActivity {
     public static final String USER_NAME = "MY_USERNAME";
     public static final String PASSWORD = "MY_PASSWORD";
 
-    SQL myDb;
     EditText editUserName,editPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        myDb = new SQL();
     }
 
     public void create(View v){
@@ -60,8 +59,8 @@ public class Activity_Main extends AppCompatActivity {
         editPassword = findViewById(R.id.passwordText);
         // make sure username & password fields are not empty
         if (isLoginAcceptable(editUserName.getText().toString(), editPassword.getText().toString())) {
-            ArrayList user_res = myDb.checkUserLoginData(editUserName.getText().toString(), editPassword.getText().toString());
-            ArrayList owner_res = myDb.checkOwnerLoginData(editUserName.getText().toString(), editPassword.getText().toString());
+            ArrayList user_res = SQL.checkUserLoginData(editUserName.getText().toString(), editPassword.getText().toString());
+            ArrayList owner_res = SQL.checkOwnerLoginData(editUserName.getText().toString(), editPassword.getText().toString());
 
             // make sure account exists in database
             if (user_res.size()==1) { // if user account
@@ -74,7 +73,7 @@ public class Activity_Main extends AppCompatActivity {
             } else if (owner_res.size()==1) { // if owner account
                 Toast.makeText(Activity_Main.this, "Login Successful", Toast.LENGTH_LONG).show();
                 Intent goIntent = new Intent(v.getContext(), Activity_Owner.class);
-                goIntent.putExtra(STALL_NAME, myDb.getStallName(editUserName.getText().toString(), editPassword.getText().toString()));
+                goIntent.putExtra(STALL_NAME, SQL.getStallName(editUserName.getText().toString(), editPassword.getText().toString()));
                 startActivity(goIntent);
             } else {
                 // show login fail message

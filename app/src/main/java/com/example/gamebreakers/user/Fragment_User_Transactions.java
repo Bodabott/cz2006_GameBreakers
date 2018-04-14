@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
+import com.example.gamebreakers.entities.SQL;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,6 @@ public class Fragment_User_Transactions extends Fragment {
     private int mColumnCount = 1;
     private OnTransactionSelectedListener mListener;
 
-    DatabaseHelper myDb;
     List<String> pastTransactions;
 
     /**
@@ -50,9 +50,8 @@ public class Fragment_User_Transactions extends Fragment {
         }
 
         Activity_User act = (Activity_User) getActivity();
-        myDb= new DatabaseHelper(getContext());
 
-        String[] transactions = myDb.getUserArrayOfHistory(act.user.getName());
+        String[] transactions = SQL.getUserArrayOfHistory(act.user.getName());
         pastTransactions = Arrays.asList(transactions);
     }
 

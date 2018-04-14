@@ -33,7 +33,6 @@ import java.util.List;
 public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fragment_Owner_BusinessMode.OnOrderSelectedListener {
 
     String stallName;
-    SQL myDb;
     List<Order> orders = new LinkedList<>();
     Handler mHandler;
 
@@ -44,13 +43,11 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_orders);
 
-        //initialisation
-        myDb = new SQL();
         //get args from intent
         Intent intent = getIntent();
         stallName = intent.getStringExtra(Activity_Main.STALL_NAME);
 
-        Order[] ordersArray = myDb.getArrayOfOrders(this.stallName);
+        Order[] ordersArray = SQL.getArrayOfOrders(this.stallName);
         orders.addAll(Arrays.asList(ordersArray));
         removeCompletedOrders();
 
@@ -89,7 +86,7 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
     @Override
     public void finishOrder(Order order){
         order.complete();
-        if(myDb.updateOrder(order.getFoodName(),order.getStallName())){
+        if(SQL.updateOrder(order.getFoodName(),order.getStallName(),"Collection Time PlaceHolder")){
             Toast.makeText(Activity_Owner_BusinessMode.this,"Order Completed",Toast.LENGTH_LONG).show();
         }
         else
@@ -118,7 +115,7 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
             public void onClick(DialogInterface dialog, int which) {
                 if(which == 0){
                     // Cancel Order
-                    Integer deletedRows = myDb.deleteOrderArrayData(order,stallName);
+                    Integer deletedRows = SQL.deleteOrderArrayData(order,stallName);
                     if(deletedRows > 0)
                         Toast.makeText(Activity_Owner_BusinessMode.this,"Order Canceled",Toast.LENGTH_LONG).show();
                     else
@@ -153,7 +150,7 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
 
             if (localorder.isBefore(localtime))i++;
         }
-        myDb.updateQueueNum(i, stallName);
+        //myDb.updateQueueNum(i, stallName);
     }
 
     private final Runnable refreshArray = new Runnable()
@@ -161,7 +158,7 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
         public void run()
 
         {
-            Order[] ordersArray = myDb.getArrayOfOrders(stallName);
+            Order[] ordersArray = SQL.getArrayOfOrders(stallName);
             orders.addAll(Arrays.asList(ordersArray));
             removeCompletedOrders();
 

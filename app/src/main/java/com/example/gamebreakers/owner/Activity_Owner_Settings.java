@@ -25,7 +25,6 @@ import com.example.gamebreakers.login.Activity_Main;
 
 public class Activity_Owner_Settings extends Activity {
 
-    SQL myDb;
     Button backButton;
     TextView textView,userName,passWord,stallName;
 
@@ -33,7 +32,6 @@ public class Activity_Owner_Settings extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_owner_settings);
-        myDb = new SQL();
 
         textView = findViewById(R.id.owner_settings_stallName);
         backButton = findViewById(R.id.back);
@@ -45,8 +43,8 @@ public class Activity_Owner_Settings extends Activity {
         final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
         if(stallNameMessage != null){
             textView.setText(stallNameMessage);
-            userName.setText(myDb.getOwnerUsername(stallNameMessage));
-            passWord.setText(myDb.getOwnerPassword(stallNameMessage));
+            userName.setText(SQL.getOwnerUsername(stallNameMessage));
+            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
             stallName.setText(stallNameMessage);
             Log.e("START",stallNameMessage);
         }
@@ -73,8 +71,8 @@ public class Activity_Owner_Settings extends Activity {
         final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
         if(stallNameMessage != null){
             textView.setText(stallNameMessage);
-            userName.setText(myDb.getOwnerUsername(stallNameMessage));
-            passWord.setText(myDb.getOwnerPassword(stallNameMessage));
+            userName.setText(SQL.getOwnerUsername(stallNameMessage));
+            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
             stallName.setText(stallNameMessage);
             Log.e("START",stallNameMessage);
         }
@@ -92,7 +90,7 @@ public class Activity_Owner_Settings extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                if(myDb.updateOwnerAccountUsername(m_Text,stallNameMessage)){
+                if(SQL.updateOwnerAccountUsername(m_Text,stallNameMessage)){
                     Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
                     userName.setText(m_Text);
                 }
@@ -115,8 +113,8 @@ public class Activity_Owner_Settings extends Activity {
         final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
         if(stallNameMessage != null){
             textView.setText(stallNameMessage);
-            userName.setText(myDb.getOwnerUsername(stallNameMessage));
-            passWord.setText(myDb.getOwnerPassword(stallNameMessage));
+            userName.setText(SQL.getOwnerUsername(stallNameMessage));
+            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
             stallName.setText(stallNameMessage);
             Log.e("START",stallNameMessage);
         }
@@ -134,7 +132,7 @@ public class Activity_Owner_Settings extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                if(myDb.updateOwnerAccountPassword(m_Text,stallNameMessage)){
+                if(SQL.updateOwnerAccountPassword(m_Text,stallNameMessage)){
                     Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
                     passWord.setText(m_Text);
                 }
@@ -157,8 +155,8 @@ public class Activity_Owner_Settings extends Activity {
         final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
         if(stallNameMessage != null){
             textView.setText(stallNameMessage);
-            userName.setText(myDb.getOwnerUsername(stallNameMessage));
-            passWord.setText(myDb.getOwnerPassword(stallNameMessage));
+            userName.setText(SQL.getOwnerUsername(stallNameMessage));
+            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
             stallName.setText(stallNameMessage);
             Log.e("START",stallNameMessage);
         }
@@ -182,7 +180,7 @@ public class Activity_Owner_Settings extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String m_Text = input.getText().toString();
-                        if(myDb.updateOwnerAccountStallName(stallNameMessage,m_Text) > 0){
+                        if(SQL.updateOwnerAccountStallName(stallNameMessage,m_Text) > 0){
                             Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
                             stallName.setText(m_Text);
                             textView.setText(m_Text);
@@ -216,8 +214,8 @@ public class Activity_Owner_Settings extends Activity {
         final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
         if(stallNameMessage != null){
             textView.setText(stallNameMessage);
-            userName.setText(myDb.getOwnerUsername(stallNameMessage));
-            passWord.setText(myDb.getOwnerPassword(stallNameMessage));
+            userName.setText(SQL.getOwnerUsername(stallNameMessage));
+            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
             stallName.setText(stallNameMessage);
             Log.e("START",stallNameMessage);
         }
@@ -227,7 +225,7 @@ public class Activity_Owner_Settings extends Activity {
         mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(myDb.deleteOwnerAccount(stallNameMessage) > 0){
+                if(SQL.deleteOwnerAccount(stallNameMessage) > 0){
                     Toast.makeText(v.getContext(),"Account Successfully Deleted",Toast.LENGTH_LONG).show();
                     setResult(Activity.RESULT_OK);
                     finish();

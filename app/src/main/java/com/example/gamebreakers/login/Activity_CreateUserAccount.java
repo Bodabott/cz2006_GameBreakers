@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class Activity_CreateUserAccount extends Activity {
 
-    SQL myDb;
     EditText username,password,confirmPassword;
     TextView alreadyMember;
 
@@ -30,7 +29,6 @@ public class Activity_CreateUserAccount extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_createuseraccount);
-        myDb = new SQL();
 
         username = findViewById(R.id.register_usernameText);
         password = findViewById(R.id.register_passwordText);
@@ -49,14 +47,14 @@ public class Activity_CreateUserAccount extends Activity {
         // make sure username & password fields are not empty
         if(isUserRegisterAcceptable(username.getText().toString(),password.getText().toString(),confirmPassword.getText().toString())){
             if(password.getText().toString().matches(confirmPassword.getText().toString())){
-                ArrayList user_res = myDb.checkUserLoginData(username.getText().toString(), password.getText().toString());
-                ArrayList owner_res = myDb.checkOwnerLoginData(username.getText().toString(), password.getText().toString());
+                ArrayList user_res = SQL.checkUserLoginData(username.getText().toString(), password.getText().toString());
+                ArrayList owner_res = SQL.checkOwnerLoginData(username.getText().toString(), password.getText().toString());
 
                 // make sure account doesn't exist in database
                 if(user_res.size()==1|| owner_res.size()==1){
                     Toast.makeText(Activity_CreateUserAccount.this,"Account Already Exists",Toast.LENGTH_LONG).show();
                 }else{
-                    boolean isInserted = myDb.addUserAccount(username.getText().toString(),password.getText().toString());
+                    boolean isInserted = SQL.addUserAccount(username.getText().toString(),password.getText().toString());
 
                     // on successful insert to database
                     if(isInserted){
