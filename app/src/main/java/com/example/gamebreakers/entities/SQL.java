@@ -16,8 +16,8 @@ import java.util.HashMap;
 /**
  * Connection class
  * Created by chris on 3/4/2018.
- *
  */
+
 
 public final class SQL {
 
@@ -456,6 +456,29 @@ public final class SQL {
     }
 
 
+    // Update the queue number in the owner table
+    // Return true if successful, false otherwise
+    public static boolean updateQueueNum(int queueNum,String stall_name){
+        String query = "UPDATE owner_table " +
+                " SET O_QUEUENUM = '" + queueNum +
+                "' WHERE CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "'; ";
+
+        String query2 = "SELECT * FROM owner_table WHERE " +
+                " CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +
+                "' AND CONVERT(VARCHAR,O_QUEUENUM) = '" + queueNum + "';";
+
+        ArrayList a = sendQuery(query2);
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        if (a == null || a2 == null)
+            return false;
+        else if (a.size()<1 && a2.size()>0)
+            return true;
+        else
+            return false;
+    }
+
     // Update the owner username in the database
     // Return true if successful, false otherwise
     public static boolean updateOwnerAccountUsername(String username,String stall_name){
@@ -723,8 +746,8 @@ public final class SQL {
                     (String)row.get("FOOD_NAME"),
                     (String)row.get("U_USERNAME"),
                     (String)row.get("O_STALLNAME"),
-                    "",
-                    false
+                    (String)row.get("COLLECTION_TIME"),
+                    (((String)row.get("COMPLETED")).equals("y"))
             );
             i++;
         }
@@ -751,8 +774,8 @@ public final class SQL {
                     (String)row.get("FOOD_NAME"),
                     (String)row.get("U_USERNAME"),
                     (String)row.get("O_STALLNAME"),
-                    "",
-                    false
+                    (String)row.get("COLLECTION_TIME"),
+                    (((String)row.get("COMPLETED")).equals("y"))
             );
             i++;
         }
@@ -766,7 +789,7 @@ public final class SQL {
     // No limit imposed on adding new orders
     public static boolean addOrderArrayData(String food_name, String username,String stall_name, String collection_time){
         String query = "INSERT INTO all_orders_table (FOOD_NAME,U_USERNAME,O_STALLNAME,COLLECTION_TIME,COMPLETED) " +
-                " VALUES ('" + food_name + "', '" + username + "', '" + stall_name + "', '" + collection_time + "', 'N');";
+                " VALUES ('" + food_name + "', '" + username + "', '" + stall_name + "', '" + collection_time + "', 'n');";
 
         String query2 = "SELECT * FROM all_orders_table WHERE CONVERT(VARCHAR,FOOD_NAME) = '" +
                 food_name + "' AND CONVERT(VARCHAR,U_USERNAME) = '" +
@@ -791,7 +814,7 @@ public final class SQL {
     // Note: Orders with the same food, stall and collection time will be updated together as completed
     public static boolean updateOrder(String food_name, String stall_name, String collection_time){
         String query = "UPDATE all_orders_table " +
-                " SET COMPLETED = 'Y'"  +
+                " SET COMPLETED = 'y'"  +
                 " WHERE CONVERT(VARCHAR,FOOD_NAME) = '" + food_name +
                 "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +
                 "' AND CONVERT(VARCHAR,COLLECTION_TIME) = '" + collection_time + "';";
@@ -835,7 +858,6 @@ public final class SQL {
             return 0;
     }
 
-    public void updateQueueNum(){}
     /////////////////////////////////////////// HISTORY METHODS ///////////////////////////////////////////
 
 
