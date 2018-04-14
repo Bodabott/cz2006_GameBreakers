@@ -60,7 +60,7 @@
             android:layout_alignParentBottom="true"
             android:background="#00000000"
             android:fontFamily="cursive"
-            android:onClick="backtoMain"
+            android:onClick="backToMain"
             android:text="EXIT" />
 
         <Button

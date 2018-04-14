@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
-import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.SQL;
 
 import java.util.Arrays;

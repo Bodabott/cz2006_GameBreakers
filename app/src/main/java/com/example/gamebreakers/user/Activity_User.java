@@ -382,10 +382,9 @@ public class Activity_User extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "PAYMENT SUCCESSFUL", Toast.LENGTH_LONG).show();
                 setResult(Activity.RESULT_OK);
 
-                fragman.popBackStack();
-                fragman.beginTransaction()
-                        .replace(R.id.content_main, new Fragment_User_MainMenu())
-                        .commit();
+                // Reset fragments
+                for(int i=0;i<fragman.getBackStackEntryCount();++i)
+                    fragman.popBackStack();
             }
         }
         else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();
@@ -447,6 +446,11 @@ public class Activity_User extends AppCompatActivity
                 .commit();
     }
     public void goPayment(View v){
+        if(food==null){
+            Toast.makeText(v.getContext(),"Please choose a food",Toast.LENGTH_LONG).show();
+            return;
+        }
+
         fragman.beginTransaction()
                 .replace(R.id.content_main, new Fragment_User_Payment())
                 .addToBackStack(null)
@@ -467,7 +471,7 @@ public class Activity_User extends AppCompatActivity
                 .commit();
     }
 
-    public void backtoMain(View v){
+    public void backToMain(View v){
         getSupportFragmentManager().popBackStack();
         getSupportFragmentManager().popBackStack();
     }
