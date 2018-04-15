@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -27,11 +26,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
-import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
 import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.entities.Stall;
@@ -423,7 +420,15 @@ public class Activity_User extends AppCompatActivity
     }
 
     public void searchStall(View v){
-        Toast.makeText(v.getContext(),"This is not done yet!",Toast.LENGTH_SHORT).show();
+        EditText search_text = findViewById(R.id.search_field);
+        String search = search_text.getText().toString();
+        if(search.isEmpty()){
+            search_text.setError("Field is Empty");
+            return;
+        }
+        Intent goIntent = new Intent(v.getContext(),MapsActivity.class);
+        goIntent.putExtra("TARGET",search);
+        startActivity(goIntent);
     }
 
     //================SIMPLE ON CLICK METHODS======================

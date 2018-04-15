@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/locationSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="8"
+        android:orientation="horizontal">
+
+        <EditText
+            android:layout_weight="4"
+            android:id="@+id/searchBox"
+            android:hint="Enter Location..."
+            android:layout_width="0sp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:onClick="searchLocation"
+            android:layout_weight="2"
+            android:id="@+id/searchButton"
+            android:text="SEARCH"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_weight="2"
+            android:id="@+id/backButton"
+            android:text="BACK"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/locationFromLayout"
+        android:weightSum="8"
+        android:layout_below="@id/locationSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/locationFrom"
+            android:text="From: "
+            android:textColor="#FFFFFF"
+            android:background="#FF0000"
+            android:layout_weight="8"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/locationToLayout"
+        android:weightSum="8"
+        android:layout_below="@id/locationFromLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/locationTo"
+            android:text="To: "
+            android:textColor="#FFFFFF"
+            android:background="#0000FF"
+            android:layout_weight="8"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/distanceLayout"
+        android:weightSum="8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/locationToLayout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="8"
+            android:text="Distance: "
+            android:textColor="#000000"
+            android:background="#FFFFFF"
+            android:id="@+id/distance"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MapsActivity"
+        android:layout_below="@id/distanceLayout"/>
+
+</RelativeLayout>

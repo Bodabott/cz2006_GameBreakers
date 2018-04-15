@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gamebreakers">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/fork_and_spoon"
@@ -9,7 +15,6 @@
         android:roundIcon="@mipmap/fork_and_spoon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
         <activity android:name=".login.Activity_Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,33 +22,56 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".login.Activity_CreateUserAccount"
+        <activity
+            android:name=".login.Activity_CreateUserAccount"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".login.Activity_CreateOwnerAccount"
+        <activity
+            android:name=".login.Activity_CreateOwnerAccount"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".user.Activity_User"
+        <activity
+            android:name=".user.Activity_User"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".user.Activity_User_Settings"
+        <activity
+            android:name=".user.Activity_User_Settings"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".owner.Activity_Owner"
+        <activity
+            android:name=".owner.Activity_Owner"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".owner.Activity_Owner_BusinessMode"
+        <activity
+            android:name=".owner.Activity_Owner_BusinessMode"
             android:label="@string/app_name">
         </activity>
 
-        <activity android:name=".owner.Activity_Owner_Settings"
+        <activity
+            android:name=".owner.Activity_Owner_Settings"
             android:label="@string/app_name">
+        </activity>
+
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".user.MapsActivity"
+            android:label="@string/title_activity_maps">
         </activity>
 
     </application>
