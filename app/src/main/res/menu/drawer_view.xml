@@ -4,19 +4,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_orders"
-            android:title="Current Orders"/>
-
+            android:title="Current Orders"
+            android:icon="@drawable/order" />
         <item
             android:id="@+id/top_up"
-            android:title="Top Up" />
+            android:title="Top Up"
+            android:icon="@drawable/money"/>
         <item
             android:id="@+id/nav_history"
-            android:title="History" />
+            android:title="History"
+            android:icon="@drawable/calendar"/>
         <item
             android:id="@+id/nav_settings"
-            android:title="Settings" />
+            android:title="Settings"
+            android:icon="@drawable/services"/>
         <item
             android:id="@+id/nav_logout"
-            android:title="Log out" />
+            android:title="Log out"
+            android:icon="@drawable/logout"/>
     </group>
 </menu>

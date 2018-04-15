@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Button
@@ -12,23 +13,29 @@
 
     <Button
         android:id="@+id/butt2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/back"
+        android:layout_marginEnd="23dp"
+        android:layout_marginTop="173dp"
+        android:layout_toStartOf="@+id/top_up_butt"
+        android:background="@drawable/border"
+        android:fontFamily="@font/montserrat_medium"
         android:onClick="updatePaymentDetails"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:text="Update Payment Details" />
+        android:text="Update Payment Details"
+        android:textSize="20dp" />
 
     <Button
-        android:onClick="ShowTopupPopup"
         android:id="@+id/top_up_butt"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/butt2"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/border_topup"
+        android:fontFamily="@font/montserrat_medium"
+        android:onClick="ShowTopupPopup"
         android:text="Top-Up Value"
-        android:layout_alignLeft="@+id/butt2"
-        android:layout_alignStart="@+id/butt2"
-        android:layout_below="@+id/butt2"
-        android:layout_marginTop="16dp" />
+        android:textSize="20dp" />
 
 </RelativeLayout>
