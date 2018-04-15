@@ -29,12 +29,7 @@
         android:inputType="textPersonName"
         android:hint="Enter amount"/>
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content">
-    <TableRow>
+
     <Button
         android:id="@+id/confirm_button"
         android:layout_width="wrap_content"
@@ -54,14 +49,6 @@
         android:layout_alignParentRight="true"
         android:text="Cancel"
         android:background="@drawable/button_style"/>
-
-</TableRow>
-
-
-
-    </TableLayout>
-
-
 
 
 </RelativeLayout>
