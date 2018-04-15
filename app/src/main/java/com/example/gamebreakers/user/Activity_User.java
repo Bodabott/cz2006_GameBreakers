@@ -118,6 +118,7 @@ public class Activity_User extends AppCompatActivity
         int val;
         String un = user.getName();
         val = SQL.getUserBalance(un);
+        val /= 100;
         val_ue = "$" + Integer.toString(val);
 
         MenuInflater inflater = getMenuInflater();
@@ -139,6 +140,7 @@ public class Activity_User extends AppCompatActivity
         int val;
         String un = user.getName();
         val = SQL.getUserBalance(un);
+        val /= 100;
         val_ue = "$" + Integer.toString(val);
 
         MenuInflater inflater = getMenuInflater();
@@ -337,6 +339,7 @@ public class Activity_User extends AppCompatActivity
                 String un = user.getName();
                 String txt = mEdit.getText().toString();
                 int bal = Integer.parseInt(txt);
+                bal *= 100;
                 int totalbal = SQL.getUserBalance(un) + bal;
                 SQL.updateUserBalance(un, totalbal);
                 invalidateOptionsMenu();
