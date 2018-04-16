@@ -32,8 +32,8 @@ public class Fragment_User_Payment extends Fragment {
             selectedfood.setText(temp);
         }
 
-        TextView text =view.findViewById(R.id.earliestTime);
-        String temp = "Earliest Collection Time = " + act.getEarliestOrderTime().getHour() + ":" + act.getEarliestOrderTime().getMinute();
+        TextView text = view.findViewById(R.id.earliestTime);
+        String temp = act.getEarliestOrderTime().getHour() + ":" + act.getEarliestOrderTime().getMinute() + " ";
         text.setText(temp);
 
         return view;
