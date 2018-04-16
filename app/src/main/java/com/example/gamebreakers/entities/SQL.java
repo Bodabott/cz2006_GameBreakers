@@ -848,9 +848,6 @@ public final class SQL {
         sendUpdate(query);
         ArrayList a2 = sendQuery(query2);
 
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@"+ "\n" +
-                a+ "   @@@@@@@@@@@@" + a2);
-
         if (a == null || a2 == null)
             return 0;
         else if (a.size()>0 && a2.size()<1)

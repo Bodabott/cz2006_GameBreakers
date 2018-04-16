@@ -295,9 +295,7 @@ public class Activity_User extends AppCompatActivity
 
     @Override
     public void onOrderSelected(Order order) {
-        System.out.println("@@@@@@@@@ "+order.isCompleted());
         if (order.isCompleted()) {
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@");
 
             SQL.addHistoryArrayData(order.getFoodName(), SQL.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());
             SQL.addUserHistoryArrayData(order.getFoodName(), SQL.getBuyerUsername(order.getFoodName(), order.getStallName()), order.getStallName());

@@ -114,8 +114,15 @@ public class Activity_Owner extends AppCompatActivity
 
                 EditText dollars= addmenu.findViewById(R.id.addmenu_dollar_price);
                 EditText cents= addmenu.findViewById(R.id.addmenu_cents_price);
-                int price = Integer.parseInt(dollars.getText().toString()) * 100 //add dollars
-                        + Integer.parseInt(cents.getText().toString());         //add cents
+
+                int price=0;
+                if (!cents.getText().toString().equals("")) {
+                    price = Integer.parseInt(cents.getText().toString());         //add cents
+                }
+                if (!dollars.getText().toString().equals("")) {
+                    price = Integer.parseInt(dollars.getText().toString()) * 100; //add dollars
+                }
+
 
                 if(SQL.addMenuArrayData(m_Text,stallNameMessage, price))
                     Toast.makeText(Activity_Owner.this,"Data Added",Toast.LENGTH_SHORT).show();
