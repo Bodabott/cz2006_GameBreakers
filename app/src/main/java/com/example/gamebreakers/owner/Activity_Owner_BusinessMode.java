@@ -1,20 +1,16 @@
 package com.example.gamebreakers.owner;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
-import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.Order;
 import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.login.Activity_Main;
@@ -35,7 +31,6 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
     String stallName;
     List<Order> orders = new LinkedList<>();
     Handler mHandler;
-
     android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
 
     @Override
@@ -83,53 +78,40 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
                 "Swipe left to cancel Orders";
         Toast.makeText(this,guide,Toast.LENGTH_SHORT).show();
     }
+
     @Override
-    public void finishOrder(Order order){
+    public boolean finishOrder(Order order){
         order.complete();
         if(SQL.updateOrder(order.getFoodName(),order.getStallName())){
             Toast.makeText(Activity_Owner_BusinessMode.this,"Order Completed",Toast.LENGTH_LONG).show();
+            removeCompletedOrders();
+            // Resets the ListView
+            Fragment currentFragment = fragman.findFragmentById(R.id.content_main);
+            if (currentFragment instanceof Fragment_Owner_BusinessMode) {
+                fragman.beginTransaction()
+                        .detach(currentFragment)
+                        .attach(currentFragment)
+                        .commit();
+            }
+            updateQueueNum();
+            return true;
         }
-        else
+        else{
             Toast.makeText(Activity_Owner_BusinessMode.this,"Order not Completed",Toast.LENGTH_LONG).show();
-        removeCompletedOrders();
-
-        // Resets the ListView
-        Fragment currentFragment = fragman.findFragmentById(R.id.content_main);
-        if (currentFragment instanceof Fragment_Owner_BusinessMode) {
-            fragman.beginTransaction()
-                    .detach(currentFragment)
-                    .attach(currentFragment)
-                    .commit();
+            return false;
         }
-
-        updateQueueNum();
     }
 
     @Override
-    public void cancelOrder(final String order){
-        Log.v("PLACE",order);
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(Activity_Owner_BusinessMode.this);
-        mBuilder.setCancelable(true);
-        mBuilder.setTitle("Canceling Order. \nAre you sure? ").setItems(R.array.Array_cancelOrder, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(which == 0){
-                    // Cancel Order
-                    Integer deletedRows = SQL.deleteOrderArrayData(order,stallName);
-                    if(deletedRows > 0)
-                        Toast.makeText(Activity_Owner_BusinessMode.this,"Order Canceled",Toast.LENGTH_LONG).show();
-                    else
-                        Toast.makeText(Activity_Owner_BusinessMode.this,"Order not Canceled",Toast.LENGTH_LONG).show();
-                    // Resets the ListView
-                    fragman.beginTransaction()
-                            .replace(R.id.content_main, new Fragment_Owner_BusinessMode())
-                            .commit();
-                }
-            }
-        });
-        mBuilder.show();
-
-        updateQueueNum();
+    public boolean cancelOrder(final String order){
+        Integer deletedRows = SQL.deleteOrderArrayData(order,stallName);
+        if(deletedRows > 0){
+            Toast.makeText(Activity_Owner_BusinessMode.this,"Order Canceled",Toast.LENGTH_LONG).show();
+            updateQueueNum();
+            return true;
+        }
+        Toast.makeText(Activity_Owner_BusinessMode.this,"Order not Canceled",Toast.LENGTH_LONG).show();
+        return false;
     }
     //====================Custom Methods=====================
 

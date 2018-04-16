@@ -334,7 +334,6 @@ public class Activity_Owner extends AppCompatActivity
     public void currentOrders(View v){
         Intent intent = getIntent();
         final String temp = intent.getStringExtra(Activity_Main.STALL_NAME);
-
         Intent goIntent = new Intent(v.getContext(),Activity_Owner_BusinessMode.class);
         goIntent.putExtra(Activity_Main.STALL_NAME,temp);
         startActivity(goIntent);
