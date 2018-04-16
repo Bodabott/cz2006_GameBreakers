@@ -812,18 +812,16 @@ public final class SQL {
     // Update orders from all orders table to completed
     // Return true if successful, false otherwise
     // Note: Orders with the same food, stall and collection time will be updated together as completed
-    public static boolean updateOrder(String food_name, String stall_name, String collection_time){
+    public static boolean updateOrder(String food_name, String stall_name){
         String query = "UPDATE all_orders_table " +
                 " SET COMPLETED = 'y'"  +
                 " WHERE CONVERT(VARCHAR,FOOD_NAME) = '" + food_name +
-                "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +
-                "' AND CONVERT(VARCHAR,COLLECTION_TIME) = '" + collection_time + "';";
+                "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "';";
 
         String query2 = "SELECT * FROM all_orders_table WHERE " +
                 " CONVERT(VARCHAR,COMPLETED) = 'Y' " +
                 " AND CONVERT(VARCHAR,FOOD_NAME) = '" + food_name +
-                "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +
-                "' AND CONVERT(VARCHAR,COLLECTION_TIME) = '" + collection_time + "';";
+                "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "';";
 
         ArrayList a = sendQuery(query2);
         sendUpdate(query);
@@ -849,6 +847,9 @@ public final class SQL {
         ArrayList a = sendQuery(query2);
         sendUpdate(query);
         ArrayList a2 = sendQuery(query2);
+
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@"+ "\n" +
+                a+ "   @@@@@@@@@@@@" + a2);
 
         if (a == null || a2 == null)
             return 0;

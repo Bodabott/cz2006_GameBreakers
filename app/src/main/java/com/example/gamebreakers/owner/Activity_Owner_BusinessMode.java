@@ -86,7 +86,7 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
     @Override
     public void finishOrder(Order order){
         order.complete();
-        if(SQL.updateOrder(order.getFoodName(),order.getStallName(),"Collection Time PlaceHolder")){
+        if(SQL.updateOrder(order.getFoodName(),order.getStallName())){
             Toast.makeText(Activity_Owner_BusinessMode.this,"Order Completed",Toast.LENGTH_LONG).show();
         }
         else
