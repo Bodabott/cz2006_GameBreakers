@@ -747,7 +747,7 @@ public final class SQL {
                     (String)row.get("U_USERNAME"),
                     (String)row.get("O_STALLNAME"),
                     (String)row.get("COLLECTION_TIME"),
-                    (((String)row.get("COMPLETED")).equals("y"))
+                    (((String)row.get("COMPLETED")).equals("n"))
             );
             i++;
         }
@@ -775,7 +775,7 @@ public final class SQL {
                     (String)row.get("U_USERNAME"),
                     (String)row.get("O_STALLNAME"),
                     (String)row.get("COLLECTION_TIME"),
-                    (((String)row.get("COMPLETED")).equals("y"))
+                    (((String)row.get("COMPLETED")).equals("n"))
             );
             i++;
         }
@@ -820,7 +820,7 @@ public final class SQL {
                 "' AND CONVERT(VARCHAR,COLLECTION_TIME) = '" + collection_time + "';";
 
         String query2 = "SELECT * FROM all_orders_table WHERE " +
-                " CONVERT(VARCHAR,COMPLETED) = 'Y' " +
+                " CONVERT(VARCHAR,COMPLETED) = 'y' " +
                 " AND CONVERT(VARCHAR,FOOD_NAME) = '" + food_name +
                 "' AND CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +
                 "' AND CONVERT(VARCHAR,COLLECTION_TIME) = '" + collection_time + "';";
