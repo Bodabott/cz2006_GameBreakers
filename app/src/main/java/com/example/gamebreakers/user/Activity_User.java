@@ -52,7 +52,7 @@ public class Activity_User extends AppCompatActivity
         ,Fragment_User_CurrentOrders.OnOrderSelectedListener, Fragment_User_Transactions.OnTransactionSelectedListener {
 
     DrawerLayout mDrawerLayout;
-    String food, userName, passWord;
+    String food;
     Stall stall;
     User user;
     Dialog myDialog;
@@ -71,10 +71,10 @@ public class Activity_User extends AppCompatActivity
                 .replace(R.id.content_main, new Fragment_User_MainMenu())
                 .commit();
         //get arguments
-        userName = getIntent().getStringExtra(USER_NAME);
-        passWord = getIntent().getStringExtra(PASSWORD);
+        String username = getIntent().getStringExtra(USER_NAME);
+        String password = getIntent().getStringExtra(PASSWORD);
         //get user
-        ArrayList user_res = SQL.checkUserLoginData(userName, passWord);
+        ArrayList user_res = SQL.checkUserLoginData(username, password);
         System.out.println(user_res);
         HashMap row = (HashMap) user_res.get(0);
         user = new User(Integer.parseInt(row.get("U_ID").toString()), (String) row.get("U_USERNAME"), Integer.parseInt(row.get("U_BALANCE").toString()));
@@ -178,6 +178,10 @@ public class Activity_User extends AppCompatActivity
         for(int i = 0; i < getSupportFragmentManager().getBackStackEntryCount(); ++i) {
             getSupportFragmentManager().popBackStack();
         }
+
+        Intent intent = getIntent();
+        final String username_message = intent.getStringExtra(USER_NAME);
+        final String password_message = intent.getStringExtra(Activity_Main.PASSWORD);
         // set item as selected to persist highlight
         item.setChecked(true);
         if(item.toString().matches("Current Orders")) {
@@ -200,8 +204,8 @@ public class Activity_User extends AppCompatActivity
                     .commit();
         }else if(item.toString().matches("Settings")){
             Intent goIntent = new Intent(getApplicationContext(),Activity_User_Settings.class);
-            goIntent.putExtra(USER_NAME,userName);
-            goIntent.putExtra(Activity_Main.PASSWORD,passWord);
+            goIntent.putExtra(USER_NAME,username_message);
+            goIntent.putExtra(Activity_Main.PASSWORD,password_message);
             startActivityForResult(goIntent,3);
         }else if(item.toString().matches("Log out")){
             finish();
@@ -358,6 +362,8 @@ public class Activity_User extends AppCompatActivity
     }
 
     public void makePayment(View v) {
+        // Get the Intent that started this activity and extract the string
+        Intent intent = getIntent();
         final String stallMessage = stall.getStallName();
         final String foodMessage = food;
         final String usernameMessage = user.getName();

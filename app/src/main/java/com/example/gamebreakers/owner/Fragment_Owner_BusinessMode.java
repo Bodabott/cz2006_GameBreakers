@@ -73,6 +73,7 @@ public class Fragment_Owner_BusinessMode extends Fragment {
         return view;
     }
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -102,7 +103,7 @@ public class Fragment_Owner_BusinessMode extends Fragment {
      */
     public interface OnOrderSelectedListener {
         void onOrderSelected(String order);
-        boolean finishOrder(Order order);
-        boolean cancelOrder(String order);
+        void finishOrder(Order order);
+        void cancelOrder(String order);
     }
 }
