@@ -67,15 +67,7 @@ public class Activity_Owner_Settings extends Activity {
     }
 
     public void editUsername(final View v){
-        Intent intent = getIntent();
-        final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
-        if(stallNameMessage != null){
-            textView.setText(stallNameMessage);
-            userName.setText(SQL.getOwnerUsername(stallNameMessage));
-            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
-            stallName.setText(stallNameMessage);
-            Log.e("START",stallNameMessage);
-        }
+        final String stallNameMessage = getIntent().getStringExtra(Activity_Main.STALL_NAME);
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getContext());
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Set new Username:");
@@ -109,15 +101,7 @@ public class Activity_Owner_Settings extends Activity {
     }
 
     public void editPassword(final View v){
-        Intent intent = getIntent();
-        final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
-        if(stallNameMessage != null){
-            textView.setText(stallNameMessage);
-            userName.setText(SQL.getOwnerUsername(stallNameMessage));
-            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
-            stallName.setText(stallNameMessage);
-            Log.e("START",stallNameMessage);
-        }
+        final String stallNameMessage = getIntent().getStringExtra(Activity_Main.STALL_NAME);
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getContext());
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Set new Password:");
@@ -151,15 +135,7 @@ public class Activity_Owner_Settings extends Activity {
     }
 
     public void editStallName(final View v){
-        Intent intent = getIntent();
-        final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
-        if(stallNameMessage != null){
-            textView.setText(stallNameMessage);
-            userName.setText(SQL.getOwnerUsername(stallNameMessage));
-            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
-            stallName.setText(stallNameMessage);
-            Log.e("START",stallNameMessage);
-        }
+        final String stallNameMessage = getIntent().getStringExtra(Activity_Main.STALL_NAME);
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getContext());
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Set new Stall Name:");
@@ -210,15 +186,7 @@ public class Activity_Owner_Settings extends Activity {
     }
 
     public void deleteAccount(final View v){
-        Intent intent = getIntent();
-        final String stallNameMessage = intent.getStringExtra(Activity_Main.STALL_NAME);
-        if(stallNameMessage != null){
-            textView.setText(stallNameMessage);
-            userName.setText(SQL.getOwnerUsername(stallNameMessage));
-            passWord.setText(SQL.getOwnerPassword(stallNameMessage));
-            stallName.setText(stallNameMessage);
-            Log.e("START",stallNameMessage);
-        }
+        final String stallNameMessage = getIntent().getStringExtra(Activity_Main.STALL_NAME);
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getContext());
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Confirm?");

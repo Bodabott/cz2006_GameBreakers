@@ -55,15 +55,6 @@ public class Activity_User_Settings extends Activity{
     }
 
     public void editUsername(final View v){
-        Intent intent = getIntent();
-        final String username_message = intent.getStringExtra(Activity_Main.USER_NAME);
-        final String password_message = intent.getStringExtra(Activity_Main.PASSWORD);
-
-        if(username_message != null && password_message != null){
-            userName.setText(username_message);
-            passWord.setText(password_message);
-        }
-
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getContext());
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Set new Username:");
@@ -97,15 +88,6 @@ public class Activity_User_Settings extends Activity{
     }
 
     public void editPassword(final View v){
-        Intent intent = getIntent();
-        final String username_message = intent.getStringExtra(Activity_Main.USER_NAME);
-        final String password_message = intent.getStringExtra(Activity_Main.PASSWORD);
-
-        if(username_message != null && password_message != null){
-            userName.setText(username_message);
-            passWord.setText(password_message);
-        }
-
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getContext());
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Set new Password:");
@@ -139,15 +121,6 @@ public class Activity_User_Settings extends Activity{
     }
 
     public void deleteAccount(final View v){
-        Intent intent = getIntent();
-        final String username_message = intent.getStringExtra(Activity_Main.USER_NAME);
-        final String password_message = intent.getStringExtra(Activity_Main.PASSWORD);
-
-        if(username_message != null && password_message != null){
-            userName.setText(username_message);
-            passWord.setText(password_message);
-        }
-
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getContext());
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Confirm?");
