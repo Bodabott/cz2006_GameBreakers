@@ -1,6 +1,8 @@
 package com.example.gamebreakers.owner;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.Order;
+import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.owner.Fragment_Owner_BusinessMode.OnOrderSelectedListener;
 
 import java.util.List;
@@ -54,14 +57,16 @@ public class Adapter_Owner_BusinessMode extends RecyclerView.Adapter<Adapter_Own
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.finishOrder(holder.mItem);
+                    if(mListener.finishOrder(holder.mItem))
+                        removeItem(holder.getAdapterPosition());
                 }
             }
             public void onSwipeLeft() {
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.cancelOrder(holder.mItem.getFoodName());
+                    if(mListener.cancelOrder(holder.mItem.getFoodName()))
+                        removeItem(holder.getAdapterPosition());
                 }
             }
         });
@@ -70,6 +75,11 @@ public class Adapter_Owner_BusinessMode extends RecyclerView.Adapter<Adapter_Own
     @Override
     public int getItemCount() {
         return mValues.size();
+    }
+
+    public void removeItem(int position){
+        mValues.remove(position);
+        notifyItemRemoved(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
