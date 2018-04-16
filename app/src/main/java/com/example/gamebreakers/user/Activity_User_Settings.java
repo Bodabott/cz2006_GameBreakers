@@ -71,7 +71,8 @@ public class Activity_User_Settings extends Activity{
                 String m_Text = input.getText().toString();
                 if(SQL.updateUserAccountUsername(userName.getText().toString(),m_Text)){
                     Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
-                    userName.setText(m_Text);
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
                 else
                     Toast.makeText(v.getContext(),"Edit Failed",Toast.LENGTH_SHORT).show();
@@ -104,7 +105,8 @@ public class Activity_User_Settings extends Activity{
                 String m_Text = input.getText().toString();
                 if(SQL.updateUserAccountPassword(passWord.getText().toString(),m_Text)){
                     Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
-                    passWord.setText(m_Text);
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
                 else
                     Toast.makeText(v.getContext(),"Edit Failed",Toast.LENGTH_SHORT).show();
