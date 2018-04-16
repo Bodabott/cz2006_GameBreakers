@@ -747,7 +747,7 @@ public final class SQL {
                     (String)row.get("U_USERNAME"),
                     (String)row.get("O_STALLNAME"),
                     (String)row.get("COLLECTION_TIME"),
-                    (((String)row.get("COMPLETED")).equals("n"))
+                    (((String)row.get("COMPLETED")).equals("y"))
             );
             i++;
         }
@@ -775,7 +775,7 @@ public final class SQL {
                     (String)row.get("U_USERNAME"),
                     (String)row.get("O_STALLNAME"),
                     (String)row.get("COLLECTION_TIME"),
-                    (((String)row.get("COMPLETED")).equals("n"))
+                    (((String)row.get("COMPLETED")).equals("y"))
             );
             i++;
         }
