@@ -21,13 +21,41 @@
 
             <RelativeLayout
                 android:id="@+id/relativeLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="450dp"
+                android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true">
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/butt_butt">
 
+                <ImageView
+                    android:id="@+id/searchImage"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/redsearchbutt"
+                    android:minHeight="35dp"
+                    android:minWidth="35dp" />
 
+                <Button
+                    android:id="@+id/search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_toEndOf="@+id/searchImage"
+                    android:background="#00f5f5f5"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:onClick="searchStall"
+                    android:text="Advanced Search"
+                    android:textAllCaps="false"
+                    android:textColor="#E43F3f"
+                    android:textSize="25dp" />
+
+                <!--
                 <EditText
                     android:id="@+id/search_field"
                     android:layout_centerHorizontal="true"
@@ -55,7 +83,7 @@
                     android:layout_toEndOf="@+id/search_field"
                     android:background="@drawable/redsearchbutt"
                     android:onClick="searchStall" />
-
+                 -->
             </RelativeLayout>
 
             <RelativeLayout
@@ -64,15 +92,25 @@
                 android:layout_height="100dp"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/relativeLayout"
-                android:layout_marginTop="68dp"
                 android:background="@drawable/butt_butt">
+
+                <ImageView
+                    android:id="@+id/stallimage"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="25dp"
+                    android:background="@drawable/stall"
+                    android:minHeight="35dp"
+                    android:minWidth="35dp" />
 
                 <Button
                     android:id="@+id/order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="58dp"
+                    android:layout_marginStart="20dp"
                     android:layout_toEndOf="@+id/stallimage"
                     android:background="#00f5f5f5"
                     android:fontFamily="@font/montserrat_regular"
@@ -81,17 +119,6 @@
                     android:textAllCaps="false"
                     android:textColor="#E43F3f"
                     android:textSize="25dp" />
-
-                <ImageView
-                    android:id="@+id/stallimage"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="30dp"
-                    android:background="@drawable/stall"
-                    android:minHeight="35dp"
-                    android:minWidth="35dp" />
 
             </RelativeLayout>
 
@@ -120,12 +147,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="38dp"
+                    android:layout_marginStart="20dp"
                     android:layout_toEndOf="@+id/currentOrders"
                     android:background="#00f5f5f5"
                     android:fontFamily="@font/montserrat_regular"
                     android:onClick="checkOrders"
-                    android:padding="10dp"
                     android:text="Current Orders"
                     android:textAllCaps="false"
                     android:textColor="#E43F3f"
@@ -150,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="26dp"
+                    android:layout_marginStart="25dp"
                     android:background="@drawable/transaction"
                     android:minHeight="70dp"
                     android:minWidth="70dp" />
@@ -160,7 +186,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_toEndOf="@+id/transactionimage"
                     android:background="#00f5f5f5"
                     android:fontFamily="@font/montserrat_regular"

@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
@@ -57,7 +58,7 @@ public class Activity_User extends AppCompatActivity
     User user;
     Dialog myDialog;
     Value val = new Value();
-    android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
+    android.support.v4.app.FragmentManager fragman = getSupportFragmentManager();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +95,9 @@ public class Activity_User extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         View headerLayout = navigationView.getHeaderView(0);
         ImageButton imageButton = headerLayout.findViewById(R.id.nav_back_arrow);
+
+        TextView userNavTextView = headerLayout.findViewById(R.id.nav_header_username);
+        userNavTextView.setText(userName);
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -418,14 +422,7 @@ public class Activity_User extends AppCompatActivity
     }
 
     public void searchStall(View v){
-        EditText search_text = findViewById(R.id.search_field);
-        String search = search_text.getText().toString();
-        if(search.isEmpty()){
-            search_text.setError("Field is Empty");
-            return;
-        }
         Intent goIntent = new Intent(v.getContext(),MapsActivity.class);
-        goIntent.putExtra("TARGET",search);
         startActivity(goIntent);
     }
 
