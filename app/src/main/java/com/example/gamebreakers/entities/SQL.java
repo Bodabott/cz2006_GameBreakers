@@ -467,6 +467,30 @@ public final class SQL {
         else
             return false;
     }
+    
+    //Returns stall array with postal code
+    //Return null if Error or Invalid Result
+    public static Stall[] getArrayOfStall(int postal_code){
+        String query = "SELECT * FROM owner_table WHERE CONVERT(VARCHAR,O_POSTALCODE) = '"+
+                postal_code + "';";
+
+        ArrayList <HashMap> a = sendQuery(query);
+        if (a == null)
+            return null;
+
+        Stall[] stallList = new Stall[a.size()];
+        int i = 0;
+        for (int j = 0; j < a.size(); j++){
+            HashMap row = a.get(j);
+            stallList[i] = new Stall(
+                    Integer.parseInt((String)row.get("O_ID")),
+                    (String)row.get("O_STALLNAME"),
+                    0
+            );
+            i++;
+        }
+        return stallList;
+    }
 
 
     // Search the database for owner username using stall name
