@@ -2,14 +2,14 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
-    android:background="#4D5DADE2 "
+    android:background="#FFFFFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
         android:layout_margin="2dp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/montserrat_medium"
         android:id="@id/selected_stall"
         android:text="The stall you have chosen is : "
         android:textSize="20sp"
@@ -18,8 +18,7 @@
 
     <TextView
         android:layout_margin="2dp"
-        android:fontFamily="casual"
-
+        android:fontFamily="@font/montserrat_medium"
         android:id="@id/selected_food"
         android:text="The type of food they serve : "
         android:textSize="20sp"
@@ -28,13 +27,12 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/chooseFood"
-        android:text="Choose a Dish:"
-        android:textStyle="italic"
+        android:text=" Choose a Dish:"
         android:layout_margin="2dp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/montserrat_regular"
         android:textSize="30dp"
-        android:background="#80A9CCE3  "
-        android:textColor="#EEEEEE"
+        android:background="#E43F3F"
+        android:textColor="#FFFFFF"
         android:layout_below="@id/selected_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -52,21 +50,17 @@
             android:layout_marginRight="10sp"
             android:layout_marginBottom="50sp"/>
 
-        <Button
+        <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
-            android:background="#00000000"
-            android:fontFamily="cursive"
+            android:layout_marginLeft="10sp"
             android:onClick="backToMain"
             android:text="EXIT" />
 
-        <Button
-            android:background="#00000000"
-
-            android:fontFamily="cursive"
+        <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/next"
             android:onClick="goPayment"
             android:text="NEXT"
@@ -76,9 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <Button
-            android:background="#00000000"
-            android:fontFamily="cursive"
+        <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@id/back"
             android:onClick="back"
             android:text="BACK"
