@@ -18,6 +18,7 @@
         android:layout_alignParentTop="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
     <EditText
         android:id="@+id/register_usernameText"
         android:hint="Username"
@@ -31,24 +32,13 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/register_stallName"
-        android:hint="Stall Name"
-        android:textColorHint="#999999"
-        android:textColor="#999999"
-        android:inputType="text"
-        android:backgroundTint="#FFFFFF"
-        android:layout_below="@id/register_usernameText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <EditText
         android:id="@+id/register_passwordText"
         android:hint="Password"
         android:textColorHint="#999999"
         android:textColor="#999999"
         android:inputType="textPassword"
         android:backgroundTint="#FFFFFF"
-        android:layout_below="@id/register_stallName"
+        android:layout_below="@id/register_usernameText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -63,6 +53,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:id="@+id/register_stallName"
+        android:hint="Stall Name"
+        android:textColorHint="#999999"
+        android:textColor="#999999"
+        android:inputType="text"
+        android:backgroundTint="#FFFFFF"
+        android:layout_below="@id/register_confirmPasswordText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/register_postalCodeText"
+        android:hint="Postal Code"
+        android:textColorHint="#999999"
+        android:textColor="#999999"
+        android:inputType="text"
+        android:backgroundTint="#FFFFFF"
+        android:layout_below="@id/register_stallName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <Button
         android:onClick="registerOwnerAccount"
         android:id="@+id/register_button"
@@ -73,7 +85,7 @@
         android:paddingLeft="50sp"
         android:paddingRight="50sp"
         android:layout_marginTop="40sp"
-        android:layout_below="@id/register_confirmPasswordText"
+        android:layout_below="@id/register_postalCodeText"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

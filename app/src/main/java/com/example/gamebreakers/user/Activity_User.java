@@ -162,9 +162,30 @@ public class Activity_User extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 3)
+        if(requestCode == 3) {
             if(resultCode == Activity.RESULT_OK)
                 finish();
+        }else if(requestCode == 5){
+            if(resultCode == Activity.RESULT_OK){
+                Stall[] stalls = SQL.getArrayOfStall();
+                if(stalls != null) {
+                    for (Stall tempStall : stalls) {
+                        if (tempStall.getStallName().matches(data.getStringExtra("MAP"))) {
+                            this.stall = tempStall;
+                            break;
+                        }
+                    }
+                }
+                fragman.beginTransaction()
+                        .replace(R.id.content_main,new Fragment_User_BrowseStall())
+                        .addToBackStack(null)
+                        .commit();
+                fragman.beginTransaction()
+                        .replace(R.id.content_main,new Fragment_User_BrowseFood())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }
     }
 
     @Override
@@ -423,7 +444,7 @@ public class Activity_User extends AppCompatActivity
 
     public void searchStall(View v){
         Intent goIntent = new Intent(v.getContext(),MapsActivity.class);
-        startActivity(goIntent);
+        startActivityForResult(goIntent,5);
     }
 
     //================SIMPLE ON CLICK METHODS======================

@@ -705,6 +705,12 @@ public final class SQL {
         return sendQuery(query);
     }
 
+    public static ArrayList checkOwnerPostalCode(String postal_code){
+        String query = "SELECT * FROM owner_table WHERE " +
+                " CONVERT(VARCHAR,O_POSTALCODE) = '" + postal_code + "';";
+        return sendQuery(query);
+    }
+
     /**
      * Original method returns Cursor
      * However, with SQL server, we only get back ResultSet which will be converted to ArrayList
