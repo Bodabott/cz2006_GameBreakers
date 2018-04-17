@@ -8,7 +8,7 @@
     <Button style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/back"
         android:onClick="back"
-        android:text="BACK"
+        android:text="← "
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="13dp"
         android:layout_marginBottom="5dp"

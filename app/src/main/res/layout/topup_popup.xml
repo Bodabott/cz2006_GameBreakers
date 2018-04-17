@@ -15,39 +15,60 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="58dp"
+        android:fontFamily="@font/montserrat_regular"
         android:text="Enter amount:"
+        android:textColor="#FFFFFF"
         android:textSize="30sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/top_up_value"
+        android:layout_alignBottom="@+id/top_up_value"
+        android:layout_toStartOf="@+id/top_up_value"
+        android:text="$"
+        android:textColor="#FF000000"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/top_up_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#FFFFFFFF"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="88dp"
-        android:ems="6"
+        android:ems="4"
         android:inputType="textPersonName"
-        android:hint="Enter amount"/>
+        android:textSize="20dp"
+        android:fontFamily="@font/montserrat_semibolditalic"
+        android:hint="Amount"/>
 
 
     <Button
         android:id="@+id/confirm_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignBottom="@+id/cancel_button"
         android:layout_toLeftOf="@+id/cancel_button"
         android:layout_toStartOf="@+id/cancel_button"
-        android:text="Confirm"
+        android:text="✔"
+        android:textColor="#FFFFFF"
+        android:layout_marginRight="5dp"
+
         android:background="@drawable/button_style"/>
 
     <Button
         android:id="@+id/cancel_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="Cancel"
+        android:text="✘"
+        android:textColor="#FFFFFF"
         android:background="@drawable/button_style"/>
 
 
