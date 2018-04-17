@@ -17,7 +17,7 @@
         android:id="@id/selected_stall"
         android:text="The Chosen Stall Is : "
         android:layout_margin="5dp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/montserrat_regular"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -26,7 +26,7 @@
         android:id="@id/selected_food"
         android:text="The Chosen Food Is: "
         android:layout_margin="5dp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/montserrat_regular"
         android:textSize="20sp"
         android:layout_below="@id/selected_stall"
         android:layout_width="match_parent"
