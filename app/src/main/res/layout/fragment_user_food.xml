@@ -48,7 +48,7 @@
             android:layout_marginTop="10sp"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
-            android:layout_marginBottom="50sp"/>
+            android:layout_marginBottom="65sp"/>
 
         <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/exit"
@@ -57,23 +57,26 @@
            android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="10sp"
+            android:textSize="25dp"
             android:onClick="backToMain"
             android:text="EXIT" />
 
         <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@+id/next"
             android:onClick="goPayment"
-            android:text="→ "
+            android:text="→"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10sp"
+            android:textSize="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button style="@style/Widget.AppCompat.Button.Colored"
             android:id="@id/back"
             android:onClick="back"
-            android:text="← "
+            android:text="←"
+            android:textSize="25dp"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@id/next"
             android:layout_width="wrap_content"

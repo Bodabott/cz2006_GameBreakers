@@ -119,11 +119,11 @@ public class Activity_User extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
 
         String val_ue;
-        int val;
+        float val;
         String un = user.getName();
         val = SQL.getUserBalance(un);
         val /= 100;
-        val_ue = "$" + Integer.toString(val);
+        val_ue = "$" + Float.toString(val);
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.custom_menu, menu);
@@ -141,11 +141,11 @@ public class Activity_User extends AppCompatActivity
         menu.clear();
 
         String val_ue;
-        int val;
+        float val;
         String un = user.getName();
         val = SQL.getUserBalance(un);
         val /= 100;
-        val_ue = "$" + Integer.toString(val);
+        val_ue = "$" + Float.toString(val);
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.custom_menu, menu);
