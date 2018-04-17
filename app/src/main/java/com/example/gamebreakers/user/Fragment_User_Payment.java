@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.example.gamebreakers.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Fragment_User_Payment extends Fragment {
     @Nullable
     @Override
@@ -33,7 +36,10 @@ public class Fragment_User_Payment extends Fragment {
         }
 
         TextView text =view.findViewById(R.id.earliestTime);
-        String temp = "Earliest Collection Time = " + act.getEarliestOrderTime().getHour() + ":" + act.getEarliestOrderTime().getMinute();
+        Calendar cal = act.getEarliestOrderTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+        String temp = "Earliest Collection Time = " + sdf.format(cal.getTime());
         text.setText(temp);
 
         return view;

@@ -1,6 +1,9 @@
 package com.example.gamebreakers.entities;
 
-import java.time.LocalDateTime;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by zNotAgain on 1/3/2018.
@@ -28,16 +31,19 @@ public class Order {
     }
 
     public String getCollectiontime() {
-        LocalDateTime localdate=LocalDateTime.parse(collectiontime);
-        String time = ""+localdate.getHour()+ ":" +localdate.getMinute();
-        return time;
+        return collectiontime;
+    }
+    public Calendar getCalendartime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        Calendar cal = Calendar.getInstance();
+       try {
+           cal.setTime(sdf.parse(collectiontime));
+       } catch (Exception ParseException) {System.out.println("@@@@@@@@@@@@@@@@ PARSE FAILED @@@@@@@@");}
+
+        return cal;
     }
 
     public String getStallName() {return stallname;}
-
-    public String getFullCollectiontime() {
-        return collectiontime;
-    }
     public boolean isCompleted() {return completed;}
     public void complete() {completed=true;}
 }

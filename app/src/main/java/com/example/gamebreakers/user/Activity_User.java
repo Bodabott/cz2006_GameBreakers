@@ -35,8 +35,10 @@ import com.example.gamebreakers.entities.Stall;
 import com.example.gamebreakers.entities.User;
 import com.example.gamebreakers.login.Activity_Main;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import static com.example.gamebreakers.login.Activity_Main.PASSWORD;
@@ -261,15 +263,15 @@ public class Activity_User extends AppCompatActivity
         }
     }
 
-    public boolean afterEarliestOrderTime(String time) {
-        LocalDateTime collectTime = LocalDateTime.parse(time);
-        return collectTime.isAfter(getEarliestOrderTime());
+    public boolean afterEarliestOrderTime(Calendar time) {
+        return time.after(getEarliestOrderTime());
     }
 
-    public LocalDateTime getEarliestOrderTime() {
-        LocalDateTime local = LocalDateTime.now();
-        local.plusMinutes(stall.getQueueNum()*2);   //add 2 minutes per person in queue
-        return local;
+    public Calendar getEarliestOrderTime() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE, stall.getQueueNum()*2 );//add 2 minutes per person in queue
+
+        return cal;
     }
 
     //====================List Adaptor Methods=====================
@@ -362,13 +364,22 @@ public class Activity_User extends AppCompatActivity
         final String stallMessage = stall.getStallName();
         final String foodMessage = food;
         final String usernameMessage = user.getName();
+        Calendar cal = Calendar.getInstance();
         //get time
         String hour = ((Spinner) v.getRootView().findViewById(R.id.hourInput)).getSelectedItem().toString();
+        int hour1 = Integer.parseInt(hour);
+        cal.set(Calendar.HOUR_OF_DAY, hour1);
+
         String min = ((Spinner) v.getRootView().findViewById(R.id.minInput)).getSelectedItem().toString();
-        String time = LocalDateTime.now().toString().substring(0, 11) + hour + ":" + min;
+        int min1 = Integer.parseInt(min);
+        cal.set(Calendar.MINUTE,min1);
+
+        //convert calendar to string
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        String time = sdf.format(cal.getTime());
 
         String newFoodMessage = foodNameConverter(foodMessage, stallMessage, usernameMessage);
-        if(afterEarliestOrderTime(time)) {
+        if(afterEarliestOrderTime(cal)) {
             if (SQL.addOrderArrayData(newFoodMessage, usernameMessage, stallMessage, time)) {
                 int foodprice = SQL.getFoodPrice(foodMessage, stallMessage);
                 int bal_left = SQL.getUserBalance(usernameMessage) - foodprice;

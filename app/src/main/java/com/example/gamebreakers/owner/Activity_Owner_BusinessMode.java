@@ -15,8 +15,8 @@ import com.example.gamebreakers.entities.Order;
 import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.login.Activity_Main;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -125,14 +125,15 @@ public class Activity_Owner_BusinessMode extends AppCompatActivity implements Fr
 
     public void updateQueueNum() {
         int i=0;
-        LocalDateTime localtime = LocalDateTime.now().plusMinutes(30);
-        for (Order o : orders) {
-            System.out.println("@@@@@@@"+o.getCollectiontime());
-            LocalDateTime localorder = LocalDateTime.parse(o.getFullCollectiontime());
+        Calendar latest = Calendar.getInstance();   //get 30 minutes from now
+        latest.add(Calendar.MINUTE, 30);
 
-            if (localorder.isBefore(localtime))i++;
+        for (Order o : orders) {
+            Calendar collectTime = o.getCalendartime();
+
+            if (collectTime.before(latest))i++;
         }
-        //myDb.updateQueueNum(i, stallName);
+        SQL.updateQueueNum(i, stallName);
     }
 
     private final Runnable refreshArray = new Runnable()

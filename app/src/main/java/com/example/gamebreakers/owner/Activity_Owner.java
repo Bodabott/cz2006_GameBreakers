@@ -117,10 +117,10 @@ public class Activity_Owner extends AppCompatActivity
 
                 int price=0;
                 if (!cents.getText().toString().equals("")) {
-                    price = Integer.parseInt(cents.getText().toString());         //add cents
+                    price += Integer.parseInt(cents.getText().toString());         //add cents
                 }
                 if (!dollars.getText().toString().equals("")) {
-                    price = Integer.parseInt(dollars.getText().toString()) * 100; //add dollars
+                    price += Integer.parseInt(dollars.getText().toString()) * 100; //add dollars
                 }
 
 

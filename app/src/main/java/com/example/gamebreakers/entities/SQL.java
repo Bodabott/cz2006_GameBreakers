@@ -372,8 +372,8 @@ public final class SQL {
     // Add a new owner account
     // Return true if successful, false otherwise
     public static boolean addOwnerAccount(String username, String stall_name, String password){
-        String query = "INSERT INTO owner_table (O_USERNAME,O_STALLNAME,O_PASSWORD) " +
-                " VALUES ('" + username + "', '" + stall_name + "', '" + password + "');";
+        String query = "INSERT INTO owner_table (O_USERNAME,O_STALLNAME,O_PASSWORD, O_QUEUENUM) " +
+                " VALUES ('" + username + "', '" + stall_name + "', '" + password+ "', 0'" + "');";
 
         String query2 = "SELECT * FROM owner_table WHERE CONVERT(VARCHAR,O_USERNAME) = '" +
                 username + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" +
@@ -639,10 +639,11 @@ public final class SQL {
         int i = 0;
         for (int j = 0; j < a.size(); j++){
             HashMap row = a.get(j);
+            System.out.println("@@@@@@@@@@@" + (String) row.get("O_STALLNAME"));
             stallList[i] = new Stall(
                     Integer.parseInt((String)row.get("O_ID")),
                     (String)row.get("O_STALLNAME"),
-                    0
+                    Integer.parseInt((String) row.get("O_QUEUENUM"))
             );
             i++;
         }
