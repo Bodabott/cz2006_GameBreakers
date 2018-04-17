@@ -21,7 +21,7 @@
         android:layout_toStartOf="@+id/top_up_butt"
         android:background="@drawable/border"
         android:fontFamily="@font/montserrat_medium"
-        android:onClick="updatePaymentDetails"
+        android:onClick="updatePayment"
         android:text="Update Payment Details"
         android:textSize="20dp" />
 

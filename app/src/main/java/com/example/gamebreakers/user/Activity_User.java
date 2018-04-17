@@ -442,6 +442,25 @@ public class Activity_User extends AppCompatActivity
         mBuilder.show();
     }
 
+    public void updatePayment(View v){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        mBuilder.setCancelable(true);
+        mBuilder.setTitle("Update Payment Details?");
+        mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(Activity_User.this,"Payment Details Updated",Toast.LENGTH_LONG).show();
+            }
+        });
+        mBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        mBuilder.show();
+    }
+
     public void searchStall(View v){
         Intent goIntent = new Intent(v.getContext(),MapsActivity.class);
         startActivityForResult(goIntent,5);
