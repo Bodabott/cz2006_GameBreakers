@@ -33,9 +33,20 @@ public class Fragment_User_Payment extends Fragment {
         }
 
         TextView text = view.findViewById(R.id.earliestTime);
-        String temp = act.getEarliestOrderTime().getHour() + ":" + act.getEarliestOrderTime().getMinute() + " ";
-        text.setText(temp);
-
+        int hour = act.getEarliestOrderTime().getHour();
+        int minute = act.getEarliestOrderTime().getMinute();
+        String newHour,newMinute;
+        if((hour/10) == 0){
+            newHour = "0" + String.valueOf(hour);
+            if((minute/10) == 0){
+                newMinute = "0" + String.valueOf(minute);
+                String temp = newHour + ":" + newMinute + " ";
+                text.setText(temp);
+            }
+        }else{
+            String temp = hour + ":" + minute + " ";
+            text.setText(temp);
+        }
         return view;
     }
 }

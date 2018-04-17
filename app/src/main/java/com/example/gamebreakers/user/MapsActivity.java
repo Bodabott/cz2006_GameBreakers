@@ -24,6 +24,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
+import com.example.gamebreakers.entities.SQL;
+import com.example.gamebreakers.entities.Stall;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -32,6 +34,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -51,16 +54,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private float benchmarkDistance = 5000;
     private LatLng defaultLatLng;
     private Address defaultAddress;
-    private String[] locations = {"Singapore 289876",
-                                    "Singapore 469572",
-                                    "Singapore 618499",
-                                    "Singapore 270020",
-                                    "Singapore 500001",
-                                    "Singapore 380017",
-                                    "Singapore 150163",
-                                    "Singapore 564226",
-                                    "Singapore 600347",
-                                    "Singapore 680602"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +102,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
+                if(isInteger(marker.getTitle()) && marker.getTitle().length() == 6)
+                    return false;
+
                 Log.e(marker.getTitle(),marker.getPosition().toString());
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapsActivity.this);
                 mBuilder.setTitle("Go to Selected Stall.\nConfirm?");
@@ -116,8 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent returnIntent = new Intent();
-                        /*  Change "Botak Jones" to marker.getTitle()   */
-                        returnIntent.putExtra("MAP","Botak Jones"); // Botak Jones is a temporary placeholder
+                        returnIntent.putExtra("MAP",marker.getTitle());
                         setResult(Activity.RESULT_OK,returnIntent);
                         finish();
                     }
@@ -246,6 +241,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public ArrayList<LatLng> getLocationLatLongs(){
         List<Address> addressList = null;
         ArrayList<LatLng> latLngList = new ArrayList<>();
+        ArrayList<String> locations = getLocationPostalCodes();
 
         for(String temp : locations){
             Geocoder geocoder = new Geocoder(getApplicationContext());
@@ -274,6 +270,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public ArrayList<Address> getLocationAddresses(){
         List<Address> addressList = null;
         ArrayList<Address> addressArrayList = new ArrayList<>();
+        ArrayList<String> locations = getLocationPostalCodes();
 
         for(String temp : locations){
             Geocoder geocoder = new Geocoder(getApplicationContext());
@@ -296,6 +293,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         }
         return addressArrayList;
+    }
+
+    public ArrayList<String> getLocationPostalCodes() {
+        Stall[] stallList = SQL.getArrayOfStall();
+        ArrayList<String> stallNameArrayList = new ArrayList<>();
+        ArrayList<String> postalCodeArrayList = new ArrayList<>();
+        String temp;
+        if (stallList != null) {
+            for (Stall stall : stallList) {
+                stallNameArrayList.add(stall.getStallName());
+            }
+            for(String stallName : stallNameArrayList){
+                temp = "Singapore " + SQL.getOwnerPostalCode(stallName);
+                postalCodeArrayList.add(temp);
+            }
+        }
+        return postalCodeArrayList;
     }
 
     // Complex On-Click Methods
@@ -334,8 +348,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapReset();
         ArrayList<LatLng> latLngArrayList = getLocationLatLongs();
         ArrayList<Address> addressArrayList = getLocationAddresses();
+
         ArrayList<LatLng> filteredLatLngArrayList = new ArrayList<>();
         ArrayList<Address> filteredAddressArrayList = new ArrayList<>();
+        ArrayList<String> filteredPostalCodeArrayList = new ArrayList<>();
 
         for(LatLng latLng : latLngArrayList) {
             if (getDistance(latLng) <= benchmarkDistance) {
@@ -353,10 +369,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
 
+        for(Address address : filteredAddressArrayList){
+            filteredPostalCodeArrayList.add(address.getPostalCode());
+        }
+
         for(LatLng latLng : filteredLatLngArrayList){
             for(Address address : filteredAddressArrayList){
-                if(address.getLatitude() == latLng.latitude && address.getLongitude() == latLng.longitude)
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(address.getPostalCode()));
+                if(address.getLatitude() == latLng.latitude && address.getLongitude() == latLng.longitude){
+                    Stall[] stalls = SQL.getArrayOfStall(Integer.parseInt(address.getPostalCode()));
+                    if(stalls != null) {
+                        Stall stall = stalls[0];
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(stall.getStallName()));
+                    }
+                }
             }
         }
         Toast.makeText(v.getContext(),"Location(s) Found\n(Within 5 KM)",Toast.LENGTH_LONG).show();
@@ -413,5 +438,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mBuilder.show();
     }
 
+    public boolean isInteger(String input){
+        try{
+            Integer.parseInt(input);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }
 

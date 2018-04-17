@@ -30,7 +30,7 @@ public class Activity_Owner extends AppCompatActivity
 
     String stallName;
 
-    android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
+    android.support.v4.app.FragmentManager fragman = getSupportFragmentManager();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

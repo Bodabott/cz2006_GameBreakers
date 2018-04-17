@@ -492,7 +492,6 @@ public final class SQL {
         return stallList;
     }
 
-
     // Search the database for owner username using stall name
     // Return empty string if no result
     public static String getOwnerUsername(String stall_name){
