@@ -47,7 +47,7 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:onClick="setNewCurrentLocation"
+            android:onClick="setCurrentLocation"
             android:id="@+id/currentLocationButton"
             android:text="SET CURRENT LOCATION"
             android:layout_weight="3"
@@ -72,7 +72,7 @@
 
         <TextView
             android:id="@+id/currentLocation"
-            android:hint="Current Location: "
+            android:text="Current Location: "
             android:background="#DD4444"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

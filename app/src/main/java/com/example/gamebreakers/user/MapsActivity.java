@@ -38,6 +38,7 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     Button backButton;
+    TextView currentLocationTextView;
     private GoogleApiClient googleApiClient;
     private float benchmarkDistance = 5000;
     private LatLng defaultLatLng;
@@ -64,11 +66,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        /*
-        String targetLocation = getIntent().getStringExtra("TARGET");
-        EditText location_tf = findViewById(R.id.searchBox);
-        location_tf.setText(targetLocation);
-        */
+        currentLocationTextView = findViewById(R.id.currentLocation);
+
         backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,8 +95,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
-
-        setCurrentLocation();
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -151,62 +148,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleApiClient.connect();
     }
 
-    public void setCurrentLocation(){
-        final TextView currentLocationTextView = findViewById(R.id.currentLocation);
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapsActivity.this);
-        mBuilder.setCancelable(true);
-        mBuilder.setTitle("Set Current Location:");
-        // Set up the input
-        final EditText input = new EditText(MapsActivity.this);
-        // Specify the type of input expected
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        mBuilder.setView(input);
-
-        // Set up the buttons
-        mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String m_Text = input.getText().toString();
-                List<Address> addressList = null;
-
-                if(!m_Text.isEmpty()){
-                    Geocoder geocoder = new Geocoder(MapsActivity.this);
-                    try{
-                        addressList = geocoder.getFromLocationName(m_Text,1);
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                    if(addressList != null){
-                        try{
-                            defaultAddress = addressList.get(0);
-                            defaultLatLng = new LatLng(defaultAddress.getLatitude(),defaultAddress.getLongitude());
-                            mMap.addMarker(new MarkerOptions().position(defaultLatLng).title(defaultAddress.getPostalCode()));
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng,17));
-                            String temp = "Current Location: Singapore " + defaultAddress.getPostalCode();
-                            currentLocationTextView.setText(temp);
-                        } catch(IndexOutOfBoundsException e){
-                            Toast.makeText(MapsActivity.this,"Location not found",Toast.LENGTH_SHORT).show();
-                        }
-                    }else{
-                        Toast.makeText(MapsActivity.this,"Location not found",Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-        });
-        mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                finish();
-            }
-        });
-
-        mBuilder.show();
-    }
-
     public void mapReset(){
         mMap.clear();
         mMap.addMarker(new MarkerOptions().position(defaultLatLng).title(defaultAddress.getPostalCode()));
+    }
+
+    public boolean isCurrentLocationEmpty(){
+        if(currentLocationTextView.getText().toString().length() == 18){
+            Toast.makeText(MapsActivity.this,"Current Location Not Set",Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
     }
 
     public float getDistance(LatLng latLng){
@@ -315,6 +267,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // Complex On-Click Methods
 
     public void searchLocation(View v){
+        if(isCurrentLocationEmpty())
+            return;
+
         mapReset();
         EditText location_tf = findViewById(R.id.searchBox);
         String location = location_tf.getText().toString();
@@ -345,6 +300,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void searchNearbyStalls(View v){
+        if(isCurrentLocationEmpty())
+            return;
+
         mapReset();
         ArrayList<LatLng> latLngArrayList = getLocationLatLongs();
         ArrayList<Address> addressArrayList = getLocationAddresses();
@@ -387,9 +345,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(v.getContext(),"Location(s) Found\n(Within 5 KM)",Toast.LENGTH_LONG).show();
     }
 
-    public void setNewCurrentLocation(View v){
-        final TextView currentLocationTextView = findViewById(R.id.currentLocation);
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapsActivity.this);
+    public void setCurrentLocation(View v){
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapsActivity.this);
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Set Current Location:");
         // Set up the input
@@ -413,10 +370,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         e.printStackTrace();
                     }
                     if(addressList != null){
+                        ArrayList<String> stringArrayList = getLocationPostalCodes();
+                        for(String postalCode : stringArrayList){
+                            if(postalCode.matches(m_Text)){
+                                Toast.makeText(MapsActivity.this,"Current Location matches an existing Stall.",Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        }
                         try{
                             defaultAddress = addressList.get(0);
                             defaultLatLng = new LatLng(defaultAddress.getLatitude(),defaultAddress.getLongitude());
-                            mapReset();
+                            mMap.clear();
+                            mMap.addMarker(new MarkerOptions().position(defaultLatLng).title(defaultAddress.getPostalCode()));
                             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng,17));
                             String temp = "Current Location: Singapore " + defaultAddress.getPostalCode();
                             currentLocationTextView.setText(temp);
@@ -433,8 +398,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
+                finish();
             }
         });
+
         mBuilder.show();
     }
 

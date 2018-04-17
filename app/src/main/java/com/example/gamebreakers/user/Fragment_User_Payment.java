@@ -3,6 +3,7 @@ package com.example.gamebreakers.user;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,18 +36,24 @@ public class Fragment_User_Payment extends Fragment {
         TextView text = view.findViewById(R.id.earliestTime);
         int hour = act.getEarliestOrderTime().getHour();
         int minute = act.getEarliestOrderTime().getMinute();
+        Log.e(String.valueOf(hour),String.valueOf(minute));
         String newHour,newMinute;
+
         if((hour/10) == 0){
             newHour = "0" + String.valueOf(hour);
-            if((minute/10) == 0){
-                newMinute = "0" + String.valueOf(minute);
-                String temp = newHour + ":" + newMinute + " ";
-                text.setText(temp);
-            }
         }else{
-            String temp = hour + ":" + minute + " ";
-            text.setText(temp);
+            newHour = String.valueOf(hour);
         }
+
+        if((minute/10) == 0){
+            newMinute = "0" + String.valueOf(minute);
+        }else{
+            newMinute = String.valueOf(minute);
+        }
+
+        String temp = newHour + ":" + newMinute + " ";
+        text.setText(temp);
+
         return view;
     }
 }
