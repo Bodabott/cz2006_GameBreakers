@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/fork_and_spoon"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         <activity android:name=".login.Activity_Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

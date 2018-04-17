@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
-    android:background="#AE5DADE2"
+    android:background="#E43F3F"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,14 +10,14 @@
     <RelativeLayout
         android:id="@+id/stallandfood"
         android:layout_width="wrap_content"
-        android:background="#87CEEB"
+        android:background="#FFFFFF"
         android:minHeight="60dp"
         android:layout_height="wrap_content">
     <TextView
         android:id="@id/selected_stall"
         android:text="The Chosen Stall Is : "
         android:layout_margin="5dp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/montserrat_regular"
         android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -26,7 +26,7 @@
         android:id="@id/selected_food"
         android:text="The Chosen Food Is: "
         android:layout_margin="5dp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/montserrat_regular"
         android:textSize="20sp"
         android:layout_below="@id/selected_stall"
         android:layout_width="match_parent"
@@ -38,18 +38,53 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/earliestTime_text"
+            android:text="Earliest Collection Time:"
             android:textAlignment="center"
-            android:id="@+id/earliestTime"
-            android:layout_marginBottom="30dp"
-            android:textSize="50sp"
+            android:fontFamily="@font/montserrat_semibolditalic"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/collectionTime"/>
+            android:layout_above="@id/rLay"/>
+
+        <RelativeLayout
+            android:id="@+id/rLay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@id/collectionTime"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:gravity="right"
+                android:background="@drawable/time_border"
+                android:id="@+id/earliestTime"
+                android:paddingTop="5dp"
+                android:textSize="50sp"
+                android:textColor="#E12929"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_width="210dp"
+                android:layout_height="80dp" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/time" />
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/collectionTime"
             android:text="Choose A Timing: "
-            android:layout_margin="10dp"
-            android:fontFamily="casual"
+            android:layout_margin="5dp"
+            android:fontFamily="@font/montserrat_semibolditalic"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:textAlignment="center"
@@ -59,18 +94,17 @@
         <android.support.v7.widget.LinearLayoutCompat
             android:id="@+id/timeRow"
             android:layout_centerInParent="true"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:paddingHorizontal="20sp">
-        <Spinner
-            android:id= "@+id/hourInput"
-            android:layout_width="0dp"
-            android:layout_weight=".5"
-            android:layout_height="wrap_content"
-            android:background="#BFFFFFFF"
-            android:entries="@array/hours"
-            />
+
+            <Spinner
+                android:id="@+id/hourInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".5"
+                android:background="#BFFFFFFF"
+                android:entries="@array/hours" />
 
         <Spinner
             android:id= "@+id/minInput"
@@ -86,16 +120,25 @@
             android:onClick="makePayment"
             android:id="@+id/paymentButton"
             android:text="Confirm Payment"
+            android:background="@drawable/butt_butt"
             android:textSize="25sp"
-            android:fontFamily="cursive"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="#CC1D1D"
             android:padding="15sp"
             android:layout_margin="15dp"
             android:textAllCaps="false"
-            android:background="#AC39B7CD"
             android:layout_above="@id/cancelPayment"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="77dp"
+            android:text="────────── or ──────────" />
 
         <Button
             android:id="@+id/cancelPayment"
@@ -103,7 +146,9 @@
             android:textAllCaps="false"
             android:text="Cancel"
             android:layout_margin="20dp"
-            android:background="#AEFF2400"
+            android:fontFamily="@font/montserrat_regular"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/transparent_white_border"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"

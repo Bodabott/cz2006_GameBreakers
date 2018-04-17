@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gamebreakers.R;
@@ -59,7 +60,7 @@ public class Activity_User extends AppCompatActivity
     User user;
     Dialog myDialog;
     Value val = new Value();
-    android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
+    android.support.v4.app.FragmentManager fragman = getSupportFragmentManager();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,6 +98,9 @@ public class Activity_User extends AppCompatActivity
         View headerLayout = navigationView.getHeaderView(0);
         ImageButton imageButton = headerLayout.findViewById(R.id.nav_back_arrow);
 
+        TextView userNavTextView = headerLayout.findViewById(R.id.nav_header_username);
+        userNavTextView.setText(userName);
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,11 +121,11 @@ public class Activity_User extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
 
         String val_ue;
-        int val;
+        float val;
         String un = user.getName();
         val = SQL.getUserBalance(un);
         val /= 100;
-        val_ue = "$" + Integer.toString(val);
+        val_ue = "$" + Float.toString(val);
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.custom_menu, menu);
@@ -139,11 +143,11 @@ public class Activity_User extends AppCompatActivity
         menu.clear();
 
         String val_ue;
-        int val;
+        float val;
         String un = user.getName();
         val = SQL.getUserBalance(un);
         val /= 100;
-        val_ue = "$" + Integer.toString(val);
+        val_ue = "$" + Float.toString(val);
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.custom_menu, menu);
@@ -160,9 +164,30 @@ public class Activity_User extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 3)
+        if(requestCode == 3) {
             if(resultCode == Activity.RESULT_OK)
                 finish();
+        }else if(requestCode == 5){
+            if(resultCode == Activity.RESULT_OK){
+                Stall[] stalls = SQL.getArrayOfStall();
+                if(stalls != null) {
+                    for (Stall tempStall : stalls) {
+                        if (tempStall.getStallName().matches(data.getStringExtra("MAP"))) {
+                            this.stall = tempStall;
+                            break;
+                        }
+                    }
+                }
+                fragman.beginTransaction()
+                        .replace(R.id.content_main,new Fragment_User_BrowseStall())
+                        .addToBackStack(null)
+                        .commit();
+                fragman.beginTransaction()
+                        .replace(R.id.content_main,new Fragment_User_BrowseFood())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }
     }
 
     @Override
@@ -428,16 +453,28 @@ public class Activity_User extends AppCompatActivity
         mBuilder.show();
     }
 
+    public void updatePayment(View v){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        mBuilder.setCancelable(true);
+        mBuilder.setTitle("Update Payment Details?");
+        mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(Activity_User.this,"Payment Details Updated",Toast.LENGTH_LONG).show();
+            }
+        });
+        mBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        mBuilder.show();
+    }
+
     public void searchStall(View v){
-        EditText search_text = findViewById(R.id.search_field);
-        String search = search_text.getText().toString();
-        if(search.isEmpty()){
-            search_text.setError("Field is Empty");
-            return;
-        }
         Intent goIntent = new Intent(v.getContext(),MapsActivity.class);
-        goIntent.putExtra("TARGET",search);
-        startActivity(goIntent);
+        startActivityForResult(goIntent,5);
     }
 
     //================SIMPLE ON CLICK METHODS======================

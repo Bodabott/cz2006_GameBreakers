@@ -10,6 +10,7 @@ public class Stall {
     int stall_ID, price, type, inQueue;
     String stallName;
     String averageTime;
+    String postalCode;
 
     public Stall() {}
 
@@ -39,4 +40,11 @@ public class Stall {
         return inQueue;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 }

@@ -396,7 +396,101 @@ public final class SQL {
         else
             return false;
     }
+    
+    
+    // Add a new owner account with stall location in postal code
+    // Return true if successful, false otherwise
+    public static boolean addOwnerAccount(String username, String stall_name, String password, int postal_code){
+        String query = "INSERT INTO owner_table (O_USERNAME,O_STALLNAME,O_PASSWORD,O_POSTALCODE) " +
+                " VALUES ('" + username + "', '" + stall_name + "', '" + password + "', '" + postal_code + "');";
 
+        String query2 = "SELECT * FROM owner_table WHERE CONVERT(VARCHAR,O_USERNAME) = '" +
+                username + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" +
+                stall_name + "' AND CONVERT(VARCHAR,O_PASSWORD) = '" +
+                password + "' AND CONVERT(VARCHAR,O_POSTALCODE) = '" +
+                postal_code + "';";
+
+        // Make sure account does not already exist
+        ArrayList a = sendQuery(query2);
+        if (a == null || a.size()>0)
+            return false;
+
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        // Check successful update
+        if (a2 == null)
+            return false;
+        else if (a2.size()>0)
+            return true;
+        else
+            return false;
+    }
+
+    // Search the database for owner postal code using stall name
+    // Return empty string if no result
+    public static String getOwnerPostalCode(String stall_name){
+        String query = "SELECT O_POSTALCODE FROM owner_table WHERE " +
+                " CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "';";
+
+        ArrayList <HashMap> a = sendQuery(query);
+        if (a == null)
+            return "";
+
+        ArrayList<String> StringList = new ArrayList<String>();
+        for (int i = 0; i < a.size(); i++){
+            HashMap row = a.get(i);
+            StringList.add((String)row.get("O_POSTALCODE"));
+        }
+        return concatArrayListToString(StringList);
+    }
+
+    // Update the postal code in the owner table
+    // Return true if successful, false otherwise
+    public static boolean updatePostalCode(String stall_name,int postal_code){
+        String query = "UPDATE owner_table " +
+                " SET O_POSTALCODE = '" + postal_code +
+                "' WHERE CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name + "'; ";
+
+        String query2 = "SELECT * FROM owner_table WHERE " +
+                " CONVERT(VARCHAR,O_STALLNAME) = '" + stall_name +
+                "' AND CONVERT(VARCHAR,O_POSTALCODE) = '" + postal_code + "';";
+
+        ArrayList a = sendQuery(query2);
+        sendUpdate(query);
+        ArrayList a2 = sendQuery(query2);
+
+        if (a == null || a2 == null)
+            return false;
+        else if (a.size()<1 && a2.size()>0)
+            return true;
+        else
+            return false;
+    }
+    
+    //Returns stall array with postal code
+    //Return null if Error or Invalid Result
+    public static Stall[] getArrayOfStall(int postal_code){
+        String query = "SELECT * FROM owner_table WHERE CONVERT(VARCHAR,O_POSTALCODE) = '"+
+                postal_code + "';";
+
+        ArrayList <HashMap> a = sendQuery(query);
+        if (a == null)
+            return null;
+
+        Stall[] stallList = new Stall[a.size()];
+        int i = 0;
+        for (int j = 0; j < a.size(); j++){
+            HashMap row = a.get(j);
+            stallList[i] = new Stall(
+                    Integer.parseInt((String)row.get("O_ID")),
+                    (String)row.get("O_STALLNAME"),
+                    0
+            );
+            i++;
+        }
+        return stallList;
+    }
 
     // Search the database for owner username using stall name
     // Return empty string if no result
@@ -607,6 +701,12 @@ public final class SQL {
         String query = "SELECT * FROM owner_table WHERE " +
                 " CONVERT(VARCHAR,O_USERNAME) = '" + username +
                 "' AND CONVERT(VARCHAR,O_PASSWORD) = '" + password + "';";
+        return sendQuery(query);
+    }
+
+    public static ArrayList checkOwnerPostalCode(String postal_code){
+        String query = "SELECT * FROM owner_table WHERE " +
+                " CONVERT(VARCHAR,O_POSTALCODE) = '" + postal_code + "';";
         return sendQuery(query);
     }
 

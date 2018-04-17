@@ -30,7 +30,7 @@ public class Activity_Owner extends AppCompatActivity
 
     String stallName;
 
-    android.support.v4.app.FragmentManager fragman= getSupportFragmentManager();
+    android.support.v4.app.FragmentManager fragman = getSupportFragmentManager();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -314,10 +314,10 @@ public class Activity_Owner extends AppCompatActivity
     }
 
     public void clearAllItems(View v){
-        AlertDialog.Builder mBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(v.getContext());
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Clear All Data?");
-        mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Integer deletedRows = SQL.deleteAllHistoryData(stallName);
@@ -334,6 +334,13 @@ public class Activity_Owner extends AppCompatActivity
                         .commit();
             }
         });
+        mBuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        mBuilder.show();
     }
 
 
