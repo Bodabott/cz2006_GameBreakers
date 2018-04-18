@@ -77,6 +77,7 @@
     <string name="c_orders">Current\nOrders</string>
     <string name="m_menu">Manage\nMenu</string>
     <string name="delete_account">Delete\nAccount</string>
+    <string name="edit_postalcode"><u>POSTAL CODE: </u></string>
     <string name="edit_stallname"><u>STALL NAME: </u></string>
     <string name="edit_username"><u>USERNAME: </u></string>
     <string name="edit_password"><u>PASSWORD: </u></string>

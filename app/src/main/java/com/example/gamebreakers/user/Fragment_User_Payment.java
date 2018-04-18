@@ -20,27 +20,27 @@ public class Fragment_User_Payment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_payment, container, false);
 
-        //check selected values. If have, update textview
+        //check selected values. If have, update textView
         Activity_User act = (Activity_User) getActivity();
-        String stallname= act.stall.getStallName();
-        String food=act.food;
+        String stallName = act.stall.getStallName();
+        String food = act.food;
 
-        if (stallname!=null) {
+        if (stallName != null) {
             TextView selectedStall = view.findViewById(R.id.selected_stall);
-            String temp = "Stall: " + stallname;
+            String temp = "Stall: " + stallName;
             selectedStall.setText(temp);
         }
         if (food!=null) {
-            TextView selectedfood = view.findViewById(R.id.selected_food);
+            TextView selectedFood = view.findViewById(R.id.selected_food);
             String temp = "Food: " + food;
-            selectedfood.setText(temp);
+            selectedFood.setText(temp);
         }
 
-        TextView text =view.findViewById(R.id.earliestTime);
+        TextView text = view.findViewById(R.id.earliestTime);
         Calendar cal = act.getEarliestOrderTime();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
-        String temp = "Earliest Collection Time = " + sdf.format(cal.getTime());
+        String temp = sdf.format(cal.getTime());
         text.setText(temp);
 
         return view;

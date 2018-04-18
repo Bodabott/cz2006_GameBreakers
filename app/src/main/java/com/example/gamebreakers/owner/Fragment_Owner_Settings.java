@@ -20,13 +20,16 @@ public class Fragment_Owner_Settings extends Fragment {
 
         String stallName = ((Activity_Owner) getActivity()).stallName;
 
-        TextView stalltext= view.findViewById(R.id.settings_stallName);
-        stalltext.setText(stallName);
+        TextView stallText= view.findViewById(R.id.settings_stallName);
+        stallText.setText(stallName);
 
         TextView username= view.findViewById(R.id.settings_username);
         username.setText(SQL.getOwnerUsername(stallName));
         TextView pass= view.findViewById(R.id.settings_password);
         pass.setText(SQL.getOwnerPassword(stallName));
+
+        TextView postalCode = view.findViewById(R.id.settings_postalCode);
+        postalCode.setText(SQL.getOwnerPostalCode(stallName));
 
         return view;
     }

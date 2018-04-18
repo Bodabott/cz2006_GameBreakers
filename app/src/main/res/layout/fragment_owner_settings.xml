@@ -35,7 +35,7 @@
         android:layout_below="@id/back"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="5"
+        android:weightSum="6"
         android:orientation="vertical">
 
         <LinearLayout
@@ -177,11 +177,56 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:weightSum="3"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_weight="2"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="2">
+                <TextView
+                    android:id="@+id/temp_postalCode"
+                    android:layout_weight="1"
+                    android:text="@string/edit_postalcode"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginTop="15sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp" />
+                <TextView
+                    android:id="@+id/settings_postalCode"
+                    android:text="Postal Code"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp" />
+            </LinearLayout>
+
+            <Button
+                android:textAllCaps="false"
+                android:background="#ACdcdcdc"
+                android:onClick="editPostalCode"
+                android:id="@+id/settings_postalCodeButton"
+                android:text="Edit"
+                android:layout_margin="5sp"
+                android:layout_weight="1"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
         <Space
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="0sp">
-        </Space>
+            android:layout_height="0sp" />
 
         <Button
             android:textAllCaps="false"

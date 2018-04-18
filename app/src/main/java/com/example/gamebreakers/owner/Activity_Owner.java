@@ -3,6 +3,8 @@ package com.example.gamebreakers.owner;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -17,6 +19,9 @@ import com.example.gamebreakers.R;
 import com.example.gamebreakers.entities.DatabaseHelper;
 import com.example.gamebreakers.entities.SQL;
 import com.example.gamebreakers.login.Activity_Main;
+
+import java.io.IOException;
+import java.util.List;
 
 import static com.example.gamebreakers.login.Activity_Main.STALL_NAME;
 
@@ -52,6 +57,20 @@ public class Activity_Owner extends AppCompatActivity
         if(requestCode == 4)
             if(resultCode == Activity.RESULT_OK)
                 finish();
+    }
+
+    public boolean isPostalCodeAcceptable(String postal_code){
+        List<Address> addressList = null;
+        String temp = "Singapore " + postal_code;
+
+        Geocoder geocoder = new Geocoder(getApplicationContext());
+        try{
+            addressList = geocoder.getFromLocationName(temp,1);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+        return addressList != null;
     }
 
     //====================List Adaptor Methods=====================
@@ -256,6 +275,66 @@ public class Activity_Owner extends AppCompatActivity
                             Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
 
                             stallName=m_Text;
+
+                            fragman.popBackStack();
+                            fragman.beginTransaction()
+                                    .replace(R.id.content_main, new Fragment_Owner_Settings())
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
+                        else
+                            Toast.makeText(v.getContext(),"Edit Failed",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                tempBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                tempBuilder.show();
+            }
+        });
+        mBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        mBuilder.show();
+    }
+
+    public void editPostalCode(final View v){
+        final String stallNameMessage = getIntent().getStringExtra(Activity_Main.STALL_NAME);
+        android.app.AlertDialog.Builder mBuilder = new android.app.AlertDialog.Builder(v.getContext());
+        mBuilder.setCancelable(true);
+        mBuilder.setTitle("Set new Postal Code:");
+        // Set up the input
+        final EditText input = new EditText(v.getContext());
+        // Specify the type of input expected
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        mBuilder.setView(input);
+
+        // Set up the buttons
+        mBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                android.app.AlertDialog.Builder tempBuilder = new android.app.AlertDialog.Builder(v.getContext());
+                tempBuilder.setCancelable(false);
+                tempBuilder.setTitle("RESET REQUIRED:");
+                tempBuilder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String m_Text = input.getText().toString();
+
+                        if(!isPostalCodeAcceptable(m_Text)) {
+                            Toast.makeText(v.getContext(),"Invalid Postal Code",Toast.LENGTH_LONG).show();
+                            return;
+                        }
+
+                        if(SQL.updatePostalCode(stallNameMessage,Integer.parseInt(m_Text))){
+                            Toast.makeText(v.getContext(),"Edit Successful",Toast.LENGTH_SHORT).show();
 
                             fragman.popBackStack();
                             fragman.beginTransaction()

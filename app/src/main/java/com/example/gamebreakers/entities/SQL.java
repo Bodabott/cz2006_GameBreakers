@@ -1085,8 +1085,8 @@ public final class SQL {
     // Delete all user data from user order history table
     // return 1 if successful, 0 otherwise
     public static Integer deleteAllUserHistoryData(String username){
-        String query = "DELETE FROM user_history_table WHERE CONVERT(VARCHAR,USERNAME) = '" + username + "';";
-        String query2 = "SELECT * FROM user_history_table WHERE CONVERT(VARCHAR,USERNAME) = '" + username + "';";
+        String query = "DELETE FROM user_history_table WHERE CONVERT(VARCHAR,U_USERNAME) = '" + username + "';";
+        String query2 = "SELECT * FROM user_history_table WHERE CONVERT(VARCHAR,U_USERNAME) = '" + username + "';";
 
         ArrayList a = sendQuery(query2);
         sendUpdate(query);
