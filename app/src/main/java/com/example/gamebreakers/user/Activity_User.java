@@ -346,6 +346,15 @@ public class Activity_User extends AppCompatActivity
 
     //================COMPLEX ON CLICK METHODS======================
 
+    public boolean checkforMoney(String txt) {
+        try {
+            Float.parseFloat(txt);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public void ShowTopupPopup(View v) {
         Button buttonCancel;
         Button buttonConfirm;
@@ -362,12 +371,17 @@ public class Activity_User extends AppCompatActivity
             public void onClick(View v) {
                 String un = user.getName();
                 String txt = mEdit.getText().toString();
-                float bal = Float.parseFloat(txt);
-                bal *= 100;
-                int totalbal = SQL.getUserBalance(un) + (int) bal;
-                SQL.updateUserBalance(un, totalbal);
-                invalidateOptionsMenu();
-                myDialog.dismiss();
+                if (checkforMoney (txt)) {
+                    float bal = Float.parseFloat(txt);
+                    bal *= 100;
+                    int totalbal = SQL.getUserBalance(un) + (int) bal;
+                    SQL.updateUserBalance(un, totalbal);
+                    invalidateOptionsMenu();
+                    myDialog.dismiss();
+                }
+                else {
+                    Toast.makeText(Activity_User.this, "Invalid input", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
