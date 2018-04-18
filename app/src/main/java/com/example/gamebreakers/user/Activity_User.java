@@ -452,9 +452,10 @@ public class Activity_User extends AppCompatActivity
                     for(int i=0;i<fragman.getBackStackEntryCount();++i)
                         fragman.popBackStack();
                 }
-                else {
-                    Toast.makeText(getApplicationContext(), "PLEASE TOPUP", Toast.LENGTH_LONG).show();
-                }
+                else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "PLEASE TOPUP", Toast.LENGTH_LONG).show();
             }
         }
         else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();
