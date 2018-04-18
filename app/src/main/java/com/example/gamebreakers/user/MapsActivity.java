@@ -104,7 +104,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 Log.e(marker.getTitle(),marker.getPosition().toString());
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapsActivity.this);
-                mBuilder.setTitle("Go to Selected Stall.\nConfirm?");
+                mBuilder.setTitle("Go to Selected Stall:\n" + marker.getTitle());
+                mBuilder.setMessage("Confirm?");
                 mBuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -342,7 +343,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             }
         }
-        Toast.makeText(v.getContext(),"Location(s) Found\n(Within 5 KM)",Toast.LENGTH_LONG).show();
+        Toast.makeText(v.getContext(),filteredPostalCodeArrayList.size() + " Location(s) Found\n(Within 5 KM)",Toast.LENGTH_LONG).show();
     }
 
     public void setCurrentLocation(View v){
@@ -413,5 +414,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return false;
         }
     }
+
 }
 
