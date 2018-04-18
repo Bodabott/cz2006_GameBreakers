@@ -126,6 +126,7 @@ public class Activity_User extends AppCompatActivity
         val = SQL.getUserBalance(un);
         val /= 100;
         val_ue = "$" + Float.toString(val);
+        val_ue = checkMoneyLength(val_ue);
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.custom_menu, menu);
@@ -148,6 +149,7 @@ public class Activity_User extends AppCompatActivity
         val = SQL.getUserBalance(un);
         val /= 100;
         val_ue = "$" + Float.toString(val);
+        val_ue = checkMoneyLength(val_ue);
 
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.custom_menu, menu);
@@ -198,6 +200,22 @@ public class Activity_User extends AppCompatActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public String checkMoneyLength(String s) {
+
+        String[] parts = s.split(".");
+        String part1 = parts[0];
+        String part2 = parts[1];
+
+        if (part2.length() == 2) {
+            return s;
+        }
+
+        else {
+            String ss = part1 + "." + part2 + "0";
+            return ss;
+        }
     }
 
     public boolean navigationItemListener(MenuItem item){
