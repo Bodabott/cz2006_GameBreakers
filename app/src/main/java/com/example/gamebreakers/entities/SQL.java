@@ -350,14 +350,18 @@ public final class SQL {
         String query2 = "DELETE FROM user_history_table WHERE CONVERT (VARCHAR,U_USERNAME) = '" +
                 username + "';";
 
-        String query3 = "SELECT * FROM user_table WHERE "+
+        String query3 = "DELETE FROM all_orders_table WHERE CONVERT (VARCHAR,U_USERNAME) = '" +
+                username + "';";
+
+        String query4 = "SELECT * FROM user_table WHERE "+
                 " CONVERT(VARCHAR,U_USERNAME) = '" + username +
                 "' AND CONVERT(VARCHAR,U_PASSWORD) = '" + password + "'; ";
 
-        ArrayList a = sendQuery(query3);
+        ArrayList a = sendQuery(query4);
         sendUpdate(query);
         sendUpdate(query2);
-        ArrayList a2 = sendQuery(query3);
+        sendUpdate(query3);
+        ArrayList a2 = sendQuery(query4);
 
         if (a == null || a2 == null)
             return 0;
