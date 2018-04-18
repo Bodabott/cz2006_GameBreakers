@@ -17,6 +17,7 @@
         android:background="#FFFFFF" />
 
     <EditText
+        android:layout_marginTop="20dp"
         android:id="@+id/usernameText"
         android:layout_width="166dp"
         android:layout_height="wrap_content"

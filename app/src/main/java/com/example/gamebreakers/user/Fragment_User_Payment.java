@@ -41,7 +41,7 @@ public class Fragment_User_Payment extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
         String temp = sdf.format(cal.getTime());
-        text.setText(temp);
+        text.setText(temp + " ");
 
         return view;
     }
