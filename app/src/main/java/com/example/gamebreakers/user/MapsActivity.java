@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -321,6 +322,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         final EditText input = new EditText(MapsActivity.this);
         // Specify the type of input expected
         input.setInputType(InputType.TYPE_CLASS_TEXT);
+        input.setHint("E.g. Singapore 637717");
+        input.setHintTextColor(Color.GRAY);
         mBuilder.setView(input);
 
         // Set up the buttons
