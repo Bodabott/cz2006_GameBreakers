@@ -56,7 +56,6 @@
         android:text="✔"
         android:textColor="#FFFFFF"
         android:layout_marginRight="5dp"
-
         android:background="@drawable/button_style"/>
 
     <Button
