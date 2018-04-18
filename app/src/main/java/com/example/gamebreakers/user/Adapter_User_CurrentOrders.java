@@ -44,9 +44,8 @@ public class Adapter_User_CurrentOrders extends RecyclerView.Adapter<Adapter_Use
         Random ran =  new Random();
         int pass = ran.nextInt(9999);
 
-        holder.mContentView.setText(
-                mValues.get(position).getCollectiontime() + "   status:" +
-                        (cooked ? " done ("+pass+")": " cooking"));
+        String temp = mValues.get(position).getCollectiontime() + "   status:" + (cooked ? " done (" + pass + ") " : " cooking");
+        holder.mContentView.setText(temp);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

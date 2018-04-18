@@ -362,9 +362,9 @@ public class Activity_User extends AppCompatActivity
             public void onClick(View v) {
                 String un = user.getName();
                 String txt = mEdit.getText().toString();
-                int bal = Integer.parseInt(txt);
+                float bal = Float.parseFloat(txt);
                 bal *= 100;
-                int totalbal = SQL.getUserBalance(un) + bal;
+                int totalbal = SQL.getUserBalance(un) + (int) bal;
                 SQL.updateUserBalance(un, totalbal);
                 invalidateOptionsMenu();
                 myDialog.dismiss();
@@ -405,17 +405,23 @@ public class Activity_User extends AppCompatActivity
 
         String newFoodMessage = foodNameConverter(foodMessage, stallMessage, usernameMessage);
         if(afterEarliestOrderTime(cal)) {
-            if (SQL.addOrderArrayData(newFoodMessage, usernameMessage, stallMessage, time)) {
-                int foodprice = SQL.getFoodPrice(foodMessage, stallMessage);
-                int bal_left = SQL.getUserBalance(usernameMessage) - foodprice;
-                SQL.updateUserBalance(usernameMessage, bal_left);
-                invalidateOptionsMenu();
-                Toast.makeText(getApplicationContext(), "PAYMENT SUCCESSFUL", Toast.LENGTH_LONG).show();
-                setResult(Activity.RESULT_OK);
+            int og_bal = SQL.getUserBalance(usernameMessage);
+            int foodprice = SQL.getFoodPrice(foodMessage, stallMessage);
+            if (og_bal >= foodprice){
+                if (SQL.addOrderArrayData(newFoodMessage, usernameMessage, stallMessage, time)) {
+                    int bal_left = SQL.getUserBalance(usernameMessage) - foodprice;
+                    SQL.updateUserBalance(usernameMessage, bal_left);
+                    invalidateOptionsMenu();
+                    Toast.makeText(getApplicationContext(), "PAYMENT SUCCESSFUL", Toast.LENGTH_LONG).show();
+                    setResult(Activity.RESULT_OK);
 
-                // Reset fragments
-                for(int i=0;i<fragman.getBackStackEntryCount();++i)
-                    fragman.popBackStack();
+                    // Reset fragments
+                    for(int i=0;i<fragman.getBackStackEntryCount();++i)
+                        fragman.popBackStack();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "PLEASE TOPUP", Toast.LENGTH_LONG).show();
+                }
             }
         }
         else Toast.makeText(getApplicationContext(),"PAYMENT NOT SUCCESSFUL",Toast.LENGTH_LONG).show();

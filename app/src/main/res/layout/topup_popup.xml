@@ -39,10 +39,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="88dp"
         android:ems="4"
+        android:maxLength="5"
         android:inputType="textPersonName"
         android:textSize="20dp"
         android:fontFamily="@font/montserrat_semibolditalic"
-        android:hint="Amount"/>
+        android:hint="0.00"/>
 
 
     <Button
