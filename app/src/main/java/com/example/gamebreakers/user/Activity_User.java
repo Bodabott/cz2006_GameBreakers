@@ -203,11 +203,12 @@ public class Activity_User extends AppCompatActivity
     }
 
     public String checkMoneyLength(String s) {
+        String[] parts = s.split("\\.");
 
-        String[] parts = s.split(".");
         String part1 = parts[0];
         String part2 = parts[1];
 
+        Log.e(part1,part2);
         if (part2.length() == 2) {
             return s;
         }

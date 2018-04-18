@@ -313,7 +313,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(v.getContext(),filteredPostalCodeArrayList.size() + " Location(s) Found\n(Within 5 KM)",Toast.LENGTH_LONG).show();
     }
 
-    public void setCurrentLocation(View v){
+    public void setCurrentLocation(View v) {
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MapsActivity.this);
         mBuilder.setCancelable(true);
         mBuilder.setTitle("Set Current Location:");
@@ -328,40 +328,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
-                if(m_Text.length() == 6){
+                if (m_Text.length() == 6) {
                     m_Text = "Singapore " + input.getText().toString();
                 }
 
                 List<Address> addressList = null;
 
-                if(!m_Text.isEmpty()){
+                if (!m_Text.isEmpty()) {
                     Geocoder geocoder = new Geocoder(MapsActivity.this);
-                    try{
-                        addressList = geocoder.getFromLocationName(m_Text,1);
-                    }catch(IOException e){
+                    try {
+                        addressList = geocoder.getFromLocationName(m_Text, 1);
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    if(addressList != null){
+                    if (addressList != null) {
                         ArrayList<String> stringArrayList = getLocationPostalCodes();
-                        for(String postalCode : stringArrayList){
-                            if(postalCode.matches(m_Text)){
-                                Toast.makeText(MapsActivity.this,"Current Location matches an existing Stall.",Toast.LENGTH_LONG).show();
+                        for (String postalCode : stringArrayList) {
+                            if (postalCode.matches(m_Text)) {
+                                Toast.makeText(MapsActivity.this, "Current Location matches an existing Stall.", Toast.LENGTH_LONG).show();
                                 return;
                             }
                         }
-                        try{
+                        try {
                             defaultAddress = addressList.get(0);
-                            defaultLatLng = new LatLng(defaultAddress.getLatitude(),defaultAddress.getLongitude());
+                            defaultLatLng = new LatLng(defaultAddress.getLatitude(), defaultAddress.getLongitude());
                             mMap.clear();
                             mMap.addMarker(new MarkerOptions().position(defaultLatLng).title(defaultAddress.getPostalCode()));
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng,17));
+                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng, 17));
                             String temp = "Current Location: Singapore " + defaultAddress.getPostalCode();
                             currentLocationTextView.setText(temp);
-                        } catch(IndexOutOfBoundsException e){
-                            Toast.makeText(MapsActivity.this,"Location not found",Toast.LENGTH_SHORT).show();
+                        } catch (IndexOutOfBoundsException e) {
+                            Toast.makeText(MapsActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
                         }
-                    }else{
-                        Toast.makeText(MapsActivity.this,"Location not found",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MapsActivity.this, "Location not found", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
