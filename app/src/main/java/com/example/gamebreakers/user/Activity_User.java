@@ -390,7 +390,7 @@ public class Activity_User extends AppCompatActivity
             public void onClick(View v) {
                 String un = user.getName();
                 String txt = mEdit.getText().toString();
-                if (checkforMoney (txt)) {
+                if (checkforMoney (txt) && Float.parseFloat(txt) >= 0) {
                     float bal = Float.parseFloat(txt);
                     bal *= 100;
                     int totalbal = SQL.getUserBalance(un) + (int) bal;
