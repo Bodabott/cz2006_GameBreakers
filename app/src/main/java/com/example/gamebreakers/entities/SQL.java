@@ -372,8 +372,8 @@ public final class SQL {
     // Add a new owner account
     // Return true if successful, false otherwise
     public static boolean addOwnerAccount(String username, String stall_name, String password){
-        String query = "INSERT INTO owner_table (O_USERNAME,O_STALLNAME,O_PASSWORD, O_QUEUENUM) " +
-                " VALUES ('" + username + "', '" + stall_name + "', '" + password+ "', 0'" + "');";
+        String query = "INSERT INTO owner_table (O_USERNAME,O_STALLNAME,O_PASSWORD, O_QUEUENUM, O_AVERAGECOOKTIME) " +
+                       " VALUES ('" + username + "', '" + stall_name + "', '" + password+ "', '0', '0');";
 
         String query2 = "SELECT * FROM owner_table WHERE CONVERT(VARCHAR,O_USERNAME) = '" +
                 username + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" +
@@ -401,8 +401,9 @@ public final class SQL {
     // Add a new owner account with stall location in postal code
     // Return true if successful, false otherwise
     public static boolean addOwnerAccount(String username, String stall_name, String password, int postal_code){
-        String query = "INSERT INTO owner_table (O_USERNAME,O_STALLNAME,O_PASSWORD,O_POSTALCODE) " +
-                " VALUES ('" + username + "', '" + stall_name + "', '" + password + "', '" + postal_code + "');";
+        String query = "INSERT INTO owner_table (O_USERNAME,O_STALLNAME,O_PASSWORD,O_POSTALCODE, O_QUEUENUM, O_AVERAGECOOKTIME) " +
+                " VALUES ('" + username + "', '" + stall_name + "', '" + password + "', '" + postal_code + "', '0', '0');";
+
 
         String query2 = "SELECT * FROM owner_table WHERE CONVERT(VARCHAR,O_USERNAME) = '" +
                 username + "' AND CONVERT(VARCHAR,O_STALLNAME) = '" +
