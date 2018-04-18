@@ -267,39 +267,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     // Complex On-Click Methods
 
-    public void searchLocation(View v){
-        if(isCurrentLocationEmpty())
-            return;
-
-        mapReset();
-        EditText location_tf = findViewById(R.id.searchBox);
-        String location = location_tf.getText().toString();
-        List<Address> addressList = null;
-
-        if(!location.isEmpty()){
-            Geocoder geocoder = new Geocoder(v.getContext());
-            try{
-                addressList = geocoder.getFromLocationName(location,1);
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-            if(addressList != null){
-                try{
-                    Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(address.getPostalCode()));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
-                } catch(IndexOutOfBoundsException e){
-                    Toast.makeText(getApplicationContext(),"Location not found",Toast.LENGTH_SHORT).show();
-                }
-            }else{
-                Toast.makeText(getApplicationContext(),"Location not found",Toast.LENGTH_SHORT).show();
-            }
-        }else{
-            location_tf.setError("Field is Empty");
-        }
-    }
-
     public void searchNearbyStalls(View v){
         if(isCurrentLocationEmpty())
             return;
@@ -361,6 +328,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String m_Text = input.getText().toString();
+                if(m_Text.length() == 6){
+                    m_Text = "Singapore " + input.getText().toString();
+                }
+
                 List<Address> addressList = null;
 
                 if(!m_Text.isEmpty()){

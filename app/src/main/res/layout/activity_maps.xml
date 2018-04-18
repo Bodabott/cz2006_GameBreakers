@@ -6,32 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:id="@+id/locationSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="8"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_weight="6"
-            android:id="@+id/searchBox"
-            android:hint="Enter Location..."
-            android:layout_width="0sp"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:onClick="searchLocation"
-            android:layout_weight="2"
-            android:id="@+id/searchButton"
-            android:text="SEARCH"
-            android:layout_width="0sp"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/buttonsLayout"
-        android:layout_below="@id/locationSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10sp"
